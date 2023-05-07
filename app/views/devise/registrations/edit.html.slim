@@ -17,12 +17,6 @@ div.d-flex
           | Currently waiting confirmation for: 
           = resource.unconfirmed_email
       .field.mb-4
-        div.form-floating
-          = form.password_field :current_password, class: "form-control", id: "floatingCurrentPassword", placeholder: "現在のパスワード", autocomplete: "current-password"
-          = form.label :current_password, for: "floatingCurrentPassword"
-          i
-            | パスワード、もしくはメールアドレスを変更するには現在ご使用中のパスワードを入力してください。
-      .field.mb-4
         h2.text-center.fs-5.fw-bold.my-4
           | パスワード変更
         p
@@ -40,6 +34,14 @@ div.d-flex
           = form.password_field :password_confirmation, class: "form-control", id: "floatingPasswordConfirmation", placeholder: "確認用パスワード", autocomplete: "new-password"
           = form.label :password_confirmation, for: "floatingPasswordConfirmation"
         br
+      .border-top.py-2
+        br
+      .field.mb-4
+        div.form-floating
+          = form.password_field :current_password, class: "form-control", id: "floatingCurrentPassword", placeholder: "現在のパスワード", autocomplete: "current-password"
+          = form.label :current_password, for: "floatingCurrentPassword"
+          i
+            | パスワード、もしくはメールアドレスを変更するには現在ご使用中のパスワードを入力してください。
       .actions.text-center.m-4
         = form.submit "上記の内容で変更する", class:"btn btn-primary rounded-pill px-4 fw-bold"
     div.text-center.mb-4
