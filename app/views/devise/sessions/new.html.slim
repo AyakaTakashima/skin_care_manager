@@ -1,0 +1,27 @@
+div.h-75.d-flex
+  div.m-auto.w-25
+    div.text-center.m-5
+      = image_tag 'logo.svg', height: '70'
+    div.m-auto
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: { novalidate: "true" }, class: "needs-validation", data: { controller: "form", form_target: "form", action: "submit->form#checkValidate" }) do |form|
+        = render "devise/shared/error_messages", resource: resource
+        .field.mt-4.mb-4
+          div.form-floating
+            = form.email_field :email, class: "form-control", id: "floatingEmail", placeholder: "メールアドレス", required: true, autofocus: true, autocomplete: "email"
+            = form.label :email, for: "floatingEmail"
+            div.invalid-feedback
+              |メールアドレスは必須です
+        .field.mb-4
+          div.form-floating
+            = form.password_field :password, class: "form-control", id: "floatingPassword", placeholder: "パスワード", required: true, autocomplete: "current-password"
+            = form.label :password, for: "floatingPassword"
+            div.invalid-feedback
+              |パスワードは必須です
+        - if devise_mapping.rememberable?
+          .field.form-check
+            = form.check_box :remember_me, class: "form-check-input"
+            = form.label :remember_me, class: "form-check-label"
+        .actions.text-center.m-4
+          = form.submit "ログイン", class:"btn btn-primary rounded-pill px-4 fw-bold"
+    div.text-center
+      = render "devise/shared/links"

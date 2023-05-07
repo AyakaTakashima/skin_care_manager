@@ -1,0 +1,30 @@
+div.mt-4
+  div.container.w-50.py-4
+    div.row.justify-content-md-center
+      div.col-md-auto
+        div.text-center.fs-4.fw-bold
+          = "1ヶ月に平均#{@monthly_consume_amounts.calculate_average_amount_by_month(@monthly_consume_amounts)}円分を消費しています。"
+        div.text-end.fs-6
+          |＊消費実績がある月のみで計算
+
+div.container.w-50
+  div.row.p-4.border-bottom
+    div.col.text-center
+      = t('datetime.prompts.month')
+    div.col.text-end
+      = t('views.number_of_used_items')
+    div.col.text-end
+      = t('views.total_of_consumption_amount')
+  - 12.times do
+    - @date -= 1.month
+    = turbo_frame_tag "show_monthly_logs"
+      = link_to monthly_log_path(year:@date.year ,month:@date.month), class: "text-decoration-none", data: { turbo_frame: "monthly_consume_amount_extra_large_modal" } do
+        div.row.p-2.border-bottom
+          div.col.is-column-link.p-3.rounded
+            div.row
+              div.col.text-center
+                = @date.strftime("%Y/%m")
+              div.col.text-end
+                = @monthly_consume_amounts.get_number_of_consumed_products(@monthly_consume_amounts, @date)
+              div.col.text-end
+                = @monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date)

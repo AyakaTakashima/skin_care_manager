@@ -1,0 +1,58 @@
+ja:
+  activerecord:
+    models:
+      product: アイテム  #g
+      product_consume_log: 使用実績  #g
+      user: ユーザー  #g
+
+    attributes:
+      product:
+        avatar_attachment: :activerecord.models.avatar_attachment  #g
+        avatar_blob: :activerecord.models.avatar_blob  #g
+        average_period: 平均使い切り日  #g
+        name: アイテム名  #g
+        price: 価格  #g
+        product_consume_logs: 使用実績  #g
+        user: :activerecord.models.user  #g
+
+      product_consume_log:
+        use_ended_at: 使用終了日  #g
+        use_started_at: 使用開始日  #g
+
+      user:
+        email: Eメール  #g
+        encrypted_password: 暗号化パスワード  #g
+        products: アイテム  #g
+        remember_created_at: ログイン記憶時刻  #g
+        reset_password_sent_at: パスワードリセット送信時刻  #g
+        reset_password_token: パスワードリセット用トークン  #g
+
+  action:
+    edit: 編集
+    destroy: 削除
+    new_product: アイテムを登録する
+    input_use_started_at: 使用開始日を登録する
+    input_use_ended_at: 使用終了日を登録する
+    new_use_started_at: 使用を開始する
+    new_use_ended_at: 使用を終了する
+    editing_product: このアイテムを編集する
+    deleting_product: このアイテムを削除する
+    product_consume_log_index: 過去1年間の実績を見る ＞
+
+  notice:
+    product_destroy_confirm: アイテムを削除すると、使用実績も削除されます。本当に宜しいですか？
+    product_consume_log_destroy_confirm: 使用実績を削除します。本当に宜しいですか？
+    error_explanation: 下記の理由により登録ができませんでした。
+    create: を登録しました。
+    update: を更新しました。
+    destroy: を削除しました。
+
+  views:
+    scheduled_consume_date: 使い切り予定日
+    measuring: 計測中
+    product_consume_log_empty: 使用実績がまだありません。
+    message_for_measuring_scheduled_consume_date: 使い切り予定日を計測中です。
+    message_for_product_consume_logs_index: 使用開始日や使用終了日を登録すると、ここに実績一覧が表示されます。
+    number_of_used_items: 使用アイテム数
+    consumption_amount: 消費金額
+    total_of_consumption_amount: 合計消費金額

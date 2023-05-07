@@ -1,0 +1,80 @@
+div.mt-4
+  - if @products.empty?
+    div.text-center.m-5
+      |アイテムの登録はされていません。<br>登録をするとSkin Care Manegerが月々の購入金額の計算と使い切り予定日の予測を自動で行なってくれます。
+    h1.text-center.m-5
+      |登録例
+    div.container.w-50.text-center
+      div.row
+        div.col
+          = image_tag 'skincare_women.png', height: '200'
+          div.m-5
+            |スキンケア用品
+        div.col
+          = image_tag 'makeup_woman_color.png', height: '200'
+          div.m-5
+            |よく使う化粧品
+    div.py-4.text-center
+      = turbo_frame_tag "add_new_product"
+        = link_to t('action.new_product'), new_product_path, class:"btn btn-primary rounded-pill fw-bold", data: { turbo_frame: "product_large_modal" }
+  - else
+    div.container.border.rounded.bg-white
+      div.row.mt-5.mb-4
+        div.col.text-center.fs-2.fw-bold
+          = "#{Date.today.month}月の消費予定金額は#{@amount}円です。"
+      div.row.m-2
+        div.col.fw-bold.text-end
+          = link_to t('action.product_consume_log_index'), monthly_consume_amount_path, class: "text-decoration-none is-text-link"
+  
+    div.container.w-75.text-center
+      - @products.each do |product|
+        div.row.align-items-center.p-4.border-bottom.product-record
+          div.col
+            div.row.product-image
+              = link_to product do
+                div.w-50.border.rounded.mx-auto.bg-white.is-image-link
+                  = image_tag product.avatar.variant(resize_to_limit: [150, 150]) if product.avatar.attached?
+                  = image_tag 'no_image.svg', size: '150x150' unless product.avatar.attached?
+              div.mt-2
+                = product.name
+          div.col
+            div.row
+              - if product.product_consume_logs.empty?
+                div
+                  = t('views.product_consume_log_empty')
+                  |<br>使用開始日を登録すると<br>使い切り予定日の計測が始まります。
+              - elsif !product.product_consume_logs.last.use_ended_at.nil?
+                div
+                  |使用開始日を登録すると<br>使い切り予定日が表示されます。
+                div.mt-2
+                  = "最新の使用履歴：#{l(product.product_consume_logs.last.use_ended_at, format: :long)}"
+              - elsif product.average_period.zero?
+                div.pb-4
+                  = t('views.scheduled_consume_date')
+                div.fs-2.fw-bold
+                  = t('views.measuring')
+                div.p-4
+                  = "#{l(product.product_consume_logs.last.use_started_at, format: :short)}から使用中"
+              -else
+                div.pb-4
+                  = t('views.scheduled_consume_date')
+                div.fs-2.fw-bold
+                  = product.format_scheduled_consume_date(product.id)
+                div.p-4
+                  - if product.count_until_scheduled_consume_date(product.id) > 0
+                    = "あと  #{product.count_until_scheduled_consume_date(product.id)}  日"
+                  - elsif product.count_until_scheduled_consume_date(product.id).zero?
+                    |本日が使い切り予定日です
+                  - else
+                    = "予定日から#{product.count_until_scheduled_consume_date(product.id).abs}日過ぎています"
+          div.col
+            - if product.in_use?(product.id)
+              = turbo_frame_tag "product_consume_log_input_use_ended_at"
+                = link_to t('action.input_use_ended_at'), product_use_end_path(product_id: product.id, id: product.product_consume_logs.last.id), class:"btn btn-outline-primary rounded-pill px-4 fw-bold", data: { turbo_frame: "consume_logs_regular_modal" }
+            - else
+              = turbo_frame_tag "product_consume_log_input_started_at"
+                = link_to t('action.input_use_started_at'), new_product_product_consume_log_path(product_id: product.id), class:"btn btn-outline-primary rounded-pill px-4 fw-bold", data: { turbo_frame: "consume_logs_regular_modal" }
+    
+    div.py-4.my-4.text-center
+      = turbo_frame_tag "add_new_product"
+        = link_to t('action.new_product'), new_product_path, class:"btn btn-primary rounded-pill px-4 fw-bold", data: { turbo_frame: "product_large_modal" }

@@ -1,0 +1,3 @@
+= render "product_large_modal", title: "#{t('activerecord.models.product')}の追加" do
+  = turbo_frame_tag "add_new_product" do
+    = render 'form', product: @product

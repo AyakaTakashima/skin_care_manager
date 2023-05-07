@@ -1,0 +1,77 @@
+div.accent-background.p-5
+  div.container.w-75
+    div.row.py-5
+      div.col.py-5
+        h1.my-4
+          |Skinmate
+        p.mb-5
+          |基礎化粧品の使用サイクル、毎月の使用金額を管理
+        div.mb-1
+          = link_to '新規アカウント登録（無料）', new_user_registration_path, class:"btn btn-primary rounded-pill px-5 py-3 fw-bold"
+      div.col.py-5
+        = image_tag 'top_image.png', height: '300'
+div.pt-5
+  h2.text-center.mt-4
+    |Skinmate ができること
+  div.container.w-75.text-center
+    div.row.p-4
+      div.col
+        div.m-2.p-2.border-0
+          = image_tag 'material-symbols_edit-note-rounded.svg', height: '100'
+          div.my-4.fw-bold
+            |使用実績の記録
+      div.col
+        div.m-2.p-2.border-0
+          = image_tag 'material-symbols_payments-outline.svg', height: '100'
+          div.my-4.fw-bold
+            |各月の消費金額の計算
+      div.col
+        div.m-2.p-2.border-0
+          = image_tag 'material-symbols_monitoring.svg', height: '100'
+          div.my-4.fw-bold
+            |使い切り予定日の推測
+
+div.text-center.p-4.my-5
+  = link_to '早速使ってみる！', new_user_registration_path, class:"btn btn-primary rounded-pill px-5 py-3 fw-bold"
+
+div.container.w-75.my-5
+  div.row.p-4
+    div.col
+      = image_tag 'image_feature1.png', height: '250'
+    div.col
+      h3.fw-bold.fs-5
+        |使用実績の記録
+      p.pt-2
+        |いつからいつまで化粧品を使用したのか、実績の記録ができます。<br>過去の記録は遡って見ることが可能です。
+  div.row.p-4
+    div.col
+      = image_tag 'image_feature2.png', height: '250'
+    div.col
+      h3.fw-bold.fs-5
+        |各月の消費金額の計算
+      p.pt-2
+        |1ヶ月ごとの消費金額(*1) を自動計算してくれます。<br>また、1ヶ月間に使用されたアイテム数の確認もできます。
+      div.text-secondary
+        |(*1) 例：1本10,000円の美容液を60日で使っていた場合<br>　　1ヶ月（30日）に5,000円分を消費している計算になります。
+  div.row.p-4
+    div.col
+      = image_tag 'image_feature3.png', height: '250'
+    div.col
+      h3.fw-bold.fs-5
+        |使い切り予定日や消費予定金額の推測
+      p.pt-2
+        |過去の記録から使い切り予定日を予測(*2)します。<br>また、今月の消費予定金額を予想します。
+      div.text-secondary
+        |(*2) 推測には、1ヶ月分のデータが必要です。
+
+div.text-center.p-4.my-5
+  = link_to '早速使ってみる！', new_user_registration_path, class:"btn btn-primary rounded-pill px-5 py-3 fw-bold"
+
+div
+  h2.text-center.mt-4
+    |よくある質問
+  div.container.w-75.mt-5
+    h3.fw-bold.fs-5
+      |Q, 利用する際に料金はかかりますか？
+    p.pb-5
+      |Skinmateは無料でご利用いただけるサービスです。そのため、ご利用にあたり料金をいただくことは一切ありません。

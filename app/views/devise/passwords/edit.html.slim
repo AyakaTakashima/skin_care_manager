@@ -1,0 +1,25 @@
+div.h-75.d-flex
+  div.m-auto.w-25
+    div.text-center.mb-5
+      = image_tag 'logo.svg', height: '70'
+    h1.text-center.fs-4.fw-bold.m-4
+      | パスワードの再設定
+    div.m-auto
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, novalidate: "true" }, class: "needs-validation", data: { controller: "form", form_target: "form", action: "submit->form#checkValidate" }) do |form|
+        = render "devise/shared/error_messages", resource: resource
+        = form.hidden_field :reset_password_token
+        .field.mb-4
+          div.form-floating
+            = form.password_field :password, class: "form-control", id: "floatingNewPassword", placeholder: "新しいパスワード", autofocus: true, autocomplete: "new-password"
+            = form.label :password, for: "floatingNewPassword"
+            - if @minimum_password_length
+              em
+                | (
+                = @minimum_password_length
+                |  文字以上)
+        .field.mb-4
+          div.form-floating
+            = form.password_field :password_confirmation, class: "form-control", id: "floatingConfirmNewPassword", placeholder: "新しいパスワードの確認", autocomplete: "new-password"
+            = form.label :password_confirmation, for: "floatingConfirmNewPassword"
+        .actions.text-center.m-4
+          = form.submit "パスワードを変更する", class:"btn btn-primary rounded-pill px-4 fw-bold"

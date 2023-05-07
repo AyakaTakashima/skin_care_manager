@@ -1,0 +1,10 @@
+== render @product
+
+div.container
+  div.row
+    div.col.py-4.text-end
+      = link_to t('action.deleting_product'), @product, method: :delete, data: { turbo_method: :delete, turbo_confirm: t('notice.product_destroy_confirm') }, class:"btn btn-outline-secondary rounded-pill px-4 fw-bold"
+    
+    div.col.py-4
+      = turbo_frame_tag "edit_product"
+        = link_to t('action.editing_product'), edit_product_path, class:"btn btn-primary rounded-pill px-4 fw-bold", data: { turbo_frame: "product_large_modal" }

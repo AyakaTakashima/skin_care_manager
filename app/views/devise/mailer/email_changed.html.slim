@@ -1,0 +1,17 @@
+p
+  | Skinmateをご利用いただき、誠にありがとうございます。<br>
+  | メールアドレスの変更が完了いたしましたことをお知らせいたします。<br>
+
+- if @resource.try(:unconfirmed_email?)
+  p
+    | 変更後のメールアドレス：
+    = @resource.unconfirmed_email
+- else
+  p
+    | 変更後のメールアドレス：
+    = @resource.email
+
+p
+  = link_to 'ログインはこちらから', new_user_session_url, class:"btn btn-primary rounded-pill px-4 fw-bold"
+p
+  |引き続き、Skinmateをよろしくお願いいたします。

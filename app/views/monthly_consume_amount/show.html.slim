@@ -1,0 +1,33 @@
+= render "monthly_consume_amount_extra_large_modal" do
+  = turbo_frame_tag "show_monthly_logs" do
+    div.container.py-4
+      div.row.justify-content-md-center
+        - if @date.month == Date.today.month
+          div.col-md-auto
+            div.text-center.fs-4.fw-bold
+              = "#{@date.year}年#{@date.month}月の消費予定金額は#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date)}円です。"
+        - else @date.month != Date.today.month
+          div.col-md-auto
+            div.text-center.fs-4.fw-bold
+              = "#{@date.year}年#{@date.month}月の合計消費金額は#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date)}円です。"
+    
+    - if @monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date).zero?
+      div.text-center.fs-4
+        = t('views.product_consume_log_empty')
+    - else
+      div.container
+        div.row.p-4.border-bottom.text-center
+          div.col
+            = t('activerecord.attributes.product.name')
+          div.col
+            = t('views.number_of_used_items')
+          div.col
+            = t('views.consumption_amount')
+        - @products.each do |product|
+          div.row.p-4.border-bottom.text-center
+            div.col
+              = link_to product.name, product, class: "text-decoration-none is-text-link fw-bold"
+            div.col
+              = "#{product.get_number_of_consume_logs(product,@date)}本"
+            div.col
+              = product.calculate_monthly_consume_amounts(product,@date)

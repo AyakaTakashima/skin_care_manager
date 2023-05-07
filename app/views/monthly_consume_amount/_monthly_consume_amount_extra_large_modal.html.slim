@@ -1,0 +1,11 @@
+= turbo_frame_tag "monthly_consume_amount_extra_large_modal" do
+  div class="modal fade" data-controller="modal"
+    div.modal-dialog.modal-dialog-centered.modal-xl
+      div class="modal-content"
+        div.modal-header.border-0
+          h5.modal-title
+          button type="button" class="btn-close d-flex justify-content-end" data-bs-dismiss="modal" aria-label="Close"
+        div.modal-body
+          div.px-5
+            = yield
+        div.m-5

@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_consume_log: one
+  product: measuring_lotion
+  month: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  amount: 1000
+  created_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  updated_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+
+two:
+  product_consume_log: one
+  product: lotion_first_used
+  month: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  amount: 1000
+  created_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  updated_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+
+three:
+  product_consume_log: one
+  product: lotion_first_used
+  month: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  amount: 1000
+  created_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  updated_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+
+four:
+  product_consume_log: one
+  product: lotion_second_using
+  month: <%= Time.zone.local(2023, 2, 1, 0, 0) %>
+  amount: 896
+  created_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  updated_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+
+five:
+  product_consume_log: one
+  product: lotion_second_using
+  month: <%= Time.zone.local(2023, 3, 1, 0, 0) %>
+  amount: 104
+  created_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  updated_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>

@@ -2,7 +2,13 @@ doctype html
 html
   head
     meta[http-equiv="Content-Type" content="text/html; charset=utf-8"]
-    style
-      |  /* Email styles need to be inline */ 
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    = csrf_meta_tags
+    = action_cable_meta_tag
+    = stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity: 'sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin: 'anonymous'
+    = stylesheet_link_tag "mailer", media: 'all'
   body
-    = yield
+    div.text-center.m-4
+      = image_tag attachments['logo.svg'].url, height: '70'
+    div.container.bg-white.text-center.p-5
+      = yield

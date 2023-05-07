@@ -1,0 +1,21 @@
+@import "bootstrap"
+@import "variables"
+
+body
+  background-color: $base-color
+  color: $text-color
+
+.btn-primary
+  background: $accent-color
+  color: $main-color
+  border: 1px solid $accent-color
+
+.btn-primary:hover, .btn-primary:focus, 
+.btn-primary:active, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary:active.focus,
+.btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus,
+.btn:disabled, .btn.disabled, fieldset:disabled .btn
+  background: $accent-color
+  color: $main-color
+  border: 1px solid $accent-color
+  opacity: 0.7

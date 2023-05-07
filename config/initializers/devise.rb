@@ -24,11 +24,12 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  #config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'info@skin-mate.net'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
-
+  config.mailer = 'Users::Mailer'
+  
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
 
@@ -129,10 +130,10 @@ Devise.setup do |config|
   # config.pepper = '55dbdb052869977c99a1fc491390b9df11d6a88f063c1a11137b2680e5d02601aaa2513cc18f8a5d8a17d0a759a7e1ae8ec5d4a79c9fa400eab8f0f75d81dd5f'
 
   # Send a notification to the original email when the user's email is changed.
-  # config.send_email_changed_notification = false
+  config.send_email_changed_notification = true
 
   # Send a notification email when the user's password is changed.
-  # config.send_password_change_notification = false
+  config.send_password_change_notification = true
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -188,7 +189,7 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  # config.timeout_in = 30.minutes
+  config.timeout_in = 1.month
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.
@@ -266,7 +267,7 @@ Devise.setup do |config|
   config.navigational_formats = ['*/*', :html, :turbo_stream]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
@@ -308,4 +309,6 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  config.responder.error_status = :unprocessable_entity
+  config.responder.redirect_status = :see_other
 end

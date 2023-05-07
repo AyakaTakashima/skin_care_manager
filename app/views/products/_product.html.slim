@@ -1,0 +1,64 @@
+div id="#{dom_id product}"
+  div.text-center.my-4.fs-4.fw-bold
+    - if product.product_consume_logs.empty?
+      = t('views.product_consume_log_empty')
+    - elsif product.average_period.zero?
+      = t('views.message_for_measuring_scheduled_consume_date')
+    - else
+      = "この製品は平均#{product.average_period}日に1本使っています。"
+  
+  div.container
+    div.row
+      div.col-md-4
+        div.container
+          div.row.text-center
+            div.col
+              = image_tag product.avatar.variant(resize_to_limit: [300, 300]), class: "border rounded bg-white" if product.avatar.attached?
+              = image_tag 'no_image.svg', size: '300x300', class: "border rounded bg-white" unless product.avatar.attached?
+        div.container.w-50
+          div.row.pt-4
+            div.border-bottom
+              = product.name
+        div.container.w-50
+          div.row.pt-4
+            div.border-bottom
+              = product.price
+      div.col-md-8
+        - if product.product_consume_logs.empty?
+          div.pt-5.text-center
+            = t('views.message_for_product_consume_logs_index')
+        - else
+          div.container
+            - @product_consume_logs.each do |product_consume_log|
+              = turbo_frame_tag product, product_consume_log do
+                div.row.py-4.border-bottom.align-items-center.product-consume-log-record
+                  div.col-1
+                    - @number_of_logs -= 1
+                    = "#{@number_of_logs}本目"
+                  div.col-4
+                    = "#{product_consume_log.use_started_at}  〜  #{product_consume_log.use_ended_at}"
+                  div.col.text-center
+                    div
+                      - if product.average_period.zero?
+                        |使用中
+                      - elsif !product_consume_log.use_ended_at.nil?
+                        = "#{(product_consume_log.use_ended_at - product_consume_log.use_started_at + 1).numerator}日"
+                      - elsif product.count_until_scheduled_consume_date(product.id) > 0
+                        = "使用中（残り#{product.count_until_scheduled_consume_date(product.id)}日）"
+                      - elsif product.count_until_scheduled_consume_date(product.id).zero?
+                        |本日使い切り予定
+                      - else product.count_until_scheduled_consume_date(product.id) < 0
+                        = "使い切り予定日から#{product.count_until_scheduled_consume_date(product.id).abs}日経過"
+                  div.col.text-end
+                      = link_to product_product_consume_log_path(product, product_consume_log), method: :delete, class:"btn btn-outline-secondary rounded-circle mx-4", data: { turbo_method: :delete, turbo_confirm: t('notice.product_consume_log_destroy_confirm') , turbo_frame: "_top"} do
+                        span.material-symbols-outlined.py-1
+                          |delete
+                      = link_to edit_product_product_consume_log_path(product, product_consume_log), class:"btn btn-outline-primary rounded-circle" do
+                        span.material-symbols-outlined.py-1
+                          |edit
+        div.text-center.p-4
+          - if !product.in_use?(product.id)
+            = turbo_frame_tag "product_consume_log_input_started_at"
+              = link_to t('action.input_use_started_at'), new_product_product_consume_log_path(product_id: product.id), class:"btn btn-outline-primary rounded-pill btn-sm px-4 fw-bold", data: { turbo_frame: "consume_logs_regular_modal" }
+
+
