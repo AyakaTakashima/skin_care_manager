@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[show edit update destroy]
 
   def index
     @products = current_user.products.order(created_at: :asc)
-    @amount = @products.includes(:monthly_consume_amounts).where('month=?', Date.today.beginning_of_month).sum(:amount)
+    @amount = @products.includes(:monthly_consume_amounts).where('month=?', Time.zone.today.beginning_of_month).sum(:amount)
   end
 
   def show
@@ -16,8 +18,7 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @product = Product.new(product_params)
@@ -51,15 +52,16 @@ class ProductsController < ApplicationController
   end
 
   private
+
   def set_product
     @product = Product.find(params[:id])
   end
 
   def product_params
     params.require(:product).permit(
-      :user_id, 
-      :name, 
-      :price, 
+      :user_id,
+      :name,
+      :price,
       :average_period,
       :avatar
     )
