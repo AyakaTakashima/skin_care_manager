@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MonthlyConsumeAmount < ApplicationRecord
   belongs_to :product
   belongs_to :product_consume_log
@@ -5,8 +7,8 @@ class MonthlyConsumeAmount < ApplicationRecord
   validates :month, presence: true
 
   def self.calculate_average_amount_by_month(monthly_consume_amounts)
-    this_month = Date.today.beginning_of_month
-    last_year = Date.today.beginning_of_month - 1.year
+    this_month = Time.zone.today.beginning_of_month
+    last_year = Time.zone.today.beginning_of_month - 1.year
     total = monthly_consume_amounts.where('month <= ?', this_month).where('month >= ?', last_year).sum(:amount)
     months = monthly_consume_amounts.count('distinct month')
     total / months
