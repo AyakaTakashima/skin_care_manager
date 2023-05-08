@@ -1,4 +1,6 @@
-require "application_system_test_case"
+# frozen_string_literal: true
+
+require 'application_system_test_case'
 
 class MonthlyConsumeAmountsTest < ApplicationSystemTestCase
   setup do
@@ -20,7 +22,7 @@ class MonthlyConsumeAmountsTest < ApplicationSystemTestCase
     sign_in @heavy_user
     visit monthly_consume_amount_url
     first('#show_monthly_logs').click
-    date = Date.today.beginning_of_month
+    date = Time.zone.today.beginning_of_month
     assert_text "#{date.year}年#{date.month}月の消費予定金額は"
   end
 end

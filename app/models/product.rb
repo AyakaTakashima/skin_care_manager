@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Product < ApplicationRecord
   belongs_to :user
   has_many :product_consume_logs, dependent: :destroy
@@ -10,38 +12,36 @@ class Product < ApplicationRecord
   def in_use?(product_id)
     Product.joins(:product_consume_logs)
            .where('product_id=?', product_id)
-           .where(product_consume_logs:{use_ended_at:nil})
+           .where(product_consume_logs: { use_ended_at: nil })
            .exists?
   end
 
   def calculate_scheduled_consume_date(id)
     product = Product.find(id)
-    if !product.product_consume_logs.empty?
-      last_use_started_day = product.product_consume_logs.last.use_started_at
-      last_use_ended_day = product.product_consume_logs.last.use_ended_at
-      average_period = product.average_period
-      if last_use_ended_day.nil? && !(average_period.zero?)
-        last_use_started_day + average_period.day
-      else
-        nil
-      end
-    end
+    return if product.product_consume_logs.empty?
+
+    last_use_started_day = product.product_consume_logs.last.use_started_at
+    last_use_ended_day = product.product_consume_logs.last.use_ended_at
+    average_period = product.average_period
+    return unless last_use_ended_day.nil? && !average_period.zero?
+
+    last_use_started_day + average_period.day
   end
 
   def format_scheduled_consume_date(id)
     scheduled_consume_date = calculate_scheduled_consume_date(id)
-    unless scheduled_consume_date.nil?
-      wday = %w(日 月 火 水 木 金 土)
-      scheduled_consume_date.strftime("%m/%d(#{wday[scheduled_consume_date.wday]})")
-    else
+    if scheduled_consume_date.nil?
       '-'
+    else
+      wday = %w[日 月 火 水 木 金 土]
+      scheduled_consume_date.strftime("%m/%d(#{wday[scheduled_consume_date.wday]})")
     end
   end
 
   def count_until_scheduled_consume_date(id)
     scheduled_consume_date = calculate_scheduled_consume_date(id)
     if !scheduled_consume_date.nil?
-      today = Date.today
+      today = Time.zone.today
       result = scheduled_consume_date - today
       result.numerator
     else
@@ -53,8 +53,7 @@ class Product < ApplicationRecord
     product.monthly_consume_amounts.where(month: date).count('distinct product_id')
   end
 
-
-  def calculate_monthly_consume_amounts(product,date)
+  def calculate_monthly_consume_amounts(product, date)
     MonthlyConsumeAmount.where(product_id: product.id).where(month: date).sum(:amount)
   end
 end

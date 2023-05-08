@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Users::Mailer < Devise::Mailer
   layout 'mailer'
   before_action :add_image
 
   def devise_mail(record, action, opts = {}, &block)
-    opts[:subject] = "【Skinmate】" + I18n.t("devise.mailer.#{action}.subject")
+    opts[:subject] = "【Skinmate】#{I18n.t("devise.mailer.#{action}.subject")}"
     super
   end
 
@@ -13,8 +15,7 @@ class Users::Mailer < Devise::Mailer
     images = ['logo.svg']
 
     images.each do |img|
-      attachments.inline[img] = File.read("#{Rails.root}/app/assets/images/mailer/" + img)
+      attachments.inline[img] = File.read(Rails.root.join('app/assets/images/mailer/') + img)
     end
   end
 end
-

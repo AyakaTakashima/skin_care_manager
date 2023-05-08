@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'application_system_test_case'
 
 class ProductsTest < ApplicationSystemTestCase
@@ -134,7 +136,6 @@ class ProductsTest < ApplicationSystemTestCase
     mail = ActionMailer::Base.deliveries.last
     assert_equal @user.email, mail.to[0]
     assert_equal '【Skinmate】メール変更完了', mail.subject
-
   end
 
   test 'can edit password at user edit page' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProductConsumeLog < ApplicationRecord
   belongs_to :product
   has_many :monthly_consume_amounts, dependent: :destroy
@@ -10,7 +12,7 @@ class ProductConsumeLog < ApplicationRecord
 
     last_index = info_to_calculate[:months].count - 1
     info_to_calculate[:months].each_with_index do |month, index|
-      if index == 0
+      if index.zero?
         consuming_amount = ((month.end_of_month - month).numerator + 1) * product.average_amount_per_day
       elsif index == last_index
         total_amount_until_last_month = MonthlyConsumeAmount.where(product_consume_log_id: product_consume_log.id).sum(:amount)
@@ -32,7 +34,7 @@ class ProductConsumeLog < ApplicationRecord
     MonthlyConsumeAmount.where(product_consume_log_id: product_consume_log.id).destroy_all
 
     if date > use_started_at.end_of_month
-      months = Enumerator.produce(use_started_at, &:next_month).take_while{|d| d <= date}
+      months = Enumerator.produce(use_started_at, &:next_month).take_while { |d| d <= date }
       info_to_calculate = {}
       info_to_calculate[:months] = months
       info_to_calculate[:product] = product

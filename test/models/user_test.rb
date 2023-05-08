@@ -1,8 +1,10 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   setup do
-    @user = users(:one)
+    @user = users(:heavy_user)
   end
 
   test 'user is valid' do
