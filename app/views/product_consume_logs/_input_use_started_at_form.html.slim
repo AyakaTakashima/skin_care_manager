@@ -1,14 +1,12 @@
 = turbo_frame_tag product_consume_log, product do
-  = form_with(model: [product, product_consume_log], class: "needs-validation", html: { novalidate: "true" }, local: true, data: { controller: "form", form_target: "form", action: "submit->form#checkValidate" }) do |form|  
-    div 
+  = form_with(model: [product, product_consume_log], class: 'needs-validation', html: { novalidate: 'true' }, local: true, data: { controller: 'form', form_target: 'form', action: 'submit->form#checkValidate' }) do |form|
+    div
       = form.hidden_field :product_id, value: product.id
-
-    div.text-center
-      div.form-floating
-        = form.date_field :use_started_at, class: "form-control", id: "floatingUseStartedAt", placeholder: "20XX/02/01", required: true
-        = form.label :use_started_at, for: "floatingUseStartedAt"
-        div.invalid-feedback
+    .text-center
+      .form-floating
+        = form.date_field :use_started_at, class: 'form-control', id: 'floatingUseStartedAt', placeholder: '20XX/02/01', required: true
+        = form.label :use_started_at, for: 'floatingUseStartedAt'
+        .invalid-feedback
           |使用開始日は必須です
-
-    div.py-4.text-center
-      = form.submit t('action.new_use_started_at'), class:"btn btn-primary rounded-pill px-4 fw-bold"
+    .py-4.text-center
+      = form.submit t('action.new_use_started_at'), class: 'btn btn-primary rounded-pill px-4 fw-bold'
