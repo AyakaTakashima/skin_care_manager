@@ -1,22 +1,25 @@
-div.h-75.d-flex
-  div.m-auto.w-25
-    div.text-center.mb-5
+.h-75.d-flex
+  .m-auto.w-25
+    .text-center.mb-5
       = image_tag 'logo.svg', height: '70'
     h1.text-center.fs-4.fw-bold
       | パスワード再設定
     p.text-center.m-4
       |ご入力いただいたメールアドレスへ<br>パスワードの再設定リンクを送信します。
-    div.m-auto
-      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, novalidate: "true" }, class: "needs-validation", data: { controller: "form", form_target: "form", action: "submit->form#checkValidate" }) do |form|
-        = render "devise/shared/error_messages", resource: resource
+    .m-auto
+      = form_for(resource, as: resource_name,
+                 url: password_path(resource_name),
+                 html: { method: :post, novalidate: 'true' },
+                 class: 'needs-validation',
+                 data: { controller: 'form', form_target: 'form', action: 'submit->form#checkValidate' }) do |form|
+        = render 'devise/shared/error_messages', resource:
         .field
-          div.form-floating
-            = form.email_field :email, class: "form-control", id: "floatingEmail", placeholder: "メールアドレス", required: true, autofocus: true, autocomplete: "email"
-            = form.label :email, for: "floatingEmail"
-            div.invalid-feedback
+          .form-floating
+            = form.email_field :email, class: 'form-control', id: 'floatingEmail', placeholder: 'メールアドレス', required: true, autofocus: true, autocomplete: 'email'
+            = form.label :email, for: 'floatingEmail'
+            .invalid-feedback
               |メールアドレスは必須です
         .actions.text-center.m-4
-          = form.submit "送信", class:"btn btn-primary rounded-pill px-5 fw-bold"
-    div.text-center
-      = link_to "ログイン画面に戻る", new_registration_path(resource_name), class: "text-decoration-none link-secondary"
-
+          = form.submit '送信', class: 'btn btn-primary rounded-pill px-5 fw-bold'
+    .text-center
+      = link_to 'ログイン画面に戻る', new_registration_path(resource_name), class: 'text-decoration-none link-secondary'

@@ -6,9 +6,9 @@ html
     = csrf_meta_tags
     = action_cable_meta_tag
     = stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity: 'sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin: 'anonymous'
-    = stylesheet_link_tag "mailer", media: 'all'
+    = stylesheet_link_tag 'mailer', media: 'all'
   body
-    div.text-center.m-4
+    .text-center.m-4
       = image_tag attachments['logo.svg'].url, height: '70'
-    div.container.bg-white.text-center.p-5
+    .container.bg-white.text-center.p-5
       = yield

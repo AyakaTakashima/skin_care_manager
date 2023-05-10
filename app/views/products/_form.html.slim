@@ -1,30 +1,29 @@
 = turbo_frame_tag product do
-  = form_with(model: product, class: "needs-validation", html: { novalidate: "true" }, local: true, data: { controller: "form", form_target: "form", action: "submit->form#checkValidate" }) do |form|
-    div.container
-      div.row.text-center
-        div.col
+  = form_with(model: product, class: 'needs-validation', html: { novalidate: 'true' }, local: true, data: { controller: 'form', form_target: 'form', action: 'submit->form#checkValidate' }) do |form|
+    .container
+      .row.text-center
+        .col
           label
-            div(data-action="click->form#selectAvatar")
+            div(data-action='click->form#selectAvatar')
               - if product.avatar.attached?
-                = image_tag product.avatar.variant(resize_to_limit: [300, 300]), class: "border rounded", data: { form_target: "avatar"}
+                = image_tag product.avatar.variant(resize_to_limit: [300, 300]), class: 'border rounded', data: { form_target: 'avatar' }
               - else
-                = image_tag 'クリックして画像を選択.svg', height: '300', class: "border rounded" ,data: { form_target: "avatar"}
-              = form.file_field :avatar, accept: "image/jpg,image/png", class: "invisible", data: { form_target: "file"}
-        div.col.text-left
-          div.row.my-5
-            div.col
-              div.form-floating
-                = form.text_area :name, class: "form-control", id: "floatingName", placeholder: "化粧水", required: true
-                = form.label :name, for: "floatingName"
-                div.invalid-feedback
+                = image_tag 'クリックして画像を選択.svg', height: '300', class: 'border rounded', data: { form_target: 'avatar' }
+              = form.file_field :avatar, accept: 'image/jpg,image/png', class: 'invisible', data: { form_target: 'file' }
+        .col.text-left
+          .row.my-5
+            .col
+              .form-floating
+                = form.text_area :name, class: 'form-control', id: 'floatingName', placeholder: '化粧水', required: true
+                = form.label :name, for: 'floatingName'
+                .invalid-feedback
                   |アイテム名は必須です
-          div.row.my-5
-            div.col
-              div.form-floating
-                = form.number_field :price, class: "form-control", id: "floatingPrice", placeholder: "5000", required: true
-                = form.label :price, for: "floatingPrice"
-                div.invalid-feedback
+          .row.my-5
+            .col
+              .form-floating
+                = form.number_field :price, class: 'form-control', id: 'floatingPrice', placeholder: '5000', required: true
+                = form.label :price, for: 'floatingPrice'
+                .invalid-feedback
                   |価格は必須です
-      
-    div.py-4.text-center
-      = form.submit '登録する', class:"btn btn-primary rounded-pill px-4 fw-bold"
+    .py-4.text-center
+      = form.submit '登録する', class: 'btn btn-primary rounded-pill px-4 fw-bold'

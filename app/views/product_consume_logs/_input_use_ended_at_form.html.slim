@@ -1,9 +1,8 @@
-= turbo_frame_tag product,product_consume_log do
+= turbo_frame_tag product, product_consume_log do
   = form_with(model: [product, product_consume_log], local: true) do |form|
-    div.text-center
-      div.form-floating
-        = form.date_field :use_ended_at, class: "form-control", id: "floatingUseEndedAt", placeholder: "20XX/02/01"
-        = form.label :use_ended_at, for: "floatingUseEndedAt"
-  
-    div.py-4.text-center
-      = form.submit t('action.new_use_ended_at'), class:"btn btn-primary rounded-pill px-4 fw-bold"
+    .text-center
+      .form-floating
+        = form.date_field :use_ended_at, class: 'form-control', id: 'floatingUseEndedAt', placeholder: '20XX/02/01'
+        = form.label :use_ended_at, for: 'floatingUseEndedAt'
+    .py-4.text-center
+      = form.submit t('action.new_use_ended_at'), class: 'btn btn-primary rounded-pill px-4 fw-bold'

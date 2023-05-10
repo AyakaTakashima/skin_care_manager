@@ -15,7 +15,7 @@ html
     meta property="og:site_name" content="基礎化粧品の使用サイクルを管理|SkinMate"
     meta property="og:image" content="ページの画像のURL（シェア時に表示される画像）"
 
-    meta name="twitter:card" content="summary" 
+    meta name="twitter:card" content="summary"
 
     = favicon_link_tag('skin_care_manager_favicon.ico')
     = csrf_meta_tags
@@ -24,14 +24,14 @@ html
     script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"
     = stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons', media: 'all'
     = stylesheet_link_tag 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0'
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = stylesheet_link_tag 'application', "data-turbo-track": 'reload'
 
   body
     - if user_signed_in? || current_page?(welcome_path)
       = render 'layouts/header'
     = render 'layouts/notice'
     = yield
-    = turbo_frame_tag "product_large_modal"
-    = turbo_frame_tag "consume_logs_regular_modal"
-    = turbo_frame_tag "monthly_consume_amount_extra_large_modal"
+    = turbo_frame_tag 'product_large_modal'
+    = turbo_frame_tag 'consume_logs_regular_modal'
+    = turbo_frame_tag 'monthly_consume_amount_extra_large_modal'
     = render 'layouts/footer'
