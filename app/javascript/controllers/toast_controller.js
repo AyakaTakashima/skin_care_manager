@@ -1,5 +1,5 @@
-import { Controller } from "@hotwired/stimulus"
-import { Toast } from "bootstrap"
+import { Controller } from '@hotwired/stimulus'
+import { Toast } from 'bootstrap'
 
 // Connects to data-controller="notice"
 export default class extends Controller {
