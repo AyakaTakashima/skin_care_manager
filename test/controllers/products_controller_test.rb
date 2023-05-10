@@ -4,11 +4,18 @@ require 'test_helper'
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @product = products(:one)
+    @product = products(:unused_lotion)
+    @heavy_user = users(:heavy_user)
+    sign_in @heavy_user
   end
 
   test 'should get index' do
     get products_url
+    assert_response :success
+  end
+
+  test 'should show product' do
+    get product_url(@product)
     assert_response :success
   end
 
@@ -17,27 +24,22 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'should create product' do
-    assert_difference('Product.count') do
-      post products_url, params: { product: { average_period: @product.average_period, name: @product.name, price: @product.price, user_id: @product.user_id } }
-    end
-
-    assert_redirected_to product_url(Product.last)
-  end
-
-  test 'should show product' do
-    get product_url(@product)
-    assert_response :success
-  end
-
   test 'should get edit' do
     get edit_product_url(@product)
     assert_response :success
   end
 
+  test 'should create product' do
+    assert_difference('Product.count') do
+      post products_url, params: { product: { name: 'テスト化粧水', price: 3000, user_id: @heavy_user.id } }
+    end
+
+    assert_redirected_to root_url
+  end
+
   test 'should update product' do
     patch product_url(@product),
-          params: { product: { average_period: @product.average_period, name: @product.name, price: @product.price, user_id: @product.user_id } }
+          params: { product: { name: '編集された未使用の化粧水', price: 2500, user_id: @heavy_user.id } }
     assert_redirected_to product_url(@product)
   end
 
@@ -46,6 +48,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       delete product_url(@product)
     end
 
-    assert_redirected_to products_url
+    assert_redirected_to root_url
   end
 end
