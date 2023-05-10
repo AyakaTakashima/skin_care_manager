@@ -7,7 +7,8 @@
     .m-auto
       = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, novalidate: 'true' }, class: 'needs-validation', data: { controller: 'form', form_target: 'form', action: 'submit->form#checkValidate' }) do |form|
         = render 'devise/shared/error_messages', resource:
-        = form.hidden_field :reset_password_token
+        div
+          = form.hidden_field :reset_password_token
         .field.mb-4
           .form-floating
             = form.password_field :password, class: 'form-control', id: 'floatingNewPassword', placeholder: '新しいパスワード', autofocus: true, autocomplete: 'new-password'
@@ -22,4 +23,4 @@
             = form.password_field :password_confirmation, class: 'form-control', id: 'floatingConfirmNewPassword', placeholder: '新しいパスワードの確認', autocomplete: 'new-password'
             = form.label :password_confirmation, for: 'floatingConfirmNewPassword'
         .actions.text-center.m-4
-          = form.submit 'パスワードを変更する', class:'btn btn-primary rounded-pill px-4 fw-bold'
+          = form.submit 'パスワードを変更する', class: 'btn btn-primary rounded-pill px-4 fw-bold'
