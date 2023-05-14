@@ -81,6 +81,7 @@ group :development do
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'slim_lint'
+  gem 'brakeman', require: false
 end
 
 group :test do
