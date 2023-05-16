@@ -23,7 +23,7 @@
                       |logout
                     div
                       |logout
-            - if current_page?(welcome_path)
+            - if current_page?(welcome_path) || current_page?(tos_path) || current_page?(pp_path)
               li.nav-item.mx-2
                 .text-center
                   = link_to 'ログイン', new_user_session_path, class: 'btn btn-outline-primary rounded-pill fw-bold px-4'

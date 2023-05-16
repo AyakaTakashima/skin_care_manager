@@ -1,5 +1,6 @@
-footer.d-flex.flex-row.justify-content-center
-  .p-4.small
-    = link_to '利用規約', '#', class: 'link-secondary text-decoration-none'
-  .p-4.small
-    = link_to 'プライバシーポリシー', '#', class: 'link-secondary text-decoration-none'
+footer
+  .small.d-flex.flex-row.justify-content-center
+    = link_to '利用規約', tos_path, class: 'link-secondary text-decoration-none mx-4'
+    = link_to 'プライバシーポリシー', pp_path, class: 'link-secondary text-decoration-none'
+  .small.d-flex.flex-row.justify-content-center.py-4
+    p © 2023 aya-kyan(AyakaTakashima)
