@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get "welcome", to: "welcome#index", as: "welcome"
+  get "tos", to: "welcome#tos", as: "tos"
+  get "pp", to: "welcome#pp", as: "pp"
   devise_for :users
   root to: "products#index"
   get "monthly_consume_amount", to: "monthly_consume_amount#index"
