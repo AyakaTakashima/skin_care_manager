@@ -56,3 +56,4 @@ ja:
     number_of_used_items: 使用アイテム数
     consumption_amount: 消費金額
     total_of_consumption_amount: 合計消費金額
+    monthly_consume_amount_empty: アイテムを消費した月はまだありません。

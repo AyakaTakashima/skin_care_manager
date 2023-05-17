@@ -11,7 +11,11 @@ class MonthlyConsumeAmount < ApplicationRecord
     last_year = Time.zone.today.beginning_of_month - 1.year
     total = monthly_consume_amounts.where('month <= ?', this_month).where('month >= ?', last_year).sum(:amount)
     months = monthly_consume_amounts.count('distinct month')
-    total / months
+    if total.zero?
+      0
+    else
+      total / months
+    end
   end
 
   def self.get_number_of_consumed_products(monthly_consume_amounts, date)
