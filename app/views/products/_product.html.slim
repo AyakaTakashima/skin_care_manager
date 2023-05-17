@@ -1,5 +1,5 @@
 div id="#{dom_id product}"
-  .text-center.my-4.fs-4.fw-bold
+  h1.text-center.my-4.fs-4.fw-bold
     - if product.product_consume_logs.empty?
       = t('views.product_consume_log_empty')
     - elsif product.average_period.zero?
@@ -24,7 +24,7 @@ div id="#{dom_id product}"
               = product.price
       .col-md-8
         - if product.product_consume_logs.empty?
-          .pt-5.text-center
+          p.pt-5.text-center
             = t('views.message_for_product_consume_logs_index')
         - else
           .container

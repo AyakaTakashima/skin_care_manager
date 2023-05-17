@@ -20,7 +20,7 @@
   - else
     .container.border.rounded.bg-white
       .row.mt-5.mb-4
-        .col.text-center.fs-2.fw-bold
+        h1.col.text-center.fs-2.fw-bold
           = "#{Time.zone.today.month}月の消費予定金額は#{@amount}円です。"
       .row.m-2
         .col.fw-bold.text-end
@@ -39,31 +39,30 @@
           .col
             .row
               - if product.product_consume_logs.empty?
-                div
+                p
                   = t('views.product_consume_log_empty')
                   |<br>使用開始日を登録すると<br>使い切り予定日の計測が始まります。
               - elsif !product.product_consume_logs.last.use_ended_at.nil?
-                div
-                  |使用開始日を登録すると<br>使い切り予定日が表示されます。
-                .mt-2
+                p 使用開始日を登録すると<br>使い切り予定日が表示されます。
+                p.mt-2
                   = "最新の使用履歴：#{l(product.product_consume_logs.last.use_ended_at, format: :long)}"
               - elsif product.average_period.zero?
-                .pb-4
+                p.pb-1
                   = t('views.scheduled_consume_date')
-                .fs-2.fw-bold
+                p.fs-2.fw-bold
                   = t('views.measuring')
-                .p-4
+                p.p-1
                   = "#{l(product.product_consume_logs.last.use_started_at, format: :short)}から使用中"
               -else
-                .pb-4
+                p.pb-1
                   = t('views.scheduled_consume_date')
-                .fs-2.fw-bold
+                p.fs-2.fw-bold
                   = product.format_scheduled_consume_date(product.id)
-                .p-4
+                p.p-1
                   - if product.count_until_scheduled_consume_date(product.id).positive?
                     = "あと  #{product.count_until_scheduled_consume_date(product.id)}  日"
                   - elsif product.count_until_scheduled_consume_date(product.id).zero?
-                    |本日が使い切り予定日です
+                    | 本日が使い切り予定日です
                   - else
                     = "予定日から#{product.count_until_scheduled_consume_date(product.id).abs}日過ぎています"
           .col

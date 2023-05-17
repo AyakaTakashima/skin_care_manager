@@ -4,15 +4,15 @@
       .row.justify-content-md-center
         - if @date.month == Time.zone.today.month
           .col-md-auto
-            .text-center.fs-4.fw-bold
+            h1.text-center.fs-4.fw-bold
               = "#{@date.year}年#{@date.month}月の消費予定金額は#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date)}円です。"
         - else
           .col-md-auto
-            .text-center.fs-4.fw-bold
+            h1.text-center.fs-4.fw-bold
               = "#{@date.year}年#{@date.month}月の合計消費金額は#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date)}円です。"
 
     - if @monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date).zero?
-      .text-center.fs-4
+      p.text-center.fs-5
         = t('views.product_consume_log_empty')
     - else
       .container
