@@ -27,10 +27,7 @@ html
     = stylesheet_link_tag 'application', "data-turbo-track": 'reload'
 
   body
-    = render 'layouts/header'
+    = render 'layouts/welcome_header'
     = render 'layouts/notice'
     = yield
-    = turbo_frame_tag 'product_large_modal'
-    = turbo_frame_tag 'consume_logs_regular_modal'
-    = turbo_frame_tag 'monthly_consume_amount_extra_large_modal'
     = render 'layouts/footer'

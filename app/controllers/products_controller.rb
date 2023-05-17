@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
 class ProductsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
   before_action :set_product, only: %i[show edit update destroy]
 
   def index
-    @products = current_user.products.order(created_at: :asc)
-    @amount = @products.includes(:monthly_consume_amounts).where('month=?', Time.zone.today.beginning_of_month).sum(:amount)
+    if current_user
+      @products = current_user.products.order(created_at: :asc)
+      @amount = @products.includes(:monthly_consume_amounts).where('month=?', Time.zone.today.beginning_of_month).sum(:amount)
+      render aciton: :index
+    else
+      render template: 'welcome/index', layout: 'welcome'
+    end
   end
 
   def show

@@ -1,0 +1,15 @@
+- unless %w[new_user_session new_user_password new_user_registration edit_user_password].any? { |name| current_page?(send("#{name}_path")) }
+  header.sticky-top
+    nav.navbar.navbar-expand-lg.navbar-light.shadow-sm
+      .container
+        .navbar-brand
+          = link_to root_path do
+            = image_tag('logo.svg', height: '50', alt: 'スキンメイトのロゴ')
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav.ms-auto
+            li.nav-item.mx-2
+              .text-center
+                = link_to 'ログイン', new_user_session_path, class: 'btn btn-outline-primary rounded-pill fw-bold px-4'
+            li.nav-item.mx-2
+              .text-center
+                = link_to '新規登録', new_user_registration_path, class: 'btn btn-primary rounded-pill fw-bold px-4'

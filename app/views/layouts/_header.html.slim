@@ -23,10 +23,3 @@
                       |logout
                     div
                       |logout
-            - if current_page?(welcome_path) || current_page?(tos_path) || current_page?(pp_path)
-              li.nav-item.mx-2
-                .text-center
-                  = link_to 'ログイン', new_user_session_path, class: 'btn btn-outline-primary rounded-pill fw-bold px-4'
-              li.nav-item.mx-2
-                .text-center
-                  = link_to '新規登録', new_user_registration_path, class: 'btn btn-primary rounded-pill fw-bold px-4'
