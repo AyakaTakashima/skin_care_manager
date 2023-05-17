@@ -48,4 +48,35 @@ class ProductConsumeLog < ApplicationRecord
                                   amount: consuming_amount)
     end
   end
+
+  def calculate_average_period(product_id)
+    logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
+    if logs.empty?
+      0
+    else
+      number_of_periods = logs.count
+      total_period = 0
+      logs.each do |log|
+        period = log.use_ended_at - log.use_started_at + 1 # X日間という数え方をしたいので1を足している
+        total_period += period.numerator
+      end
+      total_period / number_of_periods
+    end
+  end
+
+  def calculate_average_amount_per_day(product_id)
+    logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
+    product = Product.find(product_id)
+    if logs.empty?
+      0
+    else
+      number_of_logs = logs.count
+      total_amount_per_day = 0
+      logs.each do |log|
+        period = log.use_ended_at - log.use_started_at + 1 # X日間という数え方をしたいので1を足している
+        total_amount_per_day += (product.price / period.numerator)
+      end
+      total_amount_per_day / number_of_logs
+    end
+  end
 end
