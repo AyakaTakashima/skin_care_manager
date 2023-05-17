@@ -1,7 +1,7 @@
 .h-75.d-flex
   .m-auto.w-25
     .text-center.m-5
-      = image_tag 'logo.svg', height: '70'
+      = image_tag('logo.svg', height: '70', alt: 'スキンメイトのロゴ')
     .m-auto
       = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { novalidate: 'true' }, class: 'needs-validation', data: { controller: 'form', form_target: 'form', action: 'submit->form#checkValidate' }) do |form|
         = render 'devise/shared/error_messages', resource:

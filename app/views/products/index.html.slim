@@ -7,11 +7,11 @@
     .container.w-50.text-center
       .row
         .col
-          = image_tag 'skincare_color_height400.png', height: '200'
+          = image_tag('skincare_color_height400.png', height: '200', alt: '女性がスキンケアをしている')
           .m-5
             |スキンケア用品
         .col
-          = image_tag 'makeup_woman_color_height400.png', height: '200'
+          = image_tag('makeup_woman_color_height400.png', height: '200', alt: '女性が化粧をしている')
           .m-5
             |よく使う化粧品
     .py-4.text-center
@@ -32,8 +32,8 @@
             .row.product-image
               = link_to product do
                 .w-50.border.rounded.mx-auto.bg-white.is-image-link
-                  = image_tag product.avatar.variant(resize_to_limit: [150, 150]) if product.avatar.attached?
-                  = image_tag 'no_image.svg', size: '150x150' unless product.avatar.attached?
+                  = image_tag product.avatar.variant(resize_to_limit: [150, 150]), alt: product.name if product.avatar.attached?
+                  = image_tag('no_image.svg', size: '150x150', alt: '写真の登録がありません') unless product.avatar.attached?
               .mt-2
                 = product.name
           .col

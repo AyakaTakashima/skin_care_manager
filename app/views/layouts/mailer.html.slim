@@ -9,6 +9,6 @@ html
     = stylesheet_link_tag 'mailer', media: 'all'
   body
     .text-center.m-4
-      = image_tag attachments['logo.svg'].url, height: '70'
+      = image_tag attachments['logo.svg'].url, height: '70', alt: 'スキンメイトのロゴ'
     .container.bg-white.text-center.p-5
       = yield

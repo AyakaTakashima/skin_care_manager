@@ -3,7 +3,7 @@
     .row.py-5
       .col.py-5
         h1.my-4.fw-bold
-          |スキンケア商品の管理はお任せ
+          |スキンケア製品の管理はお任せ
         p.mb-2
           |Skinmateは、基礎化粧品の使用サイクル/毎月の使用金額を管理します。
         .d-flex.py-2
@@ -21,7 +21,7 @@
         .mb-1
           = link_to '新規アカウント登録（無料）', new_user_registration_path, class: 'btn btn-primary rounded-pill px-5 py-3 fw-bold'
       .col.py-5
-        = image_tag 'top_image.svg', height: '300'
+        = image_tag('top_image.svg', alt: 'スキンメイトのサービスイメージ', height: '300')
 .pt-5
   h2.text-center.mt-4
     |Skinmate ができること
@@ -29,17 +29,17 @@
     .row.p-4
       .col
         .m-2.p-2.border-0
-          = image_tag 'material-symbols_edit-note-rounded.svg', height: '100'
+          = image_tag('material-symbols_edit-note-rounded.svg', alt: '', height: '100')
           .my-4.fw-bold
             |使用実績の記録
       .col
         .m-2.p-2.border-0
-          = image_tag 'material-symbols_payments-outline.svg', height: '100'
+          = image_tag('material-symbols_payments-outline.svg', alt: '', height: '100')
           .my-4.fw-bold
             |各月の消費金額の計算
       .col
         .m-2.p-2.border-0
-          = image_tag 'material-symbols_monitoring.svg', height: '100'
+          = image_tag('material-symbols_monitoring.svg', alt: '', height: '100')
           .my-4.fw-bold
             |使い切り予定日の推測
 
@@ -49,15 +49,15 @@
 .container.w-75.my-5
   .row.p-4
     .col
-      = image_tag 'image_feature1.png', height: '250'
+      = image_tag('image_feature1.png', alt: 'スキンケア製品の利用履歴一覧と平均使い切り日数が表示されている画面', height: '250')
     .col
       h3.fw-bold.fs-5
         |使用実績の記録
       p.pt-2 style="line-height:1.7rem"
-        |いつからいつまで化粧品を使用したのか、実績の記録ができます。<br>過去の記録は遡って見ることが可能です。
+        |いつからいつまでアイテムを使用したのか、実績の記録ができます。<br>過去の記録は遡って見ることが可能です。
   .row.p-4
     .col
-      = image_tag 'image_feature2.png', height: '250'
+      = image_tag('image_feature2.png', alt: '各月の消費金額の一覧画面とその平均金額が表示されている画面', height: '250')
     .col
       h3.fw-bold.fs-5
         |各月の消費金額の計算
@@ -68,7 +68,7 @@
           |(*1) 例：1本10,000円の美容液を60日で使っていた場合<br>　　1ヶ月（30日）に5,000円分を消費している計算になります。
   .row.p-4
     .col
-      = image_tag 'image_feature3.png', height: '250'
+      = image_tag('image_feature3.png', alt: '今月消費される予定の金額表示と各スキンケア製品の使い切り予定日が表示されている画面', height: '250')
     .col
       h3.fw-bold.fs-5
         |使い切り予定日や消費予定金額の推測
@@ -78,7 +78,7 @@
         .text-secondary
           |(*2) 推測には、1ヶ月分のデータが必要です。
 h2.text-center.my-4
-  |よくある質問
+  |よくあるご質問
 .container.w-75.py-4
   .border-top.border-bottom
     h3.fw-bold.fs-6.pt-4

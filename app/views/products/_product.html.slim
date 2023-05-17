@@ -12,8 +12,8 @@ div id="#{dom_id product}"
         .container
           .row.text-center
             .col
-              = image_tag product.avatar.variant(resize_to_limit: [300, 300]), class: 'border rounded bg-white' if product.avatar.attached?
-              = image_tag 'no_image.svg', size: '300x300', class: 'border rounded bg-white' unless product.avatar.attached?
+              = image_tag product.avatar.variant(resize_to_limit: [300, 300]), alt: product.name, class: 'border rounded bg-white' if product.avatar.attached?
+              = image_tag('no_image.svg', size: '300x300', alt: '写真の登録がありません', class: 'border rounded bg-white') unless product.avatar.attached?
         .container.w-50
           .row.pt-4
             .border-bottom
