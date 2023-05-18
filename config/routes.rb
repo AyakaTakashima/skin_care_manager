@@ -7,8 +7,6 @@ Rails.application.routes.draw do
   get "monthly_consume_amount", to: "monthly_consume_amount#index"
   get "monthly_consume_amount/:year/:month", to: "monthly_consume_amount#show", as: :monthly_log
   resources :products do
-    #resources :product_consume_logs
-    #get "product_consume_logs/:id/use_end", to: "product_consume_logs#use_end", as: :use_end
     resources :product_consume_logs do
       resources :use_end, only: %i(index), controller: "product_consume_logs/use_end"
     end
