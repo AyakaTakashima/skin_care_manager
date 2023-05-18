@@ -1,21 +1,9 @@
 doctype html
 html
-  head prefix="og: http://ogp.me/ns#"
+  - page_classes = content_for(:body_classes).to_s
+  head
     meta charset="utf-8"
-    title
-      | 基礎化粧品の使用サイクルを管理|SkinMate
-    meta[name="viewport" content="width=device-width,initial-scale=1"]
-    meta name="description" content="Skinmateはあなたの日々のスキンケアをサポートする、化粧品の使用サイクル管理アプリです。使い切り予定日の予測や1ヶ月の消費金額の計算を自動で行います。"
-    meta name="keywords" content="化粧水, 化粧品, 使用サイクル, 管理, 消費金額"
-
-    meta property="og:url" content="ページのURL"
-    meta property="og:type" content="website"
-    meta property="og:title" content="基礎化粧品の使用サイクルを管理するならSkinmate"
-    meta property="og:description" content="Skinmateはあなたの日々のスキンケアをサポートする、化粧品の使用サイクル管理アプリです。使い切り予定日の予測や1ヶ月の消費金額の計算を自動で行います。"
-    meta property="og:site_name" content="基礎化粧品の使用サイクルを管理|SkinMate"
-    meta property="og:image" content="ページの画像のURL（シェア時に表示される画像）"
-
-    meta name="twitter:card" content="summary"
+    = display_meta_tags default_meta_tags
 
     = favicon_link_tag('skin_care_manager_favicon.ico')
     = csrf_meta_tags

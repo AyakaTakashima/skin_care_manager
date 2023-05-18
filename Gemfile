@@ -56,6 +56,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'html2slim'
 gem 'jquery-rails'
+gem 'meta-tags'
 gem 'premailer-rails'
 gem 'slim-rails'
 

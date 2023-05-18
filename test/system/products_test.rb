@@ -11,7 +11,7 @@ class ProductsTest < ApplicationSystemTestCase
 
   test 'cannot visit the index if no sign in' do
     visit root_url
-    assert_current_path new_user_session_path
+    assert_equal '基礎化粧品の使用サイクル管理アプリ | Skinmate（スキンメイト）', title
   end
 
   test 'cannot visit the show if no sign in' do
@@ -31,7 +31,7 @@ class ProductsTest < ApplicationSystemTestCase
     assert_text 'アイテムの登録はされていません。'
   end
 
-  test 'the show and index show no log message if product log is no' do
+  test 'the show and index show no log message if product log is none' do
     sign_in @heavy_user
     visit root_url
     within all('.product-record')[0].all('.col')[1] do
