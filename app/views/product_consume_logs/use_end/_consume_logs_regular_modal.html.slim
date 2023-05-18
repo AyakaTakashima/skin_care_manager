@@ -1,0 +1,10 @@
+= turbo_frame_tag 'consume_logs_regular_modal' do
+  div class="modal fade" data-controller="modal" data-backdrop="false"
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header.border-0
+          h5.modal-title.fw-bold
+            = title
+          button type="button" class="btn-close text-end" data-bs-dismiss="modal" aria-label="Close"
+        .modal-body
+          = yield

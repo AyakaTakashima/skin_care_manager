@@ -72,8 +72,8 @@
             - if product.in_use?(product.id)
               = turbo_frame_tag 'product_consume_log_input_use_ended_at'
                 = link_to t('action.input_use_ended_at'),
-                          product_use_end_path(product_id: product.id,
-                          id: product.product_consume_logs.last.id),
+                          product_product_consume_log_use_end_index_path(product_id: product.id,
+                          product_consume_log_id: product.product_consume_logs.last.id),
                           class: 'btn btn-outline-primary rounded-pill px-4 fw-bold',
                           data: { turbo_frame: 'consume_logs_regular_modal' }
             - else
