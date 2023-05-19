@@ -5,7 +5,7 @@
         .navbar-brand
           = link_to root_path do
             = image_tag('logo.svg', height: '50', alt: 'スキンメイトのロゴ')
-        .collapse.navbar-collapse
+        .d-none.d-sm-block.d-md-none.d-lg-block
           ul.nav.navbar-nav.ms-auto
             li.nav-item.mx-2
               .text-center
@@ -13,3 +13,8 @@
             li.nav-item.mx-2
               .text-center
                 = link_to '新規登録', new_user_registration_path, class: 'btn btn-primary rounded-pill fw-bold px-4'
+        .d-block.d-sm-none.d-md-block.d-lg-none
+          ul.nav.navbar-nav.ms-auto
+            li.nav-item.mx-2
+              .text-center
+                = link_to 'ログイン', new_user_session_path, class: 'btn btn-outline-primary rounded-pill fw-bold px-4'
