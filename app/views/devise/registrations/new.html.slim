@@ -1,10 +1,11 @@
 - title '新規アカウント登録'
 - description '基礎化粧品の使用サイクル管理アプリ「スキンメイト」の新規アカウント登録画面です。'
 
-.h-75.d-flex
-  .m-auto.w-25
+.d-flex
+  .m-auto
     .text-center.m-5
-      = image_tag('logo.svg', height: '70', alt: 'スキンメイトのロゴ')
+      = link_to root_path do
+        = image_tag('logo.svg', height: '70', alt: 'スキンメイトのロゴ')
     h1.text-center.fs-4.fw-bold.my-4
       | 新規アカウント登録
     .m-auto

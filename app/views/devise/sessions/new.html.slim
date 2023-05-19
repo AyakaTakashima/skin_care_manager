@@ -1,10 +1,11 @@
 - title 'ログイン'
 - description '基礎化粧品の使用サイクル管理アプリ「スキンメイト」のログイン画面です。'
 
-.h-75.d-flex
-  .m-auto.w-25
+.d-flex
+  .m-auto
     .text-center.m-5
-      =(image_tag 'logo.svg', height: '70', alt: 'スキンメイトのロゴ')
+      = link_to root_path do
+        =(image_tag 'logo.svg', height: '70', alt: 'スキンメイトのロゴ')
     .m-auto
       = form_for(resource, as: resource_name, url: session_path(resource_name), html: { novalidate: 'true' }, class: 'needs-validation', data: { controller: 'form', form_target: 'form', action: 'submit->form#checkValidate' }) do |form|
         = render 'devise/shared/error_messages', resource:
