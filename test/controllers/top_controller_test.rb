@@ -2,9 +2,9 @@
 
 require 'test_helper'
 
-class WelcomeControllerTest < ActionDispatch::IntegrationTest
+class TopControllerTest < ActionDispatch::IntegrationTest
   test 'should get index' do
-    get welcome_url
+    get top_url
     assert_response :success
   end
 end

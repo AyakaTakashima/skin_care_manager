@@ -9,7 +9,7 @@ class MonthlyConsumeAmountControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get index' do
-    get monthly_consume_amount_url
+    get monthly_consume_amount_index_url
     assert_response :success
   end
 

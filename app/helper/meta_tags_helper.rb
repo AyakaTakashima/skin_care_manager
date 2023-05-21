@@ -29,7 +29,7 @@ module MetaTagsHelper
   end
   # rubocop:enable Metrics/MethodLength
 
-  def welcome_meta_tags
+  def top_meta_tags
     default_meta_tags.deep_merge({
                                    title:,
                                    og: {

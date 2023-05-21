@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class WelcomeController < ApplicationController
-  layout 'welcome'
+class TopController < ApplicationController
+  layout 'top'
 
   def index; end
 

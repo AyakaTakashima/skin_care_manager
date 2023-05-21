@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
       @amount = @products.includes(:monthly_consume_amounts).where('month=?', Time.zone.today.beginning_of_month).sum(:amount)
       render aciton: :index
     else
-      render template: 'welcome/index', layout: 'welcome'
+      render template: 'top/index', layout: 'top'
     end
   end
 

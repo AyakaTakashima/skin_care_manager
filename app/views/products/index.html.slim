@@ -29,7 +29,7 @@
           h1.fs-2.fw-bold
             = "#{Time.zone.today.month}月の消費予定金額は#{@amount}円です。"
         .col-12.fw-bold.text-end.pb-2.pe-2
-          = link_to t('action.product_consume_log_index'), monthly_consume_amount_path, class: 'text-decoration-none is-text-link'
+          = link_to t('action.product_consume_log_index'), monthly_consume_amount_index_path, class: 'text-decoration-none is-text-link'
     .container-fluid.max-width-1000.text-center
       - @products.each do |product|
         .row.align-items-center.py-4.product-record.justify-content-center.text-break
