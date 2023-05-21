@@ -34,10 +34,10 @@ class ProductsTest < ApplicationSystemTestCase
   test 'the show and index show no log message if product log is none' do
     sign_in @heavy_user
     visit root_url
-    within all('.product-record')[0].all('.col')[1] do
+    within all('.product-record')[0].all('.product-col')[1] do
       assert_text '使用実績がまだありません。'
     end
-    all('.product-record')[0].all('.col')[0].find('.product-image').click
+    all('.product-record')[0].all('.product-col')[0].find('.is-image-link').click
     assert_text '使用実績がまだありません。'
     assert_text '使用開始日や使用終了日を登録すると、ここに実績一覧が表示されます。'
   end
@@ -45,10 +45,10 @@ class ProductsTest < ApplicationSystemTestCase
   test 'the show and index show measuring message if product is measuring' do
     sign_in @heavy_user
     visit root_url
-    within all('.product-record')[1].all('.col')[1] do
+    within all('.product-record')[1].all('.product-col')[1] do
       assert_text '計測中'
     end
-    all('.product-record')[1].all('.col')[0].find('.product-image').click
+    all('.product-record')[1].all('.product-col')[0].find('.is-image-link').click
     assert_text '使い切り予定日を計測中です。'
     all('.product-consume-log-record')[0].all('.col')[0] do
       assert_text '使用中'
@@ -58,12 +58,12 @@ class ProductsTest < ApplicationSystemTestCase
   test 'the show and index show used message if product is used' do
     sign_in @heavy_user
     visit root_url
-    within all('.product-record')[2].all('.col')[1] do
+    within all('.product-record')[2].all('.product-col')[1] do
       assert_text "使用開始日を登録すると\n使い切り予定日が表示されます。"
       assert_text '最新の使用履歴'
     end
-    all('.product-record')[2].all('.col')[0].find('.product-image').click
-    assert_text 'この製品は平均31日に1本使っています。'
+    all('.product-record')[2].all('.product-col')[0].find('.is-image-link').click
+    assert_text '平均31日に1本使っています。'
     all('.product-consume-log-record')[0].all('.col')[0] do
       assert_text '31日'
     end
@@ -72,11 +72,11 @@ class ProductsTest < ApplicationSystemTestCase
   test 'the index show scheduled consume date if product is using' do
     sign_in @heavy_user
     visit root_url
-    within all('.product-record')[3].all('.col')[1] do
+    within all('.product-record')[3].all('.product-col')[1] do
       assert_text '使い切り予定日'
     end
-    all('.product-record')[3].all('.col')[0].find('.product-image').click
-    assert_text 'この製品は平均31日に1本使っています。'
+    all('.product-record')[3].all('.product-col')[0].find('.is-image-link').click
+    assert_text '平均31日に1本使っています。'
     all('.product-consume-log-record')[0].all('.col')[0] do
       assert_text '使い切り予定日から'
     end
