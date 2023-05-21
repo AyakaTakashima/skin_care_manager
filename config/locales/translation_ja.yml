@@ -53,7 +53,7 @@ ja:
     product_consume_log_empty: 使用実績がまだありません。
     message_for_measuring_scheduled_consume_date: 使い切り予定日を計測中です。
     message_for_product_consume_logs_index: 使用開始日や使用終了日を登録すると、ここに実績一覧が表示されます。
-    number_of_used_items: 使用アイテム数
+    number_of_used_items: アイテム数
     consumption_amount: 消費金額
     total_of_consumption_amount: 合計消費金額
     monthly_consume_amount_empty: アイテムを消費した月はまだありません。

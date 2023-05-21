@@ -1,7 +1,7 @@
 = render 'monthly_consume_amount_extra_large_modal' do
   = turbo_frame_tag 'show_monthly_logs' do
     .container.py-4
-      .row.justify-content-md-center
+      .row.justify-content-center
         - if @date.month == Time.zone.today.month
           .col-md-auto
             h1.text-center.fs-4.fw-bold
@@ -12,11 +12,11 @@
               = "#{@date.year}年#{@date.month}月の合計消費金額は#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date)}円です。"
 
     - if @monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date).zero?
-      p.text-center.fs-5
+      h1.text-center.fs-5
         = t('views.product_consume_log_empty')
     - else
       .container
-        .row.p-4.border-bottom.text-center
+        .row.py-4.border-bottom.text-center
           .col
             = t('activerecord.attributes.product.name')
           .col
@@ -24,7 +24,7 @@
           .col
             = t('views.consumption_amount')
         - @products.each do |product|
-          .row.p-4.border-bottom.text-center
+          .row.py-4.border-bottom.text-center.text-break.align-items-center
             .col
               = link_to product.name, product, class: 'text-decoration-none is-text-link fw-bold'
             .col
