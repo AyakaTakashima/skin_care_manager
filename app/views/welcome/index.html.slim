@@ -4,9 +4,10 @@
 .accent-background.py-5.px-3
   .container-xl
     .row.align-items-center
-      .col.col-12.col-xl-6.col-md-6
+      .col-0.col-xl-1.col-lg-1.col-md-1
+      .col-12.col-xl-5.col-lg-5.col-md-5
         h1.my-4.fw-bold
-          |スキンケア製品の管理はお任せ
+          |スキンケア製品の<br>管理はお任せ
         p.mb-2
           |Skinmateは、基礎化粧品の使用サイクル/毎月の使用金額を管理します。
         .d-flex.py-2
@@ -24,8 +25,9 @@
         .col.col-12.col-xl-auto.d-none.d-sm-block
           .mb-1
             = link_to '無料アカウント登録', new_user_registration_path, class: 'btn btn-primary rounded-pill px-5 py-3 fw-bold'
-      .col.col-12.col-xl-6.col-md-6.pb-4
+      .col-12.col-xl-5.col-lg-5.col-md-5.pb-4
         = image_tag('top_image.svg', alt: 'スキンメイトのサービスイメージ', class: 'img-fluid')
+      .col-0.col-xl-1.col-lg-1.col-md-1
       .row.d-block.d-sm-none
         .col.col-12.col-xl-auto.text-center
           .mb-1

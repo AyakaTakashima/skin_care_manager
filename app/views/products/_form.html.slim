@@ -2,15 +2,15 @@
   = form_with(model: product, class: 'needs-validation', html: { novalidate: 'true' }, local: true, data: { controller: 'form', form_target: 'form', action: 'submit->form#checkValidate' }) do |form|
     .container
       .row.text-center
-        .col
+        .col-12.col-md-12.col-lg-6.col-xl-6
           label
             div(data-action='click->form#selectAvatar')
               - if product.avatar.attached?
-                = image_tag product.avatar.variant(resize_to_limit: [300, 300]), class: 'border rounded', data: { form_target: 'avatar' }
+                = image_tag product.avatar.variant(resize_to_limit: [300, 300]), class: 'border rounded is-image-link', data: { form_target: 'avatar' }
               - else
-                = image_tag('クリックして画像を選択.svg', height: '300', alt: 'クリックして画像を選択', class: 'border rounded', data: { form_target: 'avatar' })
+                = image_tag('クリックして画像を選択.svg', height: '300', alt: 'クリックして画像を選択', class: 'border rounded is-image-link', data: { form_target: 'avatar' })
               = form.file_field :avatar, accept: 'image/jpg,image/png', class: 'invisible', data: { form_target: 'file' }
-        .col.text-left
+        .col-12.col-md-12.col-lg-6.col-xl-6.text-left
           .row.my-5
             .col
               .form-floating

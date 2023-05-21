@@ -1,6 +1,6 @@
 - unless %w[new_user_session new_user_password new_user_registration edit_user_password].any? { |name| current_page?(send("#{name}_path")) }
   header.sticky-top
-    nav.navbar.navbar-expand-lg.navbar-light.shadow-sm
+    nav.navbar.navbar-expand.navbar-light.shadow-sm
       .container
         .navbar-brand
           = link_to root_path do

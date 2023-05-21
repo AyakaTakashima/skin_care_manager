@@ -7,40 +7,40 @@
       |アイテムの登録はされていません。<br>登録をするとSkin Care Manegerが月々の購入金額の計算と使い切り予定日の予測を自動で行なってくれます。
     h1.text-center.m-5
       |登録例
-    .container.w-50.text-center
-      .row
-        .col
+    .container-sm
+      .row.text-center
+        .col-0.col-xl-3.col-lg-2.col-md-1
+        .col-12.col-xl-3.col-lg-4.col-md-5
           = image_tag('skincare_color_height400.png', height: '200', alt: '女性がスキンケアをしている')
           .m-5
             |スキンケア用品
-        .col
+        .col-12.col-xl-3.col-lg-4.col-md-5
           = image_tag('makeup_woman_color_height400.png', height: '200', alt: '女性が化粧をしている')
           .m-5
             |よく使う化粧品
+        .col-0.col-xl-3.col-lg-2.col-md-1
     .py-4.text-center
       = turbo_frame_tag 'add_new_product'
         = link_to t('action.new_product'), new_product_path, class: 'btn btn-primary rounded-pill fw-bold', data: { turbo_frame: 'product_large_modal' }
   - else
-    .container.border.rounded.bg-white
-      .row.mt-5.mb-4
-        h1.col.text-center.fs-2.fw-bold
-          = "#{Time.zone.today.month}月の消費予定金額は#{@amount}円です。"
-      .row.m-2
-        .col.fw-bold.text-end
+    .container
+      .border.rounded.bg-white
+        .col-12.mt-5.mb-4.text-center
+          h1.fs-2.fw-bold
+            = "#{Time.zone.today.month}月の消費予定金額は#{@amount}円です。"
+        .col-12.fw-bold.text-end.pb-2.pe-2
           = link_to t('action.product_consume_log_index'), monthly_consume_amount_path, class: 'text-decoration-none is-text-link'
-    .container.w-75.text-center
+    .container.text-center
       - @products.each do |product|
-        .row.align-items-center.p-4.border-bottom.product-record
-          .col
-            .row.product-image
-              = link_to product do
-                .w-50.border.rounded.mx-auto.bg-white.is-image-link
-                  = image_tag product.avatar.variant(resize_to_limit: [150, 150]), alt: product.name if product.avatar.attached?
-                  = image_tag('no_image.svg', size: '150x150', alt: '写真の登録がありません') unless product.avatar.attached?
-              .mt-2
-                = product.name
-          .col
-            .row
+        .row.align-items-center.py-4.product-record.justify-content-center.text-break
+          .col-5.col-lg-3.col-md-4.product-image.pe-0
+            = link_to product, class: 'w-auto' do
+              = image_tag product.avatar.variant(resize_to_limit: [150, 150]), class: 'border rounded is-image-link bg-white', alt: product.name if product.avatar.attached?
+              = image_tag('no_image.svg', size: '150x150', alt: '写真の登録がありません', class: 'border rounded is-image-link') unless product.avatar.attached?
+            .mt-2
+              = product.name
+          .col.col-lg-3.col-md-4
+            .row.small
               - if product.product_consume_logs.empty?
                 p
                   = t('views.product_consume_log_empty')
@@ -48,7 +48,7 @@
               - elsif !product.product_consume_logs.last.use_ended_at.nil?
                 p 使用開始日を登録すると<br>使い切り予定日が表示されます。
                 p.mt-2
-                  = "最新の使用履歴：#{l(product.product_consume_logs.last.use_ended_at, format: :long)}"
+                  = "最新の使用履歴：#{l(product.product_consume_logs.last.use_ended_at, format: :default)}"
               - elsif product.average_period.zero?
                 p.pb-1
                   = t('views.scheduled_consume_date')
@@ -68,7 +68,7 @@
                     | 本日が使い切り予定日です
                   - else
                     = "予定日から#{product.count_until_scheduled_consume_date(product.id).abs}日過ぎています"
-          .col
+          .col-12.col-lg-3.col-md-4.pt-4
             - if product.in_use?(product.id)
               = turbo_frame_tag 'product_consume_log_input_use_ended_at'
                 = link_to t('action.input_use_ended_at'),
@@ -79,6 +79,7 @@
             - else
               = turbo_frame_tag 'product_consume_log_input_started_at'
                 = link_to t('action.input_use_started_at'), new_product_product_consume_log_path(product_id: product.id), class: 'btn btn-outline-primary rounded-pill px-4 fw-bold', data: { turbo_frame: 'consume_logs_regular_modal' }
+        .border-bottom
     .py-4.my-4.text-center
       = turbo_frame_tag 'add_new_product'
         = link_to t('action.new_product'), new_product_path, class: 'btn btn-primary rounded-pill px-4 fw-bold', data: { turbo_frame: 'product_large_modal' }
