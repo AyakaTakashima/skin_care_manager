@@ -6,77 +6,84 @@ class ProductConsumeLog < ApplicationRecord
 
   validates :use_started_at, presence: true
 
-  def calculate_amount(info_to_calculate)
-    product = info_to_calculate[:product]
-    product_consume_log = info_to_calculate[:product_consume_log]
+  def calculate_consuming_amount_for_period(amount_per_day, first_day, last_day)
+    period = (last_day - first_day).numerator + 1
+    period * amount_per_day
+  end
 
-    last_index = info_to_calculate[:months].count - 1
-    info_to_calculate[:months].each_with_index do |month, index|
+  def calculate_amount_by_month(parameter_to_calculate_monthly_amount)
+    product = parameter_to_calculate_monthly_amount[:product]
+    product_consume_log = parameter_to_calculate_monthly_amount[:product_consume_log]
+    use_started_at = product_consume_log.use_started_at
+    amount_per_day = product.price / ((use_ended_at - use_started_at).numerator + 1)
+
+    last_index = parameter_to_calculate_monthly_amount[:consume_dates].count - 1
+    parameter_to_calculate_monthly_amount[:consume_dates].each_with_index do |consume_date, index|
       if index.zero?
-        consuming_amount = ((month.end_of_month - month).numerator + 1) * product.average_amount_per_day
+        consuming_amount = calculate_consuming_amount_for_period(amount_per_day, use_started_at, use_started_at.end_of_month)
       elsif index == last_index
         total_amount_until_last_month = MonthlyConsumeAmount.where(product_consume_log_id: product_consume_log.id).sum(:amount)
         consuming_amount = product.price - total_amount_until_last_month
       else
-        consuming_amount = ((month.end_of_month - month.beginning_of_month).numerator + 1) * product.average_amount_per_day
+        consuming_amount = calculate_consuming_amount_for_period(amount_per_day, consume_date.beginning_of_month, consume_date.end_of_month)
       end
-
       MonthlyConsumeAmount.create(product_id: product.id,
                                   product_consume_log_id: product_consume_log.id,
-                                  month: month.beginning_of_month,
+                                  month: consume_date.beginning_of_month,
                                   amount: consuming_amount)
     end
   end
 
-  def record_monthly_amount(date, product_consume_log)
+  def record_monthly_amount(consume_date, product_consume_log)
     product = Product.find(product_consume_log.product_id)
     use_started_at = product_consume_log.use_started_at
     MonthlyConsumeAmount.where(product_consume_log_id: product_consume_log.id).destroy_all
-
-    if date > use_started_at.end_of_month
-      months = Enumerator.produce(use_started_at, &:next_month).take_while { |d| d <= date }
-      info_to_calculate = {}
-      info_to_calculate[:months] = months
-      info_to_calculate[:product] = product
-      info_to_calculate[:product_consume_log] = product_consume_log
-      calculate_amount(info_to_calculate)
-    else
+    if consume_date == use_started_at || product_consume_log.use_ended_at.nil? || consume_date < use_started_at.end_of_month
       consuming_amount = product.price
       MonthlyConsumeAmount.create(product_id: product.id,
                                   product_consume_log_id: product_consume_log.id,
                                   month: use_started_at.beginning_of_month,
                                   amount: consuming_amount)
+    else
+      consume_dates = Enumerator.produce(use_started_at, &:next_month).take_while { |d| d <= consume_date }
+      consume_dates.delete_at(-1) if consume_dates.last > product_consume_log.use_ended_at
+      consume_dates.push(product_consume_log.use_ended_at)
+      parameter_to_calculate_monthly_amount = {}
+      parameter_to_calculate_monthly_amount[:consume_dates] = consume_dates
+      parameter_to_calculate_monthly_amount[:product] = product
+      parameter_to_calculate_monthly_amount[:product_consume_log] = product_consume_log
+      calculate_amount_by_month(parameter_to_calculate_monthly_amount)
     end
   end
 
   def calculate_average_period(product_id)
-    logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
-    if logs.empty?
+    consume_logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
+    if consume_logs.empty?
       0
     else
-      number_of_periods = logs.count
+      number_of_consume_logs = consume_logs.count
       total_period = 0
-      logs.each do |log|
+      consume_logs.each do |log|
         period = log.use_ended_at - log.use_started_at + 1 # X日間という数え方をしたいので1を足している
         total_period += period.numerator
       end
-      total_period / number_of_periods
+      total_period / number_of_consume_logs
     end
   end
 
   def calculate_average_amount_per_day(product_id)
-    logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
+    consume_logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
     product = Product.find(product_id)
-    if logs.empty?
+    if consume_logs.empty?
       0
     else
-      number_of_logs = logs.count
+      number_of_consume_logs = consume_logs.count
       total_amount_per_day = 0
-      logs.each do |log|
+      consume_logs.each do |log|
         period = log.use_ended_at - log.use_started_at + 1 # X日間という数え方をしたいので1を足している
         total_amount_per_day += (product.price / period.numerator)
       end
-      total_amount_per_day / number_of_logs
+      total_amount_per_day / number_of_consume_logs
     end
   end
 end

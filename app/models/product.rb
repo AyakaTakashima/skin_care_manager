@@ -50,7 +50,7 @@ class Product < ApplicationRecord
   end
 
   def get_number_of_consume_logs(product, date)
-    product.monthly_consume_amounts.where(month: date).count('distinct product_id')
+    product.monthly_consume_amounts.where(month: date).count('distinct product_consume_log_id')
   end
 
   def calculate_monthly_consume_amounts(product, date)
