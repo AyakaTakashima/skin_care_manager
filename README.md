@@ -34,9 +34,7 @@ https://skinmate.fly.dev/users/sign_up
 
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/0b453e05-9bb7-4b2f-ae6b-a56f53f4d425)
 
-日ごろお使いのスキンケア製品を登録します。
-
-![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/13cefebb-496a-48ba-86f5-03c45066ce5e)
+日ごろお使いのスキンケア製品の情報を入力します。
 
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/592222fa-a5a0-43f3-8194-f88c34ba4538)
 
