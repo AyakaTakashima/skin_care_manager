@@ -26,17 +26,17 @@
     .container-fluid.max-width-1000
       .border.rounded.bg-white
         .col-12.mt-5.mb-4.text-center
-          h1.fs-2.fw-bold
+          h1.fs-3.fw-bold
             = "#{Time.zone.today.month}月の消費予定金額は#{@amount}円です。"
         .col-12.fw-bold.text-end.pb-2.pe-2
           = link_to t('action.product_consume_log_index'), monthly_consume_amount_index_path, class: 'text-decoration-none is-text-link'
     .container-fluid.max-width-1000.text-center
       - @products.each do |product|
         .row.align-items-center.py-4.product-record.justify-content-center.text-break
-          .product-col.col-5.col-md-4.pe-0
+          .product-col.col-4.col-md-4.pe-0
             = link_to product, class: 'w-auto' do
-              = image_tag product.avatar.variant(resize_to_limit: [150, 150]), class: 'border rounded is-image-link bg-white', alt: product.name if product.avatar.attached?
-              = image_tag('no_image.svg', size: '150x150', alt: '写真の登録がありません', class: 'border rounded is-image-link') unless product.avatar.attached?
+              = image_tag product.avatar, class: 'border rounded is-image-link bg-white img-fluid max-image-height-150', alt: product.name if product.avatar.attached?
+              = image_tag('no_image.svg', alt: '写真の登録がありません', class: 'border rounded is-image-link img-fluid max-image-height-150') unless product.avatar.attached?
             .mt-2
               = product.name
           .product-col.col.col-md-4
