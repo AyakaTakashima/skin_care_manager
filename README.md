@@ -23,50 +23,68 @@ Skinmate（スキンメイト）というサービスは、下記の問題を解
 ## 使い方
 ### はじめに
 下記URLより、新規アカウントを作成します。
+
 https://skinmate.fly.dev/users/sign_up
 
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/93d41e92-5394-40db-a815-485ff0bcf99a)
 
 
 ### 1. 製品を登録する
+ページ下部のボタン「アイテムを登録する」をクリックします。
 
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/0b453e05-9bb7-4b2f-ae6b-a56f53f4d425)
+
+日ごろお使いのスキンケア製品を登録します。
 
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/13cefebb-496a-48ba-86f5-03c45066ce5e)
 
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/592222fa-a5a0-43f3-8194-f88c34ba4538)
 
+「登録する」をクリックすると、登録完了です。
+
 ### 2. 使用開始日を登録する
 ボタン「使用開始日を登録する」をクリックします。
+
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/fd119c89-3d35-4868-86cc-cfe24c85953c)
 
 日付を入力します。
+
 入力欄の右端にあるカレンダーマークをクリックすると日付を選択することができます。
+
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/dffba9a9-1bda-4736-ac63-4615ca8125ed)
 
 「使用を開始する」をクリックすると、登録完了です。
 
 ### 3. 使用終了日を登録する
 ボタン「使用終了日を登録する」をクリックします。
+
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/7f71a322-5456-4bd4-8bc1-727ba21351e9)
 
 日付を入力します。
+
 入力欄の右端にあるカレンダーマークをクリックすると日付を選択することができます。
+
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/97ed3c9b-6b6f-4c16-a070-4578c742cd35)
 
 「使用を終了する」をクリックすると、登録完了です。
 
 ### 4. アイテムの詳細を編集/削除する
+
 アイテムの登録内容は、スキンケア製品個別ページ下部にあるボタン「このアイテムを編集する」より可能です。
+
 また、削除をしたい場合は同ページ下部にあるボタン「このアイテムを削除する」より可能です。
+
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/dba7ff1c-b0f1-472d-b8e1-f263f271df22)
 
 ### 5. 使用開始日・使用終了日の編集/削除
 使用開始日・使用終了日の編集は、スキンケア製品個別ページの鉛筆マークより可能です。
+
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/dba7ff1c-b0f1-472d-b8e1-f263f271df22)
 
 鉛筆マークのボタンをクリックすると編集が可能です。
+
 保存をクリックすると変更内容が保存されます。
+
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/8cb84bae-60ab-491b-9f4f-02926ff751fd)
 
 削除したい場合は、ゴミ箱マークのボタンより削除が可能です。
@@ -74,10 +92,13 @@ https://skinmate.fly.dev/users/sign_up
 
 ### 6. 過去1年間の実績を見る
 Skinmate では、過去1年間までの実績を遡って閲覧することができます。
+
 トップページ上部の「過去1年間の実績を見る」から確認できます。
+
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/18bd342e-7191-45f4-b258-351021d0e239)
 
 各月の詳細を見たい場合は、確認したい月をクリックします。
+
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/47dc34cb-e2e5-4ef1-b5fb-0499e88c4504)
 
 ![image](https://github.com/AyakaTakashima/skin_care_manager/assets/76944527/343bd4cc-69f7-4166-9806-1a5253ef654c)
