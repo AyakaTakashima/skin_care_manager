@@ -15,15 +15,15 @@ module MetaTagsHelper
         type: 'website',
         site_name: 'SkinMate',
         description: :description,
-        image: 'https://skinmate.net/ogp/ogp.png',
-        url: 'https://skinmate.net'
+        image: image_url('ogp.png'),
+        url: 'https://skinmate.fly.dev/'
       },
       twitter: {
-        card: 'summary',
+        card: 'summary_large_image',
         site: '@aya_kyan555',
         description: :description,
-        image: 'https://skinmate.net/ogp/ogp.png',
-        domain: 'https://skinmate.net'
+        image: image_url('ogp.png'),
+        domain: 'https://skinmate.fly.dev/'
       }
     }
   end
