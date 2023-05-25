@@ -7,6 +7,9 @@ app = "skinmate"
 primary_region = "nrt"
 console_command = "/rails/bin/rails console"
 
+[env]
+  RAILS_STORAGE = "/mnt/volume/storage"
+
 [http_service]
   internal_port = 3000
   force_https = true
@@ -17,3 +20,7 @@ console_command = "/rails/bin/rails console"
 [[statics]]
   guest_path = "/rails/public"
   url_prefix = "/"
+
+[mounts]
+  source = "storage_volume"
+  destination = "/mnt/volume"
