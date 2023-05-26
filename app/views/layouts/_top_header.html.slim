@@ -4,7 +4,7 @@
       .container
         .navbar-brand
           = link_to root_path do
-            = image_tag('logo.svg', height: '50', alt: 'スキンメイトのロゴ')
+            = image_tag('logo.svg', alt: 'スキンメイトのロゴ', class: 'img-fluid')
         .d-none.d-sm-block
           ul.nav.navbar-nav.ms-auto
             li.nav-item.mx-2
@@ -17,4 +17,4 @@
           ul.nav.navbar-nav.ms-auto
             li.nav-item.mx-2
               .text-center
-                = link_to 'ログイン', new_user_session_path, class: 'btn btn-outline-primary rounded-pill fw-bold px-4'
+                = link_to 'ログイン', new_user_session_path, class: 'btn btn-outline-primary btn-sm rounded-pill fw-bold px-4'

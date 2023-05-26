@@ -11,7 +11,7 @@ div id="#{dom_id product}"
       .col-12.col-md-4
         .container
           .row.text-center
-            .col
+            .col.px-4
               = image_tag product.avatar, alt: product.name, class: 'img-fluid border rounded bg-white' if product.avatar.attached?
               = image_tag('no_image.svg', alt: '写真の登録がありません', class: 'img-fluid border rounded') unless product.avatar.attached?
           .row.pt-4.text-break

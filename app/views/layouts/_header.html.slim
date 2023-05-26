@@ -4,22 +4,22 @@
       .container
         .navbar-brand
           = link_to root_path do
-            = image_tag('logo.svg', height: '50', alt: 'スキンメイトのロゴ')
+            = image_tag('logo.svg', alt: 'スキンメイトのロゴ', class: 'img-fluid')
         .collapse.navbar-collapse
           ul.nav.navbar-nav.ms-auto
             - if current_page?(root_path)
               li.nav-item
                 .text-center
-                  = link_to edit_user_registration_path, class: 'link-secondary text-decoration-none text-center' do
-                    span.material-icons.fs-4
+                  = link_to edit_user_registration_path, class: 'link-secondary text-decoration-none' do
+                    .material-icons.fs-4
                       |account_circle
-                    div
+                    .small
                       |Account
             - if current_page?(edit_user_registration_path) || current_page?(root_path)
               li.nav-item.ms-4
                 .text-center
                   = link_to destroy_user_session_path, class: 'link-secondary text-decoration-none' do
-                    span.material-icons
+                    .material-icons.fs-4
                       |logout
-                    div
+                    .small
                       |logout
