@@ -25,11 +25,15 @@
   - else
     .container-fluid.max-width-1000
       .border.rounded.bg-white
-        .col-12.mt-5.mb-4.text-center
-          h1.fs-3.fw-bold
-            = "#{Time.zone.today.month}月の消費予定金額は#{@amount}円です。"
+        .col-12.mt-4.mt-md-5.mb-4.text-center
+          .fs-3.fw-bold.pt-2.pt-md-0
+            = "#{Time.zone.today.month}月の消費予定金額は"
+            br.d-block.d-sm-none
+            ="#{@amount}円です。"
         .col-12.fw-bold.text-end.pb-2.pe-2
           = link_to t('action.product_consume_log_index'), monthly_consume_amount_index_path, class: 'text-decoration-none is-text-link'
+    h1.fs-5.fw-bold.text-center.mt-4.text-secondary
+      |登録アイテム
     .container-fluid.max-width-1000.text-center
       - @products.each do |product|
         .row.align-items-center.py-4.product-record.justify-content-center.text-break
@@ -42,44 +46,49 @@
           .product-col.col.col-md-4
             .row.small
               - if product.product_consume_logs.empty?
-                p
-                  = t('views.product_consume_log_empty')
-                  |<br>使用開始日を登録すると<br>使い切り予定日の計測が始まります。
+                dl
+                  dt.fw-normal
+                    = t('views.product_consume_log_empty')
+                  dd  使用開始日を登録すると<br>使い切り予定日の計測が始まります。
               - elsif !product.product_consume_logs.last.use_ended_at.nil?
-                p 使用開始日を登録すると<br>使い切り予定日が表示されます。
-                p.mt-2
-                  = "最新の使用履歴：#{l(product.product_consume_logs.last.use_ended_at, format: :default)}"
+                dl
+                  dt.fw-normal
+                    |使用開始日を登録すると<br>使い切り予定日が表示されます。
+                  dd.mt-2
+                    = "最新の使用履歴：#{l(product.product_consume_logs.last.use_ended_at, format: :default)}"
               - elsif product.average_period.zero?
-                p.pb-1
-                  = t('views.scheduled_consume_date')
-                p.fs-2.fw-bold
-                  = t('views.measuring')
-                p.p-1
-                  = "#{l(product.product_consume_logs.last.use_started_at, format: :short)}から使用中"
+                dl
+                  dt.pb-1.fw-normal
+                    = t('views.scheduled_consume_date')
+                  dd.fs-2.fw-bold
+                    = t('views.measuring')
+                  dd.p-1
+                    = "#{l(product.product_consume_logs.last.use_started_at, format: :short)}から使用中"
               -else
-                p.pb-1
-                  = t('views.scheduled_consume_date')
-                p.fs-2.fw-bold
-                  = product.format_scheduled_consume_date(product.id)
-                p.p-1
-                  - if product.count_until_scheduled_consume_date(product.id).positive?
-                    = "あと  #{product.count_until_scheduled_consume_date(product.id)}  日"
-                  - elsif product.count_until_scheduled_consume_date(product.id).zero?
-                    | 本日が使い切り予定日です
-                  - else
-                    = "予定日から#{product.count_until_scheduled_consume_date(product.id).abs}日過ぎています"
+                dl
+                  dt.pb-1.fw-normal
+                    = t('views.scheduled_consume_date')
+                  dd.fs-2.fw-bold
+                    = product.format_scheduled_consume_date(product.id)
+                  dd.p-1
+                    - if product.count_until_scheduled_consume_date(product.id).positive?
+                      = "あと  #{product.count_until_scheduled_consume_date(product.id)}  日"
+                    - elsif product.count_until_scheduled_consume_date(product.id).zero?
+                      | 本日が使い切り予定日です
+                    - else
+                      = "予定日から#{product.count_until_scheduled_consume_date(product.id).abs}日過ぎています"
           .product-col.col-12.col-md-4.pt-4
             - if product.in_use?(product.id)
               = turbo_frame_tag 'product_consume_log_input_use_ended_at'
                 = link_to t('action.input_use_ended_at'),
                           product_product_consume_log_use_end_index_path(product_id: product.id,
                           product_consume_log_id: product.product_consume_logs.last.id),
-                          class: 'btn btn-outline-primary rounded-pill px-4 fw-bold',
+                          class: 'btn btn-outline-primary rounded-pill px-3 fw-bold',
                           data: { turbo_frame: 'consume_logs_regular_modal' }
             - else
               = turbo_frame_tag 'product_consume_log_input_started_at'
-                = link_to t('action.input_use_started_at'), new_product_product_consume_log_path(product_id: product.id), class: 'btn btn-outline-primary rounded-pill px-4 fw-bold', data: { turbo_frame: 'consume_logs_regular_modal' }
+                = link_to t('action.input_use_started_at'), new_product_product_consume_log_path(product_id: product.id), class: 'btn btn-outline-primary rounded-pill px-3 fw-bold', data: { turbo_frame: 'consume_logs_regular_modal' }
         .border-bottom
     .py-4.my-4.text-center
       = turbo_frame_tag 'add_new_product'
-        = link_to t('action.new_product'), new_product_path, class: 'btn btn-primary rounded-pill px-4 fw-bold', data: { turbo_frame: 'product_large_modal' }
+        = link_to t('action.new_product'), new_product_path, class: 'btn btn-primary rounded-pill fw-bold btn-fix-194', data: { turbo_frame: 'product_large_modal' }
