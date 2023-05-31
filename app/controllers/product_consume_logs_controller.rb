@@ -18,40 +18,32 @@ class ProductConsumeLogsController < ApplicationController
   def create
     @product_consume_log = ProductConsumeLog.new(product_consume_log_params)
 
-    respond_to do |format|
-      if @product_consume_log.save
-        scheduled_consume_date = @product_consume_log.use_started_at + Product.find(@product_consume_log.product_id).average_period.day
-        @product_consume_log.record_monthly_amount(scheduled_consume_date, @product_consume_log)
-        format.html do
-          redirect_to root_url, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}"
-        end
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @product_consume_log.save
+      scheduled_consume_date = @product_consume_log.use_started_at + Product.find(@product_consume_log.product_id).average_period.day
+      @product_consume_log.record_monthly_amount(scheduled_consume_date, @product_consume_log)
+      redirect_to root_url, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}"
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @product_consume_log.update(product_consume_log_params)
-        format.html do
-          redirect_to request.referer, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}"
-        end
+    if @product_consume_log.update(product_consume_log_params)
+      redirect_to request.referer, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}"
 
-        product_id = @product_consume_log.product_id
-        average_period = @product_consume_log.calculate_average_period(product_id)
-        average_amount_per_day = @product_consume_log.calculate_average_amount_per_day(product_id)
-        Product.find(product_id).update(average_period:, average_amount_per_day:)
+      product_id = @product_consume_log.product_id
+      average_period = @product_consume_log.calculate_average_period(product_id)
+      average_amount_per_day = @product_consume_log.calculate_average_amount_per_day(product_id)
+      Product.find(product_id).update(average_period:, average_amount_per_day:)
 
-        if @product_consume_log.use_ended_at.nil?
-          scheduled_consume_date = @product_consume_log.use_started_at + Product.find(product_id).average_period.day
-          @product_consume_log.record_monthly_amount(scheduled_consume_date, @product_consume_log)
-        else
-          @product_consume_log.record_monthly_amount(@product_consume_log.use_ended_at, @product_consume_log)
-        end
+      if @product_consume_log.use_ended_at.nil?
+        scheduled_consume_date = @product_consume_log.use_started_at + Product.find(product_id).average_period.day
+        @product_consume_log.record_monthly_amount(scheduled_consume_date, @product_consume_log)
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        @product_consume_log.record_monthly_amount(@product_consume_log.use_ended_at, @product_consume_log)
       end
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -60,15 +52,11 @@ class ProductConsumeLogsController < ApplicationController
     product = Product.find(product_id)
 
     @product_consume_log.destroy
-    respond_to do |format|
-      format.html do
-        redirect_to product, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.destroy')}"
-      end
+    redirect_to product, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.destroy')}"
 
-      average_period = @product_consume_log.calculate_average_period(product_id)
-      average_amount_per_day = @product_consume_log.calculate_average_amount_per_day(product_id)
-      Product.find(product_id).update(average_period:, average_amount_per_day:)
-    end
+    average_period = @product_consume_log.calculate_average_period(product_id)
+    average_amount_per_day = @product_consume_log.calculate_average_amount_per_day(product_id)
+    Product.find(product_id).update(average_period:, average_amount_per_day:)
   end
 
   private
