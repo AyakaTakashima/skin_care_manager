@@ -1,60 +1,63 @@
 - title 'アカウント設定'
 - description '基礎化粧品の使用サイクル管理アプリ「スキンメイト」のアカウント設定画面です。'
 
-.container-xl
+.accent-background
+  .m-auto
+    h1.text-center.fs-4.fw-bold.mb-4.py-4
+      | アカウント設定
+.container-sm
   .row.row-cols-3
     .col-1.col-md-3.col-lg-4
     .col-10.col-md-6.col-lg-4
-      .m-auto
-        h1.text-center.fs-4.fw-bold.my-4
-          | アカウント設定
-        = form_for(resource, as: resource_name,
-                   url: registration_path(resource_name),
-                   html: { method: :put, novalidate: 'true' },
-                   class: 'needs-validation', data: { controller: 'form',
-                   form_target: 'form',
-                   action: 'submit->form#checkValidate' }) do |form|
-          = render 'devise/shared/error_messages', resource:
-          .field.mb-4
-            h2.text-center.fs-5.fw-bold.my-4
-              | メールアドレス変更
-            .form-floating
-              = form.email_field :email, class: 'form-control', id: 'floatingEmail', placeholder: 'メールアドレス', required: true, autofocus: true, autocomplete: 'email'
-              = form.label :email, for: 'floatingEmail'
-              .invalid-feedback
-                |メールアドレスは必須です
-          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-            div
-              | Currently waiting confirmation for:
-              = resource.unconfirmed_email
-          .field.mb-4
-            h2.text-center.fs-5.fw-bold.my-4
-              | パスワード変更
-            p
-              | パスワードの変更が不要な場合は下記項目の入力は不要です。
-            .form-floating
-              = form.password_field :password, class: 'form-control', id: 'floatingPassword', placeholder: 'パスワード', autocomplete: 'new-password'
-              = form.label :password, for: 'floatingPassword'
-              - if @minimum_password_length
-                em
-                  | (
-                  = @minimum_password_length
-                  |  文字以上)
-          .field.mb-4
-            .form-floating
-              = form.password_field :password_confirmation, class: 'form-control', id: 'floatingPasswordConfirmation', placeholder: '確認用パスワード', autocomplete: 'new-password'
-              = form.label :password_confirmation, for: 'floatingPasswordConfirmation'
-            br
-          .border-top.py-2
-            br
-          .field.mb-4
-            .form-floating
-              = form.password_field :current_password, class: 'form-control', id: 'floatingCurrentPassword', placeholder: '現在のパスワード', autocomplete: 'current-password'
-              = form.label :current_password, for: 'floatingCurrentPassword'
-              i
-                | パスワード、もしくはメールアドレスを変更するには現在ご使用中のパスワードを入力してください。
-          .actions.text-center.m-4
-            = form.submit '上記の内容で変更する', class: 'btn btn-primary rounded-pill px-4 fw-bold'
-        .text-center.mb-4
-          = link_to 'アカウント削除', registration_path(resource_name), data: { confirm: 'アカウントを削除すると、登録されているデータが全て失われます。本当によろしいですか？', turbo_confirm: 'アカウントを削除すると、登録されているデータが全て失われます。本当によろしいですか？' }, method: :delete, class: 'text-decoration-none link-danger'
+      = form_for(resource, as: resource_name,
+                 url: registration_path(resource_name),
+                 html: { method: :put, novalidate: 'true' },
+                 class: 'needs-validation', data: { controller: 'form',
+                 form_target: 'form',
+                 action: 'submit->form#checkValidate' }) do |form|
+        = render 'devise/shared/error_messages', resource:
+        .field.mb-5
+          h2.fs-5.fw-bold.my-4.border-bottom.pb-3.border-primary
+            | メールアドレス変更
+          .form-floating
+            = form.email_field :email, class: 'form-control', id: 'floatingEmail', placeholder: 'メールアドレス', required: true, autofocus: true, autocomplete: 'email'
+            = form.label :email, for: 'floatingEmail'
+            .invalid-feedback
+              |メールアドレスは必須です
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          div
+            | Currently waiting confirmation for:
+            = resource.unconfirmed_email
+        .field.mb-4
+          h2.fs-5.fw-bold.my-4.border-bottom.pb-3.border-primary
+            | パスワード変更
+          p
+            | パスワードの変更が不要な場合は下記項目の入力は不要です。
+          .form-floating
+            = form.password_field :password, class: 'form-control', id: 'floatingPassword', placeholder: 'パスワード', autocomplete: 'new-password'
+            = form.label :password, for: 'floatingPassword'
+            - if @minimum_password_length
+              p
+                | (
+                = @minimum_password_length
+                |  文字以上)
+        .field.mb-4
+          .form-floating
+            = form.password_field :password_confirmation, class: 'form-control', id: 'floatingPasswordConfirmation', placeholder: '確認用パスワード', autocomplete: 'new-password'
+            = form.label :password_confirmation, for: 'floatingPasswordConfirmation'
+          br
+        .border-top.py-2
+          br
+        h2.fs-5.fw-bold.my-4.border-bottom.pb-3.border-primary
+          | 現在のパスワードを入力
+        p
+          | パスワード、もしくはメールアドレスを変更するには現在ご使用中のパスワードを入力してください。
+        .field.mb-4
+          .form-floating
+            = form.password_field :current_password, class: 'form-control', id: 'floatingCurrentPassword', placeholder: '現在のパスワード', autocomplete: 'current-password'
+            = form.label :current_password, for: 'floatingCurrentPassword'
+        .actions.text-center.m-4
+          = form.submit '上記の内容で変更する', class: 'btn btn-primary rounded-pill px-4 fw-bold'
+      .text-center.mb-4
+        = link_to 'アカウント削除', registration_path(resource_name), data: { confirm: 'アカウントを削除すると、登録されているデータが全て失われます。本当によろしいですか？', turbo_confirm: 'アカウントを削除すると、登録されているデータが全て失われます。本当によろしいですか？' }, method: :delete, class: 'text-decoration-none link-danger'
     .col-1.col-md-3.col-lg-4
