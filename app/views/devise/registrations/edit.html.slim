@@ -5,10 +5,9 @@
   .m-auto
     h1.text-center.fs-4.fw-bold.mb-4.py-4
       | アカウント設定
-.container-sm
-  .row.row-cols-3
-    .col-1.col-md-3.col-lg-4
-    .col-10.col-md-6.col-lg-4
+.container
+  .row
+    .col-10.mx-auto.col-md-6.col-lg-4
       = form_for(resource, as: resource_name,
                  url: registration_path(resource_name),
                  html: { method: :put, novalidate: 'true' },
@@ -60,4 +59,3 @@
           = form.submit '上記の内容で変更する', class: 'btn btn-primary rounded-pill px-4 fw-bold'
       .text-center.mb-4
         = link_to 'アカウント削除', registration_path(resource_name), data: { confirm: 'アカウントを削除すると、登録されているデータが全て失われます。本当によろしいですか？', turbo_confirm: 'アカウントを削除すると、登録されているデータが全て失われます。本当によろしいですか？' }, method: :delete, class: 'text-decoration-none link-danger'
-    .col-1.col-md-3.col-lg-4

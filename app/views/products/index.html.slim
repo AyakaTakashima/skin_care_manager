@@ -7,9 +7,8 @@
       |アイテムの登録はされていません。<br>登録をするとSkin Care Manegerが月々の購入金額の計算と使い切り予定日の予測を自動で行なってくれます。
     h1.text-center.m-5
       |登録例
-    .container-sm
-      .row.text-center
-        .col-0.col-xl-3.col-lg-2.col-md-1
+    .container
+      .row.justify-content-center.text-center
         .col-12.col-xl-3.col-lg-4.col-md-5
           = image_tag('skincare_color_height400.png', height: '200', alt: '女性がスキンケアをしている')
           .m-5
@@ -18,7 +17,6 @@
           = image_tag('makeup_woman_color_height400.png', height: '200', alt: '女性が化粧をしている')
           .m-5
             |よく使う化粧品
-        .col-0.col-xl-3.col-lg-2.col-md-1
     .py-4.text-center
       = turbo_frame_tag 'add_new_product'
         = link_to t('action.new_product'), new_product_path, class: 'btn btn-primary rounded-pill fw-bold', data: { turbo_frame: 'product_large_modal' }
