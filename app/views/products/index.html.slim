@@ -36,23 +36,39 @@
       - @products.each do |product|
         .row.align-items-center.py-4.product-record.justify-content-center.text-break
           .product-col.col-4.col-md-4.pe-0
-            = link_to product, class: 'w-auto' do
-              = image_tag product.avatar, class: 'border rounded is-image-link bg-white img-fluid max-image-height-150', alt: product.name if product.avatar.attached?
-              = image_tag('no_image.svg', alt: '写真の登録がありません', class: 'border rounded is-image-link img-fluid max-image-height-150') unless product.avatar.attached?
-            .mt-2
-              = product.name
+            - if product.in_use?(product.id)
+              = link_to product, class: 'w-auto' do
+                = image_tag product.avatar, class: 'border rounded is-image-link bg-white img-fluid max-image-height-150', alt: product.name if product.avatar.attached?
+                = image_tag('no_image.svg', alt: '写真の登録がありません', class: 'border rounded is-image-link img-fluid max-image-height-150') unless product.avatar.attached?
+              .mt-2
+                .badge.rounded-pill.bg-primary.px-2.fw-normal
+                  | Active
+              .mt-2
+                = product.name
+            - else
+              = link_to product, class: 'w-auto' do
+                .position-relative.d-inline-block.is-image-link
+                  = image_tag product.avatar, class: 'border rounded img-fluid max-image-height-150 opacity-75', alt: product.name if product.avatar.attached?
+                  = image_tag('no_image.svg', alt: '写真の登録がありません', class: 'border rounded img-fluid max-image-height-150 opacity-75') unless product.avatar.attached?
+                  .position-absolute.top-0.start-0.end-0.bottom-0.is-image-product-is-not-in-use-overlay.border.rounded
+              .mt-2
+                .badge.rounded-pill.bg-secondary.px-2.fw-normal
+                  | Nonactive
+              .mt-2.text-secondary
+                = product.name
           .product-col.col.col-md-4
             .row.small
               - if product.product_consume_logs.empty?
                 dl
-                  dt.fw-normal
+                  dt.fw-normal.text-secondary
                     = t('views.product_consume_log_empty')
-                  dd  使用開始日を登録すると<br>使い切り予定日の計測が始まります。
+                  dd.text-secondary
+                    |使用開始日を登録すると<br>使い切り予定日の計測が始まります。
               - elsif !product.product_consume_logs.last.use_ended_at.nil?
                 dl
-                  dt.fw-normal
+                  dt.fw-normal.text-secondary
                     |使用開始日を登録すると<br>使い切り予定日が表示されます。
-                  dd.mt-2
+                  dd.mt-2.text-secondary
                     = "最新の使用履歴：#{l(product.product_consume_logs.last.use_ended_at, format: :default)}"
               - elsif product.average_period.zero?
                 dl

@@ -26,7 +26,6 @@ body
   color: $main-color
   border: 1px solid $accent-color
 
-
 .btn-primary
   background: $accent-color
   color: $main-color
@@ -52,6 +51,11 @@ body
 .is-image-link:hover
   opacity: 0.6
 
+.is-image-product-is-not-in-use-overlay
+  background-color: rgba(0,0,0,0.03)
+  width: 100%
+  height: 100%
+
 .is-column-link
   color: $text-color
 
@@ -60,7 +64,7 @@ body
   color: $text-color
 
 .accent-background
-  background: #ffe8d1
+  background: $accent-background
 
 .is-accent-text
   color: $accent-color
@@ -86,3 +90,13 @@ body
 
 .border-primary
   border-color: $accent-color !important
+
+.bg-primary
+  background: $main-color !important
+  color: $accent-color !important
+  border: 1px solid $accent-color
+
+.bg-secondary
+  background: $main-color !important
+  color: $secondary-color !important
+  border: 1px solid $secondary-color
