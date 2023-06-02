@@ -12,10 +12,10 @@ class ProductConsumeLogsTest < ApplicationSystemTestCase
   test 'should create product consume log' do
     visit products_url
     within all('.product-record')[0].all('.product-col')[2] do
-      click_on '使用開始日を登録する'
+      click_on '使用開始'
     end
     fill_in '使用開始日', with: Time.zone.local(2023, 1, 1, 0, 0)
-    click_on '使用を開始する'
+    click_on '使用を開始'
     assert_text '使用実績を登録しました。'
     within all('.product-record')[0].all('.product-col')[1] do
       assert_text '計測中'
@@ -25,10 +25,10 @@ class ProductConsumeLogsTest < ApplicationSystemTestCase
   test 'should record use_ended_at' do
     visit products_url
     within all('.product-record')[1].all('.product-col')[2] do
-      click_on '使用終了日を登録する'
+      click_on '使用終了'
     end
     fill_in '使用終了日', with: Time.zone.local(2023, 1, 31, 0, 0)
-    click_on '使用を終了する'
+    click_on '使用を終了'
     assert_text '使用実績を登録しました。'
     within all('.product-record')[1].all('.product-col')[1] do
       assert_text "使用開始日を登録すると\n使い切り予定日が表示されます。"

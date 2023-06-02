@@ -39,7 +39,8 @@ class ProductsTest < ApplicationSystemTestCase
     end
     all('.product-record')[0].all('.product-col')[0].find('.is-image-link').click
     assert_text '使用実績がまだありません。'
-    assert_text '使用開始日や使用終了日を登録すると、ここに実績一覧が表示されます。'
+    assert_text '使用開始日や使用終了日を登録すると、'
+    assert_text 'ここに実績一覧が表示されます。'
   end
 
   test 'the show and index show measuring message if product is measuring' do
@@ -85,10 +86,10 @@ class ProductsTest < ApplicationSystemTestCase
   test 'should create product' do
     sign_in @heavy_user
     visit root_url
-    click_on 'アイテムを登録する'
+    click_on 'アイテムを登録'
     fill_in 'アイテム名', with: '乳液'
     fill_in '価格', with: 5000
-    click_on '登録する'
+    click_on '登録'
     assert_text 'アイテムを登録しました。'
     assert_text '乳液'
   end
@@ -97,10 +98,10 @@ class ProductsTest < ApplicationSystemTestCase
     sign_in @heavy_user
     visit product_url(@product)
     assert_text '未使用の化粧水'
-    click_on 'このアイテムを編集する'
+    click_on 'アイテムを編集'
     fill_in 'アイテム名', with: '高い化粧水'
     fill_in '価格', with: 6000
-    click_on '登録する'
+    click_on '登録'
     assert_text 'アイテムを更新しました。'
     assert_text '高い化粧水'
   end
@@ -109,7 +110,7 @@ class ProductsTest < ApplicationSystemTestCase
     sign_in @heavy_user
     visit product_url(@product)
     accept_alert do
-      click_on 'このアイテムを削除する'
+      click_on 'アイテムを削除'
     end
     assert_text 'アイテムを削除しました。'
   end
