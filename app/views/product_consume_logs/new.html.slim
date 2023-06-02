@@ -1,3 +1,3 @@
-= render 'consume_logs_regular_modal', title: "#{t('activerecord.attributes.product_consume_log.use_started_at')}の登録" do
+= render 'consume_logs_regular_modal', title: "使用日を記録" do
   = turbo_frame_tag 'product_consume_log_input_started_at' do
     = render 'input_use_started_at_form', { product_consume_log: @product_consume_log, product: @product }

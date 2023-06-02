@@ -8,5 +8,9 @@
         = form.label :use_started_at, for: 'floatingUseStartedAt'
         .invalid-feedback
           |使用開始日は必須です
-    .py-4.text-center
-      = form.submit t('action.new_use_started_at'), class: 'btn btn-primary rounded-pill px-4 fw-bold'
+    - if product.product_consume_logs.empty?
+      .py-4.text-center
+        = form.submit t('action.new_use_started_at'), class: 'btn btn-primary rounded-pill px-4 fw-bold'
+    - else
+      .py-4.text-center
+        = form.submit t('action.new_use_restarted_at'), class: 'btn btn-primary rounded-pill px-4 fw-bold'
