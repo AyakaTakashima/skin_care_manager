@@ -27,7 +27,9 @@ div id="#{dom_id product}"
       .col
         - if product.product_consume_logs.empty?
           p.pt-5.text-center
-            = t('views.message_for_product_consume_logs_index')
+            | 使用開始日や使用終了日を登録すると、
+            br.d-block.d-sm-none
+            | ここに実績一覧が表示されます。
         - else
           .container
             - @product_consume_logs.each do |product_consume_log|
