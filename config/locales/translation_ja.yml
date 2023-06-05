@@ -18,6 +18,7 @@ ja:
       product_consume_log:
         use_ended_at: 使用終了日  #g
         use_started_at: 使用開始日  #g
+        use_restarted_at: 使用再開日  #g
 
       user:
         email: Eメール  #g
@@ -30,13 +31,15 @@ ja:
   action:
     edit: 編集
     destroy: 削除
-    new_product: アイテムを登録する
-    input_use_started_at: 使用開始日を登録する
-    input_use_ended_at: 使用終了日を登録する
-    new_use_started_at: 使用を開始する
-    new_use_ended_at: 使用を終了する
-    editing_product: このアイテムを編集する
-    deleting_product: このアイテムを削除する
+    new_product: アイテムを登録
+    input_use_started_at: 使用開始
+    input_use_restarted_at: 使用再開
+    input_use_ended_at: 使用終了
+    new_use_started_at: 使用を開始
+    new_use_restarted_at: 使用を再開
+    new_use_ended_at: 使用を終了
+    editing_product: アイテムを編集
+    deleting_product: アイテムを削除
     product_consume_log_index: 過去1年間の実績を見る ＞
 
   notice:
@@ -52,7 +55,6 @@ ja:
     measuring: 計測中
     product_consume_log_empty: 使用実績がまだありません。
     message_for_measuring_scheduled_consume_date: 使い切り予定日を計測中です。
-    message_for_product_consume_logs_index: 使用開始日や使用終了日を登録すると、ここに実績一覧が表示されます。
     number_of_used_items: アイテム数
     number_of_consumed_items: 消費数
     consumption_amount: 消費金額

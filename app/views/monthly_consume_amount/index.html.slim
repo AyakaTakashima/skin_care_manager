@@ -9,7 +9,9 @@
           - if @monthly_consume_amounts.calculate_average_amount_by_month(@monthly_consume_amounts).zero?
             = t('views.monthly_consume_amount_empty')
           -else
-            = "1ヶ月に平均#{@monthly_consume_amounts.calculate_average_amount_by_month(@monthly_consume_amounts)}円分を消費しています。"
+            = "1ヶ月に平均#{@monthly_consume_amounts.calculate_average_amount_by_month(@monthly_consume_amounts)}円分"
+            br.d-block.d-sm-none
+            | を消費しています。
             p.text-end.fs-6
               |＊消費実績がある月のみで計算
 
