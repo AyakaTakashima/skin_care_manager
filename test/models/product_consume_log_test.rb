@@ -12,19 +12,22 @@ class ProductConsumeLogTest < ActiveSupport::TestCase
     amount_per_day = 36
     @product_consume_log1.use_started_at = Date.new(2023, 1, 1)
     @product_consume_log1.use_ended_at = Date.new(2023, 1, 25)
-    assert_equal @product_consume_log1.calculate_consuming_amount_for_period(amount_per_day, @product_consume_log1.use_started_at, @product_consume_log1.use_ended_at), 900
+    result = @product_consume_log1.calculate_consuming_amount_for_period(amount_per_day, @product_consume_log1.use_started_at,
+                                                                         @product_consume_log1.use_ended_at)
+    assert_equal result, 900
   end
 
   test '#calculate_amount_by_month should create new monthly consume amount record' do
     assert_equal MonthlyConsumeAmount.count, 5
     assert_equal MonthlyConsumeAmount.where(product_consume_log_id: @product_consume_log4.id).last.created_at, Time.current.beginning_of_month - 1.month
-    
+
+    consume_dates = Enumerator.produce(@product_consume_log4.use_started_at, &:next_month).take_while { |d| d <= @product_consume_log4.use_ended_at }
     parameter_to_calculate_monthly_amount = {}
-    parameter_to_calculate_monthly_amount[:consume_dates] = Enumerator.produce(@product_consume_log4.use_started_at, &:next_month).take_while { |d| d <= @product_consume_log4.use_ended_at }
+    parameter_to_calculate_monthly_amount[:consume_dates] = consume_dates
     parameter_to_calculate_monthly_amount[:product] = Product.find(@product_consume_log4.product_id)
     parameter_to_calculate_monthly_amount[:product_consume_log] = @product_consume_log4
     @product_consume_log4.calculate_amount_by_month(parameter_to_calculate_monthly_amount)
-    
+
     assert MonthlyConsumeAmount.where(product_consume_log_id: @product_consume_log4.id).last.created_at.today?
     assert_equal MonthlyConsumeAmount.count, 6
   end

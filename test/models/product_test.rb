@@ -18,7 +18,7 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test '#calculate_scheduled_consume_date' do
-    use_started_at = Time.current.beginning_of_month - 6.day
+    use_started_at = Time.current.beginning_of_month - 6.days
     period1 = 30
     period2 = 25
     average_period = (period1 + period2) / 2
@@ -27,7 +27,7 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test '#format_scheduled_consume_date' do
-    use_started_at = Time.current.beginning_of_month - 6.day
+    use_started_at = Time.current.beginning_of_month - 6.days
     period1 = 30
     period2 = 25
     average_period = (period1 + period2) / 2
@@ -39,7 +39,7 @@ class ProductTest < ActiveSupport::TestCase
 
   test '#count_until_scheduled_consume_date' do
     today = Time.zone.today
-    use_started_at = Date.current.beginning_of_month - 6.day
+    use_started_at = Date.current.beginning_of_month - 6.days
     period1 = 30
     period2 = 25
     average_period = (period1 + period2) / 2
