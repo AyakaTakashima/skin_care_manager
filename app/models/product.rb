@@ -30,23 +30,15 @@ class Product < ApplicationRecord
 
   def format_scheduled_consume_date(id)
     scheduled_consume_date = calculate_scheduled_consume_date(id)
-    if scheduled_consume_date.nil?
-      '-'
-    else
-      wday = %w[日 月 火 水 木 金 土]
-      scheduled_consume_date.strftime("%m/%d(#{wday[scheduled_consume_date.wday]})")
-    end
+    wday = %w[日 月 火 水 木 金 土]
+    scheduled_consume_date.strftime("%m/%d(#{wday[scheduled_consume_date.wday]})")
   end
 
   def count_until_scheduled_consume_date(id)
     scheduled_consume_date = calculate_scheduled_consume_date(id)
-    if !scheduled_consume_date.nil?
-      today = Time.zone.today
-      result = scheduled_consume_date - today
-      result.numerator
-    else
-      '-'
-    end
+    today = Time.zone.today
+    result = scheduled_consume_date - today
+    result.numerator
   end
 
   def get_number_of_consume_logs(product, date)
