@@ -7,7 +7,7 @@ class ProductTest < ActiveSupport::TestCase
     @product1 = products(:unused_lotion)
     @product2 = products(:measuring_lotion)
     @product3 = products(:lotion_first_used)
-    @product4 = products(:lotion_second_using)
+    @product4 = products(:lotion_third_using)
   end
 
   test '#in_use?' do
@@ -19,14 +19,18 @@ class ProductTest < ActiveSupport::TestCase
 
   test '#calculate_scheduled_consume_date' do
     use_started_at = Time.current.beginning_of_month - 6.day
-    average_period = ((Date.current.beginning_of_month - 7.day) - (Date.current.beginning_of_month - 1.month)).numerator
+    period1 = 30
+    period2 = 25
+    average_period = (period1 + period2) / 2
     scheduled_consume_date = use_started_at + average_period.day
     assert_equal @product4.calculate_scheduled_consume_date(@product4.id), scheduled_consume_date
   end
 
   test '#format_scheduled_consume_date' do
     use_started_at = Time.current.beginning_of_month - 6.day
-    average_period = ((Date.current.beginning_of_month - 7.day) - (Date.current.beginning_of_month - 1.month)).numerator
+    period1 = 30
+    period2 = 25
+    average_period = (period1 + period2) / 2
     scheduled_consume_date = use_started_at + average_period.day
     wday = %w[日 月 火 水 木 金 土]
     formatted_scheduled_consume_date = scheduled_consume_date.strftime("%m/%d(#{wday[scheduled_consume_date.wday]})")
@@ -36,7 +40,9 @@ class ProductTest < ActiveSupport::TestCase
   test '#count_until_scheduled_consume_date' do
     today = Time.zone.today
     use_started_at = Date.current.beginning_of_month - 6.day
-    average_period = ((Date.current.beginning_of_month - 7.day) - (Date.current.beginning_of_month - 1.month)).numerator
+    period1 = 30
+    period2 = 25
+    average_period = (period1 + period2) / 2
     scheduled_consume_date = use_started_at + average_period.day
     result = scheduled_consume_date - today
     assert_equal @product4.count_until_scheduled_consume_date(@product4.id), result

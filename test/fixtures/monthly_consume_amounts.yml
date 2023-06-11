@@ -18,16 +18,24 @@ two:
 
 three:
   product_consume_log: three
-  product: lotion_second_using
+  product: lotion_third_using
+  month: <%= Time.current.beginning_of_month - 2.month %>
+  amount: 1000
+  created_at: <%= Time.current.beginning_of_month - 2.month %>
+  updated_at: <%= Time.current.beginning_of_month - 2.month %>
+
+four:
+  product_consume_log: four
+  product: lotion_third_using
   month: <%= Time.current.beginning_of_month - 1.month %>
   amount: 1000
   created_at: <%= Time.current.beginning_of_month - 1.month %>
   updated_at: <%= Time.current.beginning_of_month - 1.month %>
 
-four:
-  product_consume_log: four
-  product: lotion_second_using
+five:
+  product_consume_log: five
+  product: lotion_third_using
   month: <%= Time.current.beginning_of_month - 1.month %>
   amount: 1000
-  created_at: <%= Time.current.beginning_of_month %>
-  updated_at: <%= Time.current.beginning_of_month %>
+  created_at: <%= Time.current.beginning_of_month - 1.month %>
+  updated_at: <%= Time.current.beginning_of_month - 1.month %>

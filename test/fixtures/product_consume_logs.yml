@@ -14,14 +14,21 @@ two:
   updated_at: <%= Time.current.beginning_of_month - 1.day %>
 
 three:
-  product: lotion_second_using
+  product: lotion_third_using
+  use_started_at: <%= Time.current.beginning_of_month - 2.month %>
+  use_ended_at: <%= Time.current.beginning_of_month - 1.month - 1.day %>
+  created_at: <%= Time.current.beginning_of_month - 2.month %>
+  updated_at: <%= Time.current.beginning_of_month - 1.month - 1.day %>
+
+four:
+  product: lotion_third_using
   use_started_at: <%= Time.current.beginning_of_month - 1.month %>
   use_ended_at: <%= Time.current.beginning_of_month - 7.day %>
   created_at: <%= Time.current.beginning_of_month - 1.month %>
   updated_at: <%= Time.current.beginning_of_month - 7.day %>
 
-four:
-  product: lotion_second_using
+five:
+  product: lotion_third_using
   use_started_at: <%= Time.current.beginning_of_month - 6.day %>
   created_at: <%= Time.current.beginning_of_month - 6.day %>
   updated_at: <%= Time.current.beginning_of_month - 6.day %>

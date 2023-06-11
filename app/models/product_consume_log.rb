@@ -7,7 +7,7 @@ class ProductConsumeLog < ApplicationRecord
   validates :use_started_at, presence: true
 
   def calculate_consuming_amount_for_period(amount_per_day, first_day, last_day)
-    period = (last_day - first_day).numerator + 1
+    period = (last_day - first_day).numerator + 1 # X日間という数え方をしたいので1を足している
     period * amount_per_day
   end
 
@@ -15,7 +15,7 @@ class ProductConsumeLog < ApplicationRecord
     product = parameter_to_calculate_monthly_amount[:product]
     product_consume_log = parameter_to_calculate_monthly_amount[:product_consume_log]
     use_started_at = product_consume_log.use_started_at
-    amount_per_day = product.price / ((use_ended_at - use_started_at).numerator + 1)
+    amount_per_day = product.price / ((use_ended_at - use_started_at).numerator + 1) # X日間という数え方をしたいので1を足している
 
     last_index = parameter_to_calculate_monthly_amount[:consume_dates].count - 1
     parameter_to_calculate_monthly_amount[:consume_dates].each_with_index do |consume_date, index|
@@ -38,7 +38,7 @@ class ProductConsumeLog < ApplicationRecord
     product = Product.find(product_consume_log.product_id)
     use_started_at = product_consume_log.use_started_at
     MonthlyConsumeAmount.where(product_consume_log_id: product_consume_log.id).destroy_all
-    if consume_date == use_started_at || product_consume_log.use_ended_at.nil? || consume_date < use_started_at.end_of_month
+    if consume_date == use_started_at || product_consume_log.use_ended_at.nil? || consume_date <= use_started_at.end_of_month
       consuming_amount = product.price
       MonthlyConsumeAmount.create(product_id: product.id,
                                   product_consume_log_id: product_consume_log.id,
