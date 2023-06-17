@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   def index
     if current_user
       @products = current_user.products.order(created_at: :asc)
-      @amount = @products.includes(:monthly_consume_amounts).where('month=?', Time.zone.today.beginning_of_month).sum(:amount)
+      @amount = @products.includes(:monthly_consume_amounts).where('monthly_consume_amounts.month=?', Time.zone.today.beginning_of_month).sum(:amount)
       render aciton: :index
     else
       render template: 'top/index', layout: 'top'
@@ -29,31 +29,24 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.user_id = current_user.id
 
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to root_url, notice: "#{t('activerecord.models.product')}#{t('notice.create')}" }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @product.save
+      redirect_to root_url, notice: "#{t('activerecord.models.product')}#{t('notice.create')}"
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @product.update(product_params)
-        format.html { redirect_to product_url(@product), notice: "#{t('activerecord.models.product')}#{t('notice.update')}" }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @product.update(product_params)
+      redirect_to product_url(@product), notice: "#{t('activerecord.models.product')}#{t('notice.update')}"
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @product.destroy
-
-    respond_to do |format|
-      format.html { redirect_to root_url, notice: "#{t('activerecord.models.product')}#{t('notice.destroy')}" }
-    end
+    redirect_to root_url, notice: "#{t('activerecord.models.product')}#{t('notice.destroy')}"
   end
 
   private
