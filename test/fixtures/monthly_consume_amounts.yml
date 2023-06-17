@@ -3,39 +3,39 @@
 one:
   product_consume_log: one
   product: measuring_lotion
-  month: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  month: <%= Time.current.beginning_of_month %>
   amount: 1000
-  created_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
-  updated_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  created_at: <%= Time.current.beginning_of_month %>
+  updated_at: <%= Time.current.beginning_of_month %>
 
 two:
-  product_consume_log: one
+  product_consume_log: two
   product: lotion_first_used
-  month: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  month: <%= Time.current.beginning_of_month - 1.month %>
   amount: 1000
-  created_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
-  updated_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  created_at: <%= Time.current.beginning_of_month %>
+  updated_at: <%= Time.current.beginning_of_month %>
 
 three:
-  product_consume_log: one
-  product: lotion_first_used
-  month: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  product_consume_log: three
+  product: lotion_third_using
+  month: <%= Time.current.beginning_of_month - 2.month %>
   amount: 1000
-  created_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
-  updated_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  created_at: <%= Time.current.beginning_of_month - 2.month %>
+  updated_at: <%= Time.current.beginning_of_month - 2.month %>
 
 four:
-  product_consume_log: one
-  product: lotion_second_using
-  month: <%= Time.zone.local(2023, 2, 1, 0, 0) %>
-  amount: 896
-  created_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
-  updated_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  product_consume_log: four
+  product: lotion_third_using
+  month: <%= Time.current.beginning_of_month - 1.month %>
+  amount: 1000
+  created_at: <%= Time.current.beginning_of_month - 1.month %>
+  updated_at: <%= Time.current.beginning_of_month - 1.month %>
 
 five:
-  product_consume_log: one
-  product: lotion_second_using
-  month: <%= Time.zone.local(2023, 3, 1, 0, 0) %>
-  amount: 104
-  created_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
-  updated_at: <%= Time.zone.local(2023, 1, 1, 0, 0) %>
+  product_consume_log: five
+  product: lotion_third_using
+  month: <%= Time.current.beginning_of_month - 1.month %>
+  amount: 1000
+  created_at: <%= Time.current.beginning_of_month - 1.month %>
+  updated_at: <%= Time.current.beginning_of_month - 1.month %>

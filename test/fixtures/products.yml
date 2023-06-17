@@ -22,10 +22,10 @@ lotion_first_used:
   created_at: <%= Time.zone.local(2023, 1, 3, 0, 0) %>
   updated_at: <%= Time.zone.local(2023, 1, 3, 0, 0) %>
 
-lotion_second_using:
+lotion_third_using:
   user: heavy_user
-  name: 2本目を使用中の化粧水
+  name: 3本目を使用中の化粧水
   price: 1000
-  average_period: 31
+  average_period: 27
   created_at: <%= Time.zone.local(2023, 1, 4, 0, 0) %>
   updated_at: <%= Time.zone.local(2023, 1, 4, 0, 0) %>

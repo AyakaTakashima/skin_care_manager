@@ -77,7 +77,10 @@ class ProductsTest < ApplicationSystemTestCase
       assert_text '使い切り予定日'
     end
     all('.product-record')[3].all('.product-col')[0].find('.is-image-link').click
-    assert_text '平均31日に1本使っています。'
+    period1 = 30
+    period2 = 25
+    average_period = (period1 + period2) / 2
+    assert_text "平均#{average_period}日に1本使っています。"
     all('.product-consume-log-record')[0].all('.col')[0] do
       assert_text '使い切り予定日から'
     end

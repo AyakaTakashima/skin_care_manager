@@ -4,25 +4,21 @@ require 'test_helper'
 
 class MonthlyConsumeAmountTest < ActiveSupport::TestCase
   setup do
-    @monthly_consume_amount = monthly_consume_amounts(:one)
+    heavy_user = users(:heavy_user)
+    @monthly_consume_amounts = MonthlyConsumeAmount.includes(product: :user).where(user: { id: heavy_user.id })
   end
 
-  test 'monthly_consume_amount is valid' do
-    assert @monthly_consume_amount.valid?
+  test '#calculate_average_amount_by_month' do
+    assert_equal @monthly_consume_amounts.calculate_average_amount_by_month(@monthly_consume_amounts), 1666
   end
 
-  test 'monthly_consume_amount is invalid if month is null' do
-    @monthly_consume_amount.month = nil
-    assert_not @monthly_consume_amount.valid?
+  test '#get_number_of_consumed_products' do
+    date = Time.zone.today.beginning_of_month - 1.month
+    assert_equal @monthly_consume_amounts.get_number_of_consumed_products(@monthly_consume_amounts, date), 2
   end
 
-  test 'monthly_consume_amount is invalid if product_id is null' do
-    @monthly_consume_amount.product_id = nil
-    assert_not @monthly_consume_amount.valid?
-  end
-
-  test 'monthly_consume_amount is invalid if product_consume_log_id is null' do
-    @monthly_consume_amount.product_consume_log_id = nil
-    assert_not @monthly_consume_amount.valid?
+  test '#calculate_monthly_consume_amounts' do
+    date = Time.zone.today.beginning_of_month - 1.month
+    assert_equal @monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, date), 3000
   end
 end
