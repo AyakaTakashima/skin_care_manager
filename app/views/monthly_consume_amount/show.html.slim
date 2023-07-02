@@ -7,14 +7,14 @@
             h1.text-center.fs-4.fw-bold
               = "#{@date.year}年#{@date.month}月の消費予定金額は"
               br.d-block.d-sm-none
-              = "#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date)}円です。"
+              = "#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@date)}円です。"
         - else
           .col-md-auto
             h1.text-center.fs-4.fw-bold
               = "#{@date.year}年#{@date.month}月の合計消費金額は"
               br.d-block.d-sm-none
-              = "#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date)}円です。"
-    - if @monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date).zero?
+              = "#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@date)}円です。"
+    - if @monthly_consume_amounts.calculate_monthly_consume_amounts(@date).zero?
       h1.text-center.fs-5
         = t('views.product_consume_log_empty')
     - else
@@ -31,6 +31,6 @@
             .col
               = link_to product.name, product, class: 'text-decoration-none is-text-link fw-bold'
             .col
-              = "#{product.get_number_of_consume_logs(product, @date)}本"
+              = "#{product.get_number_of_consume_logs(@date)}本"
             .col
-              = product.calculate_monthly_consume_amounts(product, @date)
+              = product.calculate_monthly_consume_amounts(@date)
