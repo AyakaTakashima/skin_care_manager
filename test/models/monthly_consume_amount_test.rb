@@ -9,16 +9,16 @@ class MonthlyConsumeAmountTest < ActiveSupport::TestCase
   end
 
   test '#calculate_average_amount_by_month' do
-    assert_equal @monthly_consume_amounts.calculate_average_amount_by_month(@monthly_consume_amounts), 1666
+    assert_equal @monthly_consume_amounts.calculate_average_amount_by_month, 1666
   end
 
   test '#get_number_of_consumed_products' do
     date = Time.zone.today.beginning_of_month - 1.month
-    assert_equal @monthly_consume_amounts.get_number_of_consumed_products(@monthly_consume_amounts, date), 2
+    assert_equal @monthly_consume_amounts.get_number_of_consumed_products(date), 2
   end
 
   test '#calculate_monthly_consume_amounts' do
     date = Time.zone.today.beginning_of_month - 1.month
-    assert_equal @monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, date), 3000
+    assert_equal @monthly_consume_amounts.calculate_monthly_consume_amounts(date), 3000
   end
 end

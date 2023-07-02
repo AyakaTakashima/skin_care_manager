@@ -7,14 +7,14 @@
             h1.text-center.fs-4.fw-bold
               = "#{@date.year}年#{@date.month}月の消費予定金額は"
               br.d-block.d-sm-none
-              = "#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date)}円です。"
+              = "#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@date)}円です。"
         - else
           .col-md-auto
             h1.text-center.fs-4.fw-bold
               = "#{@date.year}年#{@date.month}月の合計消費金額は"
               br.d-block.d-sm-none
-              = "#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date)}円です。"
-    - if @monthly_consume_amounts.calculate_monthly_consume_amounts(@monthly_consume_amounts, @date).zero?
+              = "#{@monthly_consume_amounts.calculate_monthly_consume_amounts(@date)}円です。"
+    - if @monthly_consume_amounts.calculate_monthly_consume_amounts(@date).zero?
       h1.text-center.fs-5
         = t('views.product_consume_log_empty')
     - else
