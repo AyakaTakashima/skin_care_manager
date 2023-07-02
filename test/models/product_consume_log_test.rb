@@ -35,22 +35,22 @@ class ProductConsumeLogTest < ActiveSupport::TestCase
   test '#record_monthly_amount should delete old monthly consume amount record and create new monthly consume amount record' do
     assert_equal MonthlyConsumeAmount.count, 5
     assert_equal MonthlyConsumeAmount.where(product_consume_log_id: @product_consume_log1.id).last.created_at, Time.current.beginning_of_month
-    @product_consume_log1.record_monthly_amount(@product_consume_log1.use_started_at, @product_consume_log1)
+    @product_consume_log1.record_monthly_amount(@product_consume_log1.use_started_at)
     assert MonthlyConsumeAmount.where(product_consume_log_id: @product_consume_log1.id).last.created_at.today?
     assert_equal MonthlyConsumeAmount.count, 5
   end
 
   test '#calculate_average_period' do
-    assert_equal @product_consume_log1.calculate_average_period(@product_consume_log1.product_id), 0
-    assert_equal @product_consume_log4.calculate_average_period(@product_consume_log4.product_id), 27
+    assert_equal @product_consume_log1.calculate_average_period, 0
+    assert_equal @product_consume_log4.calculate_average_period, 27
   end
 
   test '#calculate_average_amount_per_day' do
-    assert_equal @product_consume_log1.calculate_average_amount_per_day(@product_consume_log1.product_id), 0
+    assert_equal @product_consume_log1.calculate_average_amount_per_day, 0
 
     period1 = 1000 / 25
     period2 = 1000 / 30
     average_amount_per_day = (period1 + period2) / 2
-    assert_equal @product_consume_log4.calculate_average_amount_per_day(@product_consume_log4.product_id), average_amount_per_day
+    assert_equal @product_consume_log4.calculate_average_amount_per_day, average_amount_per_day
   end
 end
