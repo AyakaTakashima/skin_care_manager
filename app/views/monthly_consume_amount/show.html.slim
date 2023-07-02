@@ -31,6 +31,6 @@
             .col
               = link_to product.name, product, class: 'text-decoration-none is-text-link fw-bold'
             .col
-              = "#{product.get_number_of_consume_logs(product, @date)}本"
+              = "#{product.get_number_of_consume_logs(@date)}本"
             .col
-              = product.calculate_monthly_consume_amounts(product, @date)
+              = product.calculate_monthly_consume_amounts(@date)
