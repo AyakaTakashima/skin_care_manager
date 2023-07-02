@@ -62,6 +62,6 @@ div id="#{dom_id product}"
                       span.material-symbols-outlined.py-1
                         |edit
         .text-center.p-4
-          - if !product.in_use?(product.id)
+          - if !Product.in_use?(product.id)
             = turbo_frame_tag 'product_consume_log_input_started_at'
               = link_to t('action.input_use_started_at'), new_product_product_consume_log_path(product_id: product.id), class: 'btn btn-outline-primary rounded-pill btn-sm px-4 fw-bold', data: { turbo_frame: 'consume_logs_regular_modal' }

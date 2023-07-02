@@ -9,8 +9,8 @@ class Product < ApplicationRecord
   validates :name, presence: true, length: { maximum: 255 }
   validates :price, presence: true
 
-  def in_use?(product_id)
-    Product.joins(:product_consume_logs)
+  def self.in_use?(product_id)
+    self.joins(:product_consume_logs)
            .where('product_id=?', product_id)
            .where(product_consume_logs: { use_ended_at: nil })
            .exists?

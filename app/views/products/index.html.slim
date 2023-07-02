@@ -36,7 +36,7 @@
       - @products.each do |product|
         .row.align-items-center.py-4.product-record.justify-content-center.text-break
           .product-col.col-4.col-md-4.pe-0
-            - if product.in_use?(product.id)
+            - if Product.in_use?(product.id)
               = link_to product, class: 'w-auto' do
                 = image_tag product.avatar, class: 'border rounded is-image-link bg-white img-fluid max-image-height-150', alt: product.name if product.avatar.attached?
                 = image_tag('no_image.svg', alt: '写真の登録がありません', class: 'border rounded is-image-link img-fluid max-image-height-150') unless product.avatar.attached?
@@ -92,7 +92,7 @@
                     - else
                       = "予定日から#{product.count_until_scheduled_consume_date(product.id).abs}日過ぎています"
           .product-col.col-12.col-md-4.pt-4
-            - if product.in_use?(product.id)
+            - if Product.in_use?(product.id)
               = turbo_frame_tag 'product_consume_log_input_use_ended_at'
                 = link_to t('action.input_use_ended_at'),
                           product_product_consume_log_use_end_index_path(product_id: product.id,

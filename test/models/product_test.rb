@@ -11,10 +11,10 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test '#in_use?' do
-    assert_not @product1.in_use?(@product1.id)
-    assert @product2.in_use?(@product2.id)
-    assert_not @product3.in_use?(@product3.id)
-    assert @product4.in_use?(@product4.id)
+    assert_not Product.in_use?(@product1.id)
+    assert Product.in_use?(@product2.id)
+    assert_not Product.in_use?(@product3.id)
+    assert Product.in_use?(@product4.id)
   end
 
   test '#calculate_scheduled_consume_date' do
