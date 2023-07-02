@@ -35,19 +35,19 @@ class ProductConsumeLog < ApplicationRecord
   end
 
   def record_monthly_amount(consume_date)
-    product = Product.find(self.product_id)
+    product = Product.find(product_id)
     use_started_at = self.use_started_at
-    MonthlyConsumeAmount.where(product_consume_log_id: self.id).destroy_all
-    if consume_date == use_started_at || self.use_ended_at.nil? || consume_date <= use_started_at.end_of_month
+    MonthlyConsumeAmount.where(product_consume_log_id: id).destroy_all
+    if consume_date == use_started_at || use_ended_at.nil? || consume_date <= use_started_at.end_of_month
       consuming_amount = product.price
       MonthlyConsumeAmount.create(product_id: product.id,
-                                  product_consume_log_id: self.id,
+                                  product_consume_log_id: id,
                                   month: use_started_at.beginning_of_month,
                                   amount: consuming_amount)
     else
       consume_dates = Enumerator.produce(use_started_at, &:next_month).take_while { |d| d <= consume_date }
-      consume_dates.delete_at(-1) if consume_dates.last > self.use_ended_at
-      consume_dates.push(self.use_ended_at)
+      consume_dates.delete_at(-1) if consume_dates.last > use_ended_at
+      consume_dates.push(use_ended_at)
       parameter_to_calculate_monthly_amount = {}
       parameter_to_calculate_monthly_amount[:consume_dates] = consume_dates
       parameter_to_calculate_monthly_amount[:product] = product
@@ -57,7 +57,7 @@ class ProductConsumeLog < ApplicationRecord
   end
 
   def calculate_average_period
-    consume_logs = ProductConsumeLog.where('product_id=?', self.product_id).where.not(use_ended_at: nil)
+    consume_logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
     if consume_logs.empty?
       0
     else
@@ -72,8 +72,8 @@ class ProductConsumeLog < ApplicationRecord
   end
 
   def calculate_average_amount_per_day
-    consume_logs = ProductConsumeLog.where('product_id=?', self.product_id).where.not(use_ended_at: nil)
-    product = Product.find(self.product_id)
+    consume_logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
+    product = Product.find(product_id)
     if consume_logs.empty?
       0
     else
