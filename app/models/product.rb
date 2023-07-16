@@ -25,12 +25,12 @@ class Product < ApplicationRecord
     @scheduled_consume_date = product_consume_logs.last.use_started_at + average_period.day
   end
 
-  def format_scheduled_consume_date
+  def formatted_scheduled_consume_date
     wday = %w[日 月 火 水 木 金 土]
     scheduled_consume_date.strftime("%m/%d(#{wday[scheduled_consume_date.wday]})")
   end
 
-  def count_until_scheduled_consume_date
+  def days_until_scheduled_consume_date
     today = Time.zone.today
     result = scheduled_consume_date - today
     result.numerator

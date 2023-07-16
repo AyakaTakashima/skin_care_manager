@@ -32,8 +32,8 @@ class ProductConsumeLogsController < ApplicationController
       redirect_to request.referer, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}"
 
       product_id = @product_consume_log.product_id
-      average_period = @product_consume_log.calculate_average_period
-      average_amount_per_day = @product_consume_log.calculate_average_amount_per_day
+      average_period = @product_consume_log.average_period
+      average_amount_per_day = @product_consume_log.average_amount_per_day
       Product.find(product_id).update(average_period:, average_amount_per_day:)
 
       if @product_consume_log.use_ended_at.nil?
@@ -54,8 +54,8 @@ class ProductConsumeLogsController < ApplicationController
     @product_consume_log.destroy
     redirect_to product, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.destroy')}"
 
-    average_period = @product_consume_log.calculate_average_period
-    average_amount_per_day = @product_consume_log.calculate_average_amount_per_day
+    average_period = @product_consume_log.average_period
+    average_amount_per_day = @product_consume_log.average_amount_per_day
     Product.find(product_id).update(average_period:, average_amount_per_day:)
   end
 

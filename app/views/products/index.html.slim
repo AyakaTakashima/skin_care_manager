@@ -83,14 +83,14 @@
                   dt.pb-1.fw-normal
                     = t('views.scheduled_consume_date')
                   dd.fs-2.fw-bold
-                    = product.format_scheduled_consume_date
+                    = product.formatted_scheduled_consume_date
                   dd.p-1
-                    - if product.count_until_scheduled_consume_date.positive?
-                      = "あと  #{product.count_until_scheduled_consume_date}  日"
-                    - elsif product.count_until_scheduled_consume_date.zero?
+                    - if product.days_until_scheduled_consume_date.positive?
+                      = "あと  #{product.days_until_scheduled_consume_date}  日"
+                    - elsif product.days_until_scheduled_consume_date.zero?
                       | 本日が使い切り予定日です
                     - else
-                      = "予定日から#{product.count_until_scheduled_consume_date.abs}日過ぎています"
+                      = "予定日から#{product.days_until_scheduled_consume_date.abs}日過ぎています"
           .product-col.col-12.col-md-4.pt-4
             - if Product.in_use?(product.id)
               = turbo_frame_tag 'product_consume_log_input_use_ended_at'

@@ -26,7 +26,7 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal @product4.scheduled_consume_date, scheduled_consume_date
   end
 
-  test '#format_scheduled_consume_date' do
+  test '#formatted_scheduled_consume_date' do
     use_started_at = Time.current.beginning_of_month - 6.days
     period1 = 30
     period2 = 25
@@ -34,10 +34,10 @@ class ProductTest < ActiveSupport::TestCase
     scheduled_consume_date = use_started_at + average_period.day
     wday = %w[日 月 火 水 木 金 土]
     formatted_scheduled_consume_date = scheduled_consume_date.strftime("%m/%d(#{wday[scheduled_consume_date.wday]})")
-    assert_equal @product4.format_scheduled_consume_date, formatted_scheduled_consume_date
+    assert_equal @product4.formatted_scheduled_consume_date, formatted_scheduled_consume_date
   end
 
-  test '#count_until_scheduled_consume_date' do
+  test '#days_until_scheduled_consume_date' do
     today = Time.zone.today
     use_started_at = Date.current.beginning_of_month - 6.days
     period1 = 30
@@ -45,7 +45,7 @@ class ProductTest < ActiveSupport::TestCase
     average_period = (period1 + period2) / 2
     scheduled_consume_date = use_started_at + average_period.day
     result = scheduled_consume_date - today
-    assert_equal @product4.count_until_scheduled_consume_date, result
+    assert_equal @product4.days_until_scheduled_consume_date, result
   end
 
   test '#get_number_of_consume_logs' do

@@ -40,17 +40,17 @@ class ProductConsumeLogTest < ActiveSupport::TestCase
     assert_equal MonthlyConsumeAmount.count, 5
   end
 
-  test '#calculate_average_period' do
-    assert_equal @product_consume_log1.calculate_average_period, 0
-    assert_equal @product_consume_log4.calculate_average_period, 27
+  test '#average_period' do
+    assert_equal @product_consume_log1.average_period, 0
+    assert_equal @product_consume_log4.average_period, 27
   end
 
-  test '#calculate_average_amount_per_day' do
-    assert_equal @product_consume_log1.calculate_average_amount_per_day, 0
+  test '#average_amount_per_day' do
+    assert_equal @product_consume_log1.average_amount_per_day, 0
 
     period1 = 1000 / 25
     period2 = 1000 / 30
     average_amount_per_day = (period1 + period2) / 2
-    assert_equal @product_consume_log4.calculate_average_amount_per_day, average_amount_per_day
+    assert_equal @product_consume_log4.average_amount_per_day, average_amount_per_day
   end
 end

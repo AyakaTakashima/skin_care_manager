@@ -56,7 +56,7 @@ class ProductConsumeLog < ApplicationRecord
     end
   end
 
-  def calculate_average_period
+  def average_period
     consume_logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
     if consume_logs.empty?
       0
@@ -71,7 +71,7 @@ class ProductConsumeLog < ApplicationRecord
     end
   end
 
-  def calculate_average_amount_per_day
+  def average_amount_per_day
     consume_logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
     product = Product.find(product_id)
     if consume_logs.empty?

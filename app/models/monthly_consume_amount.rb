@@ -6,7 +6,7 @@ class MonthlyConsumeAmount < ApplicationRecord
 
   validates :month, presence: true
 
-  def self.calculate_average_amount_by_month
+  def self.average_amount_by_month
     this_month = Time.zone.today.beginning_of_month
     last_year = Time.zone.today.beginning_of_month - 1.year
     total_amount = where('month <= ?', this_month).where('month >= ?', last_year).sum(:amount)
