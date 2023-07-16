@@ -17,13 +17,13 @@ class ProductTest < ActiveSupport::TestCase
     assert Product.in_use?(@product4.id)
   end
 
-  test '#calculate_scheduled_consume_date' do
+  test '#scheduled_consume_date' do
     use_started_at = Time.current.beginning_of_month - 6.days
     period1 = 30
     period2 = 25
     average_period = (period1 + period2) / 2
     scheduled_consume_date = use_started_at + average_period.day
-    assert_equal @product4.calculate_scheduled_consume_date, scheduled_consume_date
+    assert_equal @product4.scheduled_consume_date, scheduled_consume_date
   end
 
   test '#format_scheduled_consume_date' do
