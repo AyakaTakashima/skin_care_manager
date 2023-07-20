@@ -6,6 +6,10 @@ class MonthlyConsumeAmount < ApplicationRecord
 
   validates :month, presence: true
 
+  scope :viewable, ->(current_user) {
+    MonthlyConsumeAmount.includes(product: :user).where(user: { id: current_user })
+  }
+
   def self.average_amount_by_month
     this_month = Time.zone.today.beginning_of_month
     last_year = Time.zone.today.beginning_of_month - 1.year

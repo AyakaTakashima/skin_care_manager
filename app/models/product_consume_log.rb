@@ -6,6 +6,10 @@ class ProductConsumeLog < ApplicationRecord
 
   validates :use_started_at, presence: true
 
+  scope :consume_logs, ->(product_id) {
+    ProductConsumeLog.where(product_id:).where.not(use_ended_at: nil)
+  }
+
   def calculate_consuming_amount_for_period(amount_per_day, first_day, last_day)
     period = (last_day - first_day).numerator + 1 # X日間という数え方をしたいので1を足している
     period * amount_per_day
@@ -57,7 +61,7 @@ class ProductConsumeLog < ApplicationRecord
   end
 
   def average_period
-    consume_logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
+    consume_logs = ProductConsumeLog.consume_logs(product_id)
     if consume_logs.empty?
       0
     else
@@ -72,7 +76,7 @@ class ProductConsumeLog < ApplicationRecord
   end
 
   def average_amount_per_day
-    consume_logs = ProductConsumeLog.where('product_id=?', product_id).where.not(use_ended_at: nil)
+    consume_logs = ProductConsumeLog.consume_logs(product_id)
     product = Product.find(product_id)
     if consume_logs.empty?
       0
