@@ -6,10 +6,10 @@
     .row.justify-content-md-center
       .col-md-auto
         h1.text-center.fs-4.fw-bold
-          - if @monthly_consume_amounts.calculate_average_amount_by_month.zero?
+          - if @monthly_consume_amounts.average_amount_by_month.zero?
             = t('views.monthly_consume_amount_empty')
-          -else
-            = "1ヶ月に平均#{@monthly_consume_amounts.calculate_average_amount_by_month}円分"
+          - else
+            = "1ヶ月に平均#{@monthly_consume_amounts.average_amount_by_month}円分"
             br.d-block.d-sm-none
             | を消費しています。
             p.text-end.fs-6

@@ -8,8 +8,8 @@ class MonthlyConsumeAmountTest < ActiveSupport::TestCase
     @monthly_consume_amounts = MonthlyConsumeAmount.includes(product: :user).where(user: { id: heavy_user.id })
   end
 
-  test '#calculate_average_amount_by_month' do
-    assert_equal @monthly_consume_amounts.calculate_average_amount_by_month, 1666
+  test '#average_amount_by_month' do
+    assert_equal @monthly_consume_amounts.average_amount_by_month, 1666
   end
 
   test '#get_number_of_consumed_products' do

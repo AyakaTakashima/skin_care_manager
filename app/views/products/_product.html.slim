@@ -46,12 +46,12 @@ div id="#{dom_id product}"
                         |使用中
                       - elsif !product_consume_log.use_ended_at.nil?
                         = "#{(product_consume_log.use_ended_at - product_consume_log.use_started_at + 1).numerator}日間"
-                      - elsif product.count_until_scheduled_consume_date.positive?
-                        = "使用中（残り#{product.count_until_scheduled_consume_date}日）"
-                      - elsif product.count_until_scheduled_consume_date.zero?
+                      - elsif product.days_until_scheduled_consume_date.positive?
+                        = "使用中（残り#{product.days_until_scheduled_consume_date}日）"
+                      - elsif product.days_until_scheduled_consume_date.zero?
                         |本日使い切り予定
                       - else
-                        = "使い切り予定日から#{product.count_until_scheduled_consume_date.abs}日経過"
+                        = "使い切り予定日から#{product.days_until_scheduled_consume_date.abs}日経過"
                   .col-auto.p-0
                     = link_to product_product_consume_log_path(product, product_consume_log), method: :delete, class: 'btn btn-outline-secondary rounded-circle',
                               data: { turbo_method: :delete, turbo_confirm: t('notice.product_consume_log_destroy_confirm'), turbo_frame: '_top' } do
