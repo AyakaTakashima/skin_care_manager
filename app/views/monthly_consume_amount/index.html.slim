@@ -8,7 +8,7 @@
         h1.text-center.fs-4.fw-bold
           - if @monthly_consume_amounts.average_amount_by_month.zero?
             = t('views.monthly_consume_amount_empty')
-          -else
+          - else
             = "1ヶ月に平均#{@monthly_consume_amounts.average_amount_by_month}円分"
             br.d-block.d-sm-none
             | を消費しています。
