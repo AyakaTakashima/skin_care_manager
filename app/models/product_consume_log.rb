@@ -6,7 +6,7 @@ class ProductConsumeLog < ApplicationRecord
 
   validates :use_started_at, presence: true
 
-  scope :consume_logs, ->(product_id) {
+  scope :consume_logs, lambda { |product_id|
     ProductConsumeLog.where(product_id:).where.not(use_ended_at: nil)
   }
 

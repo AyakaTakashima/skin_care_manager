@@ -6,7 +6,7 @@ class MonthlyConsumeAmount < ApplicationRecord
 
   validates :month, presence: true
 
-  scope :viewable, ->(current_user) {
+  scope :viewable, lambda { |current_user|
     MonthlyConsumeAmount.includes(product: :user).where(user: { id: current_user })
   }
 
