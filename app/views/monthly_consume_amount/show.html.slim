@@ -2,7 +2,7 @@
   = turbo_frame_tag 'show_monthly_logs' do
     .container.py-4
       .row.justify-content-center
-        - if @date.month == Time.zone.today.month
+        - if @date.month == Time.current.month
           .col-md-auto
             h1.text-center.fs-4.fw-bold
               = "#{@date.year}年#{@date.month}月の消費予定金額は"

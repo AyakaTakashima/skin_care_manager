@@ -25,7 +25,7 @@
       .border.rounded.bg-white
         .col-12.mt-4.mt-md-5.mb-4.text-center
           .fs-3.fw-bold.pt-2.pt-md-0
-            = "#{Time.zone.today.month}月の消費予定金額は"
+            = "#{Time.current.month}月の消費予定金額は"
             br.d-block.d-sm-none
             ="#{@amount}円です。"
         .col-12.fw-bold.text-end.pb-2.pe-2

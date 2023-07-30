@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   def index
     if current_user
       @products = current_user.products.order(created_at: :asc)
-      @amount = @products.includes(:monthly_consume_amounts).where('monthly_consume_amounts.month=?', Time.zone.today.beginning_of_month).sum(:amount)
+      @amount = @products.includes(:monthly_consume_amounts).where('monthly_consume_amounts.month=?', Time.current.beginning_of_month).sum(:amount)
       render aciton: :index
     else
       render template: 'top/index', layout: 'top'

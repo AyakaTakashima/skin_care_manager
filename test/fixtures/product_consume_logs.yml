@@ -8,23 +8,23 @@ one:
 
 two:
   product: lotion_first_used
-  use_started_at: <%= Time.current.beginning_of_month - 1.month %>
-  use_ended_at: <%= Time.current.beginning_of_month - 1.day %>
-  created_at: <%= Time.current.beginning_of_month - 1.month %>
-  updated_at: <%= Time.current.beginning_of_month - 1.day %>
+  use_started_at: <%= Time.current.beginning_of_month.last_month %>
+  use_ended_at: <%= Time.current.beginning_of_month.yesterday %>
+  created_at: <%= Time.current.beginning_of_month.last_month %>
+  updated_at: <%= Time.current.beginning_of_month.yesterday %>
 
 three:
   product: lotion_third_using
   use_started_at: <%= Time.current.beginning_of_month - 2.month %>
-  use_ended_at: <%= Time.current.beginning_of_month - 1.month - 1.day %>
+  use_ended_at: <%= Time.current.beginning_of_month.last_month.yesterday %>
   created_at: <%= Time.current.beginning_of_month - 2.month %>
-  updated_at: <%= Time.current.beginning_of_month - 1.month - 1.day %>
+  updated_at: <%= Time.current.beginning_of_month.last_month.yesterday %>
 
 four:
   product: lotion_third_using
-  use_started_at: <%= Time.current.beginning_of_month - 1.month %>
+  use_started_at: <%= Time.current.beginning_of_month.last_month %>
   use_ended_at: <%= Time.current.beginning_of_month - 7.day %>
-  created_at: <%= Time.current.beginning_of_month - 1.month %>
+  created_at: <%= Time.current.beginning_of_month.last_month %>
   updated_at: <%= Time.current.beginning_of_month - 7.day %>
 
 five:

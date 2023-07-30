@@ -49,12 +49,12 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test '#get_number_of_consume_logs' do
-    last_month = Time.zone.today.beginning_of_month - 1.month
+    last_month = Time.current.beginning_of_month.last_month
     assert_equal @product4.get_number_of_consume_logs(last_month), 2
   end
 
   test '#calculate_monthly_consume_amounts' do
-    last_month = Time.zone.today.beginning_of_month - 1.month
+    last_month = Time.current.beginning_of_month.last_month
     assert_equal @product4.calculate_monthly_consume_amounts(last_month), 2000
   end
 end

@@ -19,7 +19,7 @@ class ProductConsumeLogTest < ActiveSupport::TestCase
 
   test '#calculate_amount_by_month should create new monthly consume amount record' do
     assert_equal MonthlyConsumeAmount.count, 5
-    assert_equal MonthlyConsumeAmount.where(product_consume_log_id: @product_consume_log4.id).last.created_at, Time.current.beginning_of_month - 1.month
+    assert_equal MonthlyConsumeAmount.where(product_consume_log_id: @product_consume_log4.id).last.created_at, Time.current.beginning_of_month.last_month
 
     consume_dates = Enumerator.produce(@product_consume_log4.use_started_at, &:next_month).take_while { |d| d <= @product_consume_log4.use_ended_at }
     parameter_to_calculate_monthly_amount = {}
