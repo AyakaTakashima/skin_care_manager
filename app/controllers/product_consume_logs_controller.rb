@@ -29,8 +29,6 @@ class ProductConsumeLogsController < ApplicationController
 
   def update
     if @product_consume_log.update(product_consume_log_params)
-      redirect_to request.referer, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}"
-
       product_id = @product_consume_log.product_id
       average_period = @product_consume_log.average_period
       average_amount_per_day = @product_consume_log.average_amount_per_day
@@ -42,6 +40,8 @@ class ProductConsumeLogsController < ApplicationController
       else
         @product_consume_log.record_monthly_amount(@product_consume_log.use_ended_at)
       end
+
+      redirect_back(fallback_location: product_url(product_id), notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}")
     else
       render :edit, status: :unprocessable_entity
     end
