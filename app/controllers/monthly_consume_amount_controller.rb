@@ -5,7 +5,7 @@ class MonthlyConsumeAmountController < ApplicationController
 
   def index
     @monthly_consume_amounts = MonthlyConsumeAmount.viewable(current_user)
-    @date = Time.zone.today.beginning_of_month + 1.month # viewでループ処理をするために1ヶ月足しておく
+    @date = Time.current.beginning_of_month.next_month # viewでループ処理をするために1ヶ月足しておく
   end
 
   def show
