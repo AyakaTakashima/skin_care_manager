@@ -2,7 +2,7 @@
   #error_explanation[data-turbo-cache="false"]
 
   .alert.alert-danger
-    = "#{resource.errors.count}個のエラーが発生しました"
+    | #{resource.errors.count}個のエラーが発生しました
     hr
     ul.mb-0
       - resource.errors.full_messages.each do |message|
