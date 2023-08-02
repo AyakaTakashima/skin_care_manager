@@ -11,8 +11,8 @@ class MonthlyConsumeAmount < ApplicationRecord
   }
 
   def self.average_amount_by_month
-    this_month = Time.zone.today.beginning_of_month
-    last_year = Time.zone.today.beginning_of_month - 1.year
+    this_month = Time.current.beginning_of_month
+    last_year = Time.current.beginning_of_month - 1.year
     total_amount = where('month <= ?', this_month).where('month >= ?', last_year).sum(:amount)
     number_of_recorded_months = count('distinct month')
     if total_amount.zero?

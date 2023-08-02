@@ -13,12 +13,12 @@ class MonthlyConsumeAmountTest < ActiveSupport::TestCase
   end
 
   test '#get_number_of_consumed_products' do
-    date = Time.zone.today.beginning_of_month - 1.month
+    date = Time.current.beginning_of_month.last_month
     assert_equal @monthly_consume_amounts.get_number_of_consumed_products(date), 2
   end
 
   test '#calculate_monthly_consume_amounts' do
-    date = Time.zone.today.beginning_of_month - 1.month
+    date = Time.current.beginning_of_month.last_month
     assert_equal @monthly_consume_amounts.calculate_monthly_consume_amounts(date), 3000
   end
 end

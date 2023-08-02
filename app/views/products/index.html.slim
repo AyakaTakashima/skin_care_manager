@@ -25,9 +25,9 @@
       .border.rounded.bg-white
         .col-12.mt-4.mt-md-5.mb-4.text-center
           .fs-3.fw-bold.pt-2.pt-md-0
-            = "#{Time.zone.today.month}月の消費予定金額は"
+            | #{Time.current.month}月の消費予定金額は
             br.d-block.d-sm-none
-            ="#{@amount}円です。"
+            | #{@amount}円です。
         .col-12.fw-bold.text-end.pb-2.pe-2
           = link_to t('action.product_consume_log_index'), monthly_consume_amount_index_path, class: 'text-decoration-none is-text-link'
     h1.fs-5.fw-bold.text-center.mt-4.text-secondary
@@ -69,7 +69,7 @@
                   dt.fw-normal.text-secondary
                     |使用開始日を登録すると<br>使い切り予定日が表示されます。
                   dd.mt-2.text-secondary
-                    = "最新の使用履歴：#{l(product.product_consume_logs.last.use_ended_at, format: :default)}"
+                    | 最新の使用履歴：#{l(product.product_consume_logs.last.use_ended_at, format: :default)}
               - elsif product.average_period.zero?
                 dl
                   dt.pb-1.fw-normal
@@ -77,7 +77,7 @@
                   dd.fs-2.fw-bold
                     = t('views.measuring')
                   dd.p-1
-                    = "#{l(product.product_consume_logs.last.use_started_at, format: :short)}から使用中"
+                    | #{l(product.product_consume_logs.last.use_started_at, format: :short)}から使用中
               -else
                 dl
                   dt.pb-1.fw-normal
@@ -86,11 +86,11 @@
                     = product.formatted_scheduled_consume_date
                   dd.p-1
                     - if product.days_until_scheduled_consume_date.positive?
-                      = "あと  #{product.days_until_scheduled_consume_date}  日"
+                      | あと  #{product.days_until_scheduled_consume_date}  日
                     - elsif product.days_until_scheduled_consume_date.zero?
                       | 本日が使い切り予定日です
                     - else
-                      = "予定日から#{product.days_until_scheduled_consume_date.abs}日過ぎています"
+                      | 予定日から#{product.days_until_scheduled_consume_date.abs}日過ぎています
           .product-col.col-12.col-md-4.pt-4
             - if Product.in_use?(product.id)
               = turbo_frame_tag 'product_consume_log_input_use_ended_at'

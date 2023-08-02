@@ -22,7 +22,7 @@ class MonthlyConsumeAmountsTest < ApplicationSystemTestCase
     sign_in @heavy_user
     visit monthly_consume_amount_index_url
     first('#show_monthly_logs').click
-    date = Time.zone.today.beginning_of_month
+    date = Time.current.beginning_of_month
     assert_text "#{date.year}年#{date.month}月の消費予定金額は"
   end
 end
