@@ -8,6 +8,12 @@ class ProductConsumeLogTest < ActiveSupport::TestCase
     @product_consume_log4 = product_consume_logs(:four)
   end
 
+  test '#consume_logs' do
+    product = products(:lotion_first_used)
+    product_consume_log = ProductConsumeLog.where(product_id: product).where.not(use_ended_at: nil)
+    assert_equal product_consume_log, ProductConsumeLog.consume_logs(product)
+  end
+
   test '#calculate_consuming_amount_for_period' do
     amount_per_day = 36
     @product_consume_log1.use_started_at = Date.new(2023, 1, 1)
