@@ -8,7 +8,7 @@ class ProductConsumeLogTest < ActiveSupport::TestCase
     @product_consume_log4 = product_consume_logs(:four)
   end
 
-  test '#consume_logs' do
+  test '.consume_logs' do
     product = products(:lotion_first_used)
     product_consume_log = ProductConsumeLog.where(product_id: product).where.not(use_ended_at: nil)
     assert_equal product_consume_log, ProductConsumeLog.consume_logs(product)

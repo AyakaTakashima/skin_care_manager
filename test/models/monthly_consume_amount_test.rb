@@ -8,7 +8,7 @@ class MonthlyConsumeAmountTest < ActiveSupport::TestCase
     @monthly_consume_amounts = MonthlyConsumeAmount.includes(product: :user).where(user: { id: @heavy_user.id })
   end
 
-  test '#viewable' do
+  test '.viewable' do
     viewable_monthly_consume_amounts = MonthlyConsumeAmount.viewable(@heavy_user)
     assert_equal @monthly_consume_amounts, viewable_monthly_consume_amounts
   end
