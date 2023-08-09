@@ -4,8 +4,13 @@ require 'test_helper'
 
 class MonthlyConsumeAmountTest < ActiveSupport::TestCase
   setup do
-    heavy_user = users(:heavy_user)
-    @monthly_consume_amounts = MonthlyConsumeAmount.includes(product: :user).where(user: { id: heavy_user.id })
+    @heavy_user = users(:heavy_user)
+    @monthly_consume_amounts = MonthlyConsumeAmount.includes(product: :user).where(user: { id: @heavy_user.id })
+  end
+
+  test '.viewable' do
+    viewable_monthly_consume_amounts = MonthlyConsumeAmount.viewable(@heavy_user)
+    assert_equal @monthly_consume_amounts, viewable_monthly_consume_amounts
   end
 
   test '#average_amount_by_month' do

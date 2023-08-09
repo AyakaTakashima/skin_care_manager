@@ -31,9 +31,7 @@ class Product < ApplicationRecord
   end
 
   def days_until_scheduled_consume_date
-    today = Time.zone.today
-    result = scheduled_consume_date - today
-    result.numerator
+    (scheduled_consume_date - Time.zone.today).numerator
   end
 
   def get_number_of_consume_logs(date)
