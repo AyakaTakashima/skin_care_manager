@@ -20,7 +20,7 @@ module MetaTagsHelper
       },
       twitter: {
         card: 'summary_large_image',
-        site: '@skinmate_app',
+        site: '@aya_kyan555',
         description: :description,
         image: image_url('ogp.png'),
         domain: 'https://skinmate.fly.dev/'
