@@ -15,17 +15,17 @@ class ProductConsumeLog < ApplicationRecord
   }
 
   def use_end_at_be_greater_than_use_start_at
-    if use_ended_at <= use_started_at
-      errors.add(:use_ended_at, '使用終了日は使用開始日より遅い必要があります。')
-    end
+    return unless use_ended_at <= use_started_at
+
+    errors.add(:use_ended_at, '使用終了日は使用開始日より遅い必要があります。')
   end
 
   def use_started_at_be_after_previous_use_ended_at
-    previous_log = ProductConsumeLog.where("product_id = ?", product_id).order(id: :desc).first
-  
-    if previous_log && previous_log.use_ended_at && use_started_at < previous_log.use_ended_at
-      errors.add(:use_started_at, '使用開始日は前回の使用終了日よりも遅い必要があります。')
-    end
+    previous_log = ProductConsumeLog.where('product_id = ?', product_id).order(id: :desc).first
+
+    return unless previous_log&.use_ended_at && use_started_at < previous_log&.use_ended_at
+
+    errors.add(:use_started_at, '使用開始日は前回の使用終了日よりも遅い必要があります。')
   end
 
   def calculate_consuming_amount_for_period(amount_per_day, first_day, last_day)

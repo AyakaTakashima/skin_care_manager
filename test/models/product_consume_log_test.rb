@@ -16,7 +16,7 @@ class ProductConsumeLogTest < ActiveSupport::TestCase
 
   test '#use_end_at_be_greater_than_use_start_at' do
     log = ProductConsumeLog.new(product: @product, use_started_at: Time.current, use_ended_at: Time.current - 1.day)
-    
+
     assert_not log.valid?
     assert_equal ['使用終了日は使用開始日より遅い必要があります。'], log.errors[:use_ended_at]
   end
