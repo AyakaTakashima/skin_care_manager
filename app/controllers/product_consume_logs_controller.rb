@@ -17,13 +17,14 @@ class ProductConsumeLogsController < ApplicationController
 
   def create
     @product_consume_log = ProductConsumeLog.new(product_consume_log_params)
+    @product = Product.find(params[:product_id])
 
     if @product_consume_log.save
       scheduled_consume_date = @product_consume_log.use_started_at + Product.find(@product_consume_log.product_id).average_period.day
       @product_consume_log.record_monthly_amount(scheduled_consume_date)
       redirect_to root_url, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}"
     else
-      render :new, status: :unprocessable_entity
+      render :new, layout: false, status: :unprocessable_entity
     end
   end
 
@@ -43,7 +44,7 @@ class ProductConsumeLogsController < ApplicationController
 
       redirect_back(fallback_location: product_url(product_id), notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}")
     else
-      render :edit, status: :unprocessable_entity
+      render_error_view
     end
   end
 
@@ -71,5 +72,14 @@ class ProductConsumeLogsController < ApplicationController
 
   def product_consume_log_params
     params.require(:product_consume_log).permit(:product_id, :use_started_at, :use_ended_at)
+  end
+
+  def render_error_view
+    case params[:product_consume_log][:view]
+    when 'use_end_index'
+      render template: 'product_consume_logs/use_end/index', layout: false, status: :unprocessable_entity
+    else
+      render :edit, layout: false, status: :unprocessable_entity
+    end
   end
 end

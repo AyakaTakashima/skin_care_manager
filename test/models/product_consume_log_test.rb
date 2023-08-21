@@ -14,6 +14,22 @@ class ProductConsumeLogTest < ActiveSupport::TestCase
     assert_equal product_consume_log, ProductConsumeLog.consume_logs(product)
   end
 
+  test '#use_end_at_be_greater_than_use_start_at' do
+    log = ProductConsumeLog.new(product: @product, use_started_at: Time.current, use_ended_at: Time.current - 1.day)
+    
+    assert_not log.valid?
+    assert_equal ['使用終了日は使用開始日より遅い必要があります。'], log.errors[:use_ended_at]
+  end
+
+  test '#use_started_at_be_after_previous_use_ended_at' do
+    product = products(:unused_lotion)
+    ProductConsumeLog.create!(product:, use_started_at: Time.current - 3.days, use_ended_at: Time.current - 1.day)
+    log = ProductConsumeLog.new(product:, use_started_at: Time.current - 2.days)
+
+    assert_not log.valid?
+    assert_equal ['使用開始日は前回の使用終了日よりも遅い必要があります。'], log.errors[:use_started_at]
+  end
+
   test '#calculate_consuming_amount_for_period' do
     amount_per_day = 36
     @product_consume_log1.use_started_at = Date.new(2023, 1, 1)

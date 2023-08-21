@@ -22,7 +22,6 @@ export default class extends Controller {
   checkValidate(event) {
     const forms = this.formTarget
     Array.from(forms).forEach((form) => {
-      console.log(form.checkValidity())
       if (form.checkValidity() === false) {
         form.classList.add('is-invalid')
         event.preventDefault()

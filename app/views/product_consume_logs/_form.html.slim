@@ -1,21 +1,26 @@
 = turbo_frame_tag product, product_consume_log do
   = form_with(model: [product, product_consume_log], class: 'needs-validation', html: { novalidate: 'true' }, local: true, data: { controller: 'form', form_target: 'form', action: 'submit->form#checkValidate' }) do |form|
     .row.py-4.py-md-3.border-bottom
-      .col.align-self-center
+      .col
         .form-floating
-          = form.date_field :use_started_at, class: 'form-control', id: 'floatingUseStartedAt', placeholder: '20XX/02/01', required: true
+          = form.date_field :use_started_at, class: "form-control #{'is-invalid' if product_consume_log.errors[:use_started_at].any?}", id: 'floatingUseStartedAt', placeholder: '20XX/02/01', required: true
           = form.label :use_started_at, for: 'floatingUseStartedAt'
-          .invalid-feedback
-            |使用開始日は必須です
-      .col-1.align-self-center.text-center
-        |-
-      .col.align-self-center
+          - if product_consume_log.errors[:use_started_at].any?
+            .invalid-feedback
+              = product_consume_log.errors[:use_started_at].join(', ')
+          - else
+            .invalid-feedback
+              |使用開始日は必須です
+      .col
         .form-floating
-          = form.date_field :use_ended_at, class: 'form-control', id: 'floatingUseEndedAt', placeholder: '20XX/02/01'
+          = form.date_field :use_ended_at, class: "form-control #{'is-invalid' if product_consume_log.errors[:use_ended_at].any?}", id: 'floatingUseEndedAt', placeholder: '20XX/02/01'
           = form.label :use_ended_at, for: 'floatingUseEndedAt'
+          - if product_consume_log.errors[:use_ended_at].any?
+            .invalid-feedback
+              = product_consume_log.errors[:use_ended_at].join(', ')
       .col.text-end.align-self-center.d-lg-none.d-xl-block
-        = link_to 'キャンセル', product, class: 'btn btn-outline-secondary mx-2 my-3 fw-bold'
-        = form.submit '保存', class: 'btn btn-primary mx-2 my-3 fw-bold', data: { turbo_frame: '_top' }
+        = link_to 'キャンセル', product, class: 'btn btn-outline-secondary mx-2 mt-3 fw-bold'
+        = form.submit '保存', class: 'btn btn-primary mx-2 mt-3 fw-bold'
       .col.text-end.align-self-center.d-none.d-lg-block.d-xl-none
-        = form.submit '保存', class: 'btn btn-primary mx-2 my-2 fw-bold btn-fix-106', data: { turbo_frame: '_top' }
+        = form.submit '保存', class: 'btn btn-primary mx-2 my-2 fw-bold btn-fix-106'
         = link_to 'キャンセル', product, class: 'btn btn-outline-secondary mx-2 my-3 my-lg-3 fw-bold btn-fix-106'

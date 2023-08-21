@@ -5,10 +5,28 @@ class ProductConsumeLog < ApplicationRecord
   has_many :monthly_consume_amounts, dependent: :destroy
 
   validates :use_started_at, presence: true
+  validate :use_started_at_be_after_previous_use_ended_at, if: :use_started_at
+  with_options if: -> { use_started_at && use_ended_at } do
+    validate :use_end_at_be_greater_than_use_start_at
+  end
 
   scope :consume_logs, lambda { |product_id|
     ProductConsumeLog.where(product_id:).where.not(use_ended_at: nil)
   }
+
+  def use_end_at_be_greater_than_use_start_at
+    if use_ended_at <= use_started_at
+      errors.add(:use_ended_at, '使用終了日は使用開始日より遅い必要があります。')
+    end
+  end
+
+  def use_started_at_be_after_previous_use_ended_at
+    previous_log = ProductConsumeLog.where("product_id = ?", product_id).order(id: :desc).first
+  
+    if previous_log && previous_log.use_ended_at && use_started_at < previous_log.use_ended_at
+      errors.add(:use_started_at, '使用開始日は前回の使用終了日よりも遅い必要があります。')
+    end
+  end
 
   def calculate_consuming_amount_for_period(amount_per_day, first_day, last_day)
     period = (last_day - first_day).numerator + 1 # X日間という数え方をしたいので1を足している

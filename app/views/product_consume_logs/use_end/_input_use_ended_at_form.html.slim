@@ -1,8 +1,12 @@
 = turbo_frame_tag product, product_consume_log do
   = form_with(model: [product, product_consume_log], local: true) do |form|
+    = form.hidden_field :view, value: 'use_end_index'
     .text-center
       .form-floating
-        = form.date_field :use_ended_at, class: 'form-control', id: 'floatingUseEndedAt', placeholder: '20XX/02/01'
+        = form.date_field :use_ended_at, class: "form-control #{'is-invalid' if product_consume_log.errors[:use_ended_at].any?}", id: 'floatingUseEndedAt', placeholder: '20XX/02/01'
         = form.label :use_ended_at, for: 'floatingUseEndedAt'
+        - if product_consume_log.errors[:use_ended_at].any?
+          .invalid-feedback
+            = product_consume_log.errors[:use_ended_at].join(', ')
     .py-4.text-center
       = form.submit t('action.new_use_ended_at'), class: 'btn btn-primary rounded-pill px-4 fw-bold'

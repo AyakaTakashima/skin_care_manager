@@ -4,10 +4,14 @@
       = form.hidden_field :product_id, value: product.id
     .text-center
       .form-floating
-        = form.date_field :use_started_at, class: 'form-control', id: 'floatingUseStartedAt', placeholder: '20XX/02/01', required: true
+        = form.date_field :use_started_at, class: "form-control #{'is-invalid' if product_consume_log.errors[:use_started_at].any?}", id: 'floatingUseStartedAt', placeholder: '20XX/02/01', required: true
         = form.label :use_started_at, for: 'floatingUseStartedAt'
-        .invalid-feedback
-          |使用開始日は必須です
+        - if product_consume_log.errors[:use_started_at].any?
+          .invalid-feedback
+            = product_consume_log.errors[:use_started_at].join(', ')
+        - else
+          .invalid-feedback
+            |使用開始日は必須です
     - if product.product_consume_logs.empty?
       .py-4.text-center
         = form.submit t('action.new_use_started_at'), class: 'btn btn-primary rounded-pill px-4 fw-bold'
