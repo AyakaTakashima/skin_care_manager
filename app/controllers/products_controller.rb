@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product_consume_logs = @product.product_consume_logs.reverse
+    @product_consume_logs = @product.product_consume_logs.order(id: :asc).reverse
     @number_of_logs = @product_consume_logs.count + 1
   end
 

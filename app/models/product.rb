@@ -20,9 +20,9 @@ class Product < ApplicationRecord
     return @scheduled_consume_date if instance_variable_defined?(:@scheduled_consume_date)
 
     return if product_consume_logs.empty?
-    return unless product_consume_logs.last.use_ended_at.nil? && !average_period.zero?
+    return if product_consume_logs.last.use_ended_at.nil? && average_period.zero?
 
-    @scheduled_consume_date = product_consume_logs.last.use_started_at + average_period.day
+    @scheduled_consume_date = product_consume_logs.last.use_started_at + average_period
   end
 
   def formatted_scheduled_consume_date

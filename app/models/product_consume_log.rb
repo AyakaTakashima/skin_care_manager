@@ -21,9 +21,16 @@ class ProductConsumeLog < ApplicationRecord
   end
 
   def use_started_at_be_after_previous_use_ended_at
-    previous_log = ProductConsumeLog.where('product_id = ?', product_id).order(id: :desc).first
+    if self.id
+      previous_log = ProductConsumeLog.where('product_id = ?', product_id)
+                                      .where('id < ?', self.id)
+                                      .order(id: :desc).first
+    else
+      previous_log = ProductConsumeLog.where('product_id = ?', product_id)
+                                      .order(id: :desc).first
+    end
 
-    return unless previous_log&.use_ended_at && use_started_at < previous_log&.use_ended_at
+    return unless previous_log&.use_ended_at && (use_started_at < previous_log&.use_ended_at)
 
     errors.add(:use_started_at, '使用開始日は前回の使用終了日よりも遅い必要があります。')
   end

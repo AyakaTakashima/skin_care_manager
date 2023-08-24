@@ -42,7 +42,12 @@ class ProductConsumeLogsController < ApplicationController
         @product_consume_log.record_monthly_amount(@product_consume_log.use_ended_at)
       end
 
-      redirect_back(fallback_location: product_url(product_id), notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}")
+      case params[:product_consume_log][:view]
+      when 'edit_in_product_show'
+        redirect_to product_url(product_id)
+      else
+        redirect_to root_url, notice: "#{t('activerecord.models.product_consume_log')}#{t('notice.create')}"
+      end
     else
       render_error_view
     end
