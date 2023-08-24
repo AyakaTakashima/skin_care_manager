@@ -23,11 +23,11 @@ class ProductConsumeLogTest < ActiveSupport::TestCase
 
   test 'update: #use_started_at_be_after_previous_use_ended_at' do
     product = products(:unused_lotion)
-    first_log = ProductConsumeLog.create!(product: product, use_started_at: Time.current - 5.days, use_ended_at: Time.current - 3.days)
-    second_log = ProductConsumeLog.create!(product: product, use_started_at: Time.current - 2.days, use_ended_at: Time.current)
-  
+    ProductConsumeLog.create!(product:, use_started_at: Time.current - 5.days, use_ended_at: Time.current - 3.days)
+    second_log = ProductConsumeLog.create!(product:, use_started_at: Time.current - 2.days, use_ended_at: Time.current)
+
     second_log.use_started_at = Time.current - 4.days
-  
+
     assert_not second_log.valid?
     assert_equal ['使用開始日は前回の使用終了日よりも遅い必要があります。'], second_log.errors[:use_started_at]
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ProductConsumeLog < ApplicationRecord
+class ProductConsumeLog < ApplicationRecord # rubocop:disable Metrics/ClassLength
   belongs_to :product
   has_many :monthly_consume_amounts, dependent: :destroy
 
@@ -21,14 +21,14 @@ class ProductConsumeLog < ApplicationRecord
   end
 
   def use_started_at_be_after_previous_use_ended_at
-    if self.id
-      previous_log = ProductConsumeLog.where('product_id = ?', product_id)
-                                      .where('id < ?', self.id)
+    previous_log = if id
+                     ProductConsumeLog.where('product_id = ?', product_id)
+                                      .where('id < ?', id)
                                       .order(id: :desc).first
-    else
-      previous_log = ProductConsumeLog.where('product_id = ?', product_id)
+                   else
+                     ProductConsumeLog.where('product_id = ?', product_id)
                                       .order(id: :desc).first
-    end
+                   end
 
     return unless previous_log&.use_ended_at && (use_started_at < previous_log&.use_ended_at)
 
