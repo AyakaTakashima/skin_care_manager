@@ -47,7 +47,7 @@ class ProductConsumeLogsTest < ApplicationSystemTestCase
     within all('.product-record')[1].all('.product-col')[2] do
       click_on '使用終了'
     end
-    fill_in '使用終了日', with: Time.current
+    fill_in '使用終了日', with: Time.current.tomorrow
     click_on '使用を終了'
     assert_text '使用実績を登録しました。'
     within all('.product-record')[1].all('.product-col')[1] do
