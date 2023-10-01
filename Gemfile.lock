@@ -81,6 +81,9 @@ GEM
       sassc-rails (>= 2.0.0)
     brakeman (5.4.1)
     builder (3.2.4)
+    bullet (7.0.7)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     capybara (3.39.2)
       addressable
       matrix
@@ -307,6 +310,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    uniform_notifier (1.16.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -331,6 +335,7 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 5.2.2)
   brakeman
+  bullet
   capybara
   debug
   devise
