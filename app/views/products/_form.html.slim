@@ -5,11 +5,16 @@
         .col-12.col-md-12.col-lg-6.col-xl-6
           label
             div(data-action='click->form#selectAvatar')
-              - if product.avatar.attached?
+              - if product.errors[:avatar].any?
+                = image_tag('upload_error.svg', alt: 'アップロードエラー', class: 'border rounded is-image-link img-fluid', data: { form_target: 'avatar' })
+              - elsif product.avatar.attached?
                 = image_tag product.avatar, class: 'border rounded is-image-link img-fluid', data: { form_target: 'avatar' }
               - else
                 = image_tag('クリックして画像を選択.svg', alt: 'クリックして画像を選択', class: 'border rounded is-image-link img-fluid', data: { form_target: 'avatar' })
-              = form.file_field :avatar, accept: 'image/jpg,image/png, image/jpeg', class: 'invisible', data: { form_target: 'file' }
+              = form.file_field :avatar, accept: 'image/jpg,image/png, image/jpeg', class: "invisible #{'is-invalid' if product.errors[:avatar].any?}", data: { form_target: 'file' }
+              - if product.errors[:avatar].any?
+                .invalid-feedback
+                  = product.errors[:avatar].join(', ')
         .col-12.col-md-12.col-lg-6.col-xl-6.text-left
           .row.my-5
             .col

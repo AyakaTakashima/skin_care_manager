@@ -8,6 +8,7 @@ class Product < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 255 }
   validates :price, presence: true
+  validate :avatar_size_validation
 
   def self.in_use?(product_id)
     joins(:product_consume_logs)
@@ -40,5 +41,13 @@ class Product < ApplicationRecord
 
   def calculate_monthly_consume_amounts(date)
     MonthlyConsumeAmount.where(product_id: id).where(month: date).sum(:amount)
+  end
+
+  private
+
+  def avatar_size_validation
+    if avatar.attached? && avatar.blob.byte_size > 1.megabytes
+      errors.add(:avatar, "ファイルサイズは1MB以下にしてください")
+    end
   end
 end
