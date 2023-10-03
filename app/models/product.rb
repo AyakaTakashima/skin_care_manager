@@ -46,8 +46,8 @@ class Product < ApplicationRecord
   private
 
   def avatar_size_validation
-    if avatar.attached? && avatar.blob.byte_size > 1.megabytes
-      errors.add(:avatar, "ファイルサイズは1MB以下にしてください")
-    end
+    return unless avatar.attached? && avatar.blob.byte_size > 1.megabytes
+
+    errors.add(:avatar, 'ファイルサイズは1MB以下にしてください')
   end
 end
