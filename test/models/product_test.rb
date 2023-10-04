@@ -62,11 +62,11 @@ class ProductTest < ActiveSupport::TestCase
     @product1.avatar.attach(io: StringIO.new("a" * (1.megabytes + 1)), filename: 'large.jpg', content_type: 'image/jpeg')
 
     assert_not @product1.valid?
-    assert @product1.errors[:avatar].include?('ファイルサイズは1MB以下にしてください')
+    assert @product1.errors[:avatar].include?('別の画像をアップロードしてください')
 
     @product1.avatar.attach(io: StringIO.new("a" * (1.megabytes - 1)), filename: 'small.jpg', content_type: 'image/jpeg')
 
     assert @product1.valid?
-    assert_not @product1.errors[:avatar].include?('ファイルサイズは1MB以下にしてください')
+    assert_not @product1.errors[:avatar].include?('別の画像をアップロードしてください')
   end
 end
