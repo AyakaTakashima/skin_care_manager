@@ -4,7 +4,10 @@ export default class extends Controller {
   static targets = ['file', 'avatar', 'form']
 
   connect() {
-    this.fileTarget.addEventListener('change', this.displaySelectedAvatar.bind(this))
+    this.fileTarget.addEventListener(
+      'change',
+      this.displaySelectedAvatar.bind(this)
+    )
   }
 
   displaySelectedAvatar(event) {
@@ -24,7 +27,6 @@ export default class extends Controller {
       reader.readAsDataURL(file)
     }
   }
-
 
   checkValidate(event) {
     const forms = this.formTarget
