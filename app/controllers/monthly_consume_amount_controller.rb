@@ -18,5 +18,6 @@ class MonthlyConsumeAmountController < ApplicationController
     @products = Product.includes(:monthly_consume_amounts, :user)
                        .where(user: { id: current_user.id })
                        .where(monthly_consume_amounts: { month: @date })
+                       .order(created_at: :asc)
   end
 end
