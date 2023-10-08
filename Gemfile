@@ -52,10 +52,12 @@ gem 'image_processing', '~> 1.2'
 
 # not default
 gem 'bootstrap', '~> 5.2.2'
+gem 'bootstrap5-kaminari-views'
 gem 'devise'
 gem 'devise-i18n'
 gem 'html2slim'
 gem 'jquery-rails'
+gem 'kaminari'
 gem 'meta-tags'
 gem 'premailer-rails'
 gem 'slim-rails'

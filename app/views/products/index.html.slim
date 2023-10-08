@@ -106,6 +106,8 @@
               = turbo_frame_tag 'product_consume_log_input_started_at'
                 = link_to t('action.input_use_restarted_at'), new_product_product_consume_log_path(product_id: product.id), class: 'btn btn-outline-primary rounded-pill fw-bold btn-fix-150', data: { turbo_frame: 'consume_logs_regular_modal' }
         .border-bottom
+    .d-flex.justify-content-center.my-4
+      = paginate @products, theme: 'bootstrap-5'
     .py-4.mt-4.text-center.d-none.d-sm-block
       = turbo_frame_tag 'add_new_product'
         = link_to t('action.new_product'), new_product_path, class: 'btn btn-primary rounded-pill fw-bold btn-fix-150', data: { turbo_frame: 'product_large_modal' }
