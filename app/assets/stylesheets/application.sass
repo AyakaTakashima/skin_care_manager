@@ -104,18 +104,28 @@ body
 .btn-fix-106
   width: 106px
 
-.pagination>li>a, .pagination>li>a:hover
+.pagination>li>a, .pagination>li>a:hover, .pagination>li>a:focus
   color: $accent-color
   border-color: $accent-color
   box-shadow: none
 
-.pagination>li>a:hover,
+.pagination>li>a:hover, .pagination>li>a:focus
   background: $accent-background
 
 .pagination>.active>a, .pagination>.active>a:hover, .pagination>.active>a:focus
-  color: $main-color
   border-color: $accent-color
   background: $accent-color
 
 .pagination>.active>a:hover
   opacity: 0.7
+
+.pagination>.active>a:focus, .pagination>li>a:focus
+.pagination>.active>a:focus-visible, .pagination>li>a:focus-visible
+  box-shadow: 0 0 0 0.25rem rgba($accent-color, 0.2)
+
+.pagination>.active>a:focus-visible, .pagination>li>a:focus-visible
+  outline: none
+
+.form-control:focus
+  border-color: $accent-color
+  box-shadow: 0 0 0 0.25rem rgba($accent-color, 0.2)
