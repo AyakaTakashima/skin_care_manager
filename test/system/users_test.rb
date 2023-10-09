@@ -77,8 +77,8 @@ class ProductsTest < ApplicationSystemTestCase
 
   test 'can logout' do
     sign_in @user
-    visit root_url
-    click_on 'logout'
+    visit edit_user_registration_url
+    click_on 'ログアウト'
     assert_text 'ログアウトしました。'
     assert_equal '基礎化粧品の使用サイクル管理アプリ | Skinmate（スキンメイト）', title
   end
@@ -88,8 +88,11 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in 'Eメール', with: 'heavy_user@example.com'
     fill_in 'パスワード', with: 'password'
     click_on 'ログイン'
-    assert_current_path root_path
-    click_on 'logout'
+    assert_current_path root_url
+
+    click_on 'Account'
+    assert_current_path edit_user_registration_url
+    click_on 'ログアウト'
     assert_text 'ログアウトしました。'
     assert_equal '基礎化粧品の使用サイクル管理アプリ | Skinmate（スキンメイト）', title
 
@@ -115,8 +118,9 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in 'Eメール', with: 'heavy_user@example.com'
     fill_in 'パスワード', with: 'password123'
     click_on 'ログイン'
-    assert_current_path root_path
-    click_on 'logout'
+    click_on 'Account'
+    assert_current_path edit_user_registration_url
+    click_on 'ログアウト'
     assert_text 'ログアウトしました。'
     assert_equal '基礎化粧品の使用サイクル管理アプリ | Skinmate（スキンメイト）', title
 
