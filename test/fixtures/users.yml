@@ -17,3 +17,7 @@ heavy_user:
 no_product_user:
   email: no_product_user@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+user_to_delete:
+  email: user_to_delete@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>

@@ -160,4 +160,15 @@ class ProductsTest < ApplicationSystemTestCase
     assert_equal @user.email, mail.to[0]
     assert_equal '【Skinmate】パスワードの変更について', mail.subject
   end
+
+  test 'can delete account' do
+    user_to_delete = users(:user_to_delete)
+    sign_in user_to_delete
+    visit edit_user_registration_path
+    assert_selector 'h1', text: 'アカウント設定'
+    accept_alert do
+      click_on '退会手続き'
+    end
+    assert_text 'アカウントを削除しました。またのご利用をお待ちしております。'
+  end
 end
