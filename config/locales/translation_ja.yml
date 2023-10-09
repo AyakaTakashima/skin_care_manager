@@ -40,7 +40,7 @@ ja:
     new_use_ended_at: 使用を終了
     editing_product: アイテムを編集
     deleting_product: アイテムを削除
-    product_consume_log_index: 過去1年間の実績を確認 ＞
+    product_consume_log_index: 過去1年間の実績を確認
 
   notice:
     product_destroy_confirm: アイテムを削除すると、使用実績も削除されます。本当に宜しいですか？

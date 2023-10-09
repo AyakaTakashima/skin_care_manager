@@ -55,11 +55,11 @@ div id="#{dom_id product}"
                   .col-auto.p-0
                     = link_to product_product_consume_log_path(product, product_consume_log), method: :delete, class: 'btn btn-outline-secondary rounded-circle',
                               data: { turbo_method: :delete, turbo_confirm: t('notice.product_consume_log_destroy_confirm'), turbo_frame: '_top' } do
-                      span.material-symbols-outlined.py-1
+                      span.material-symbols-rounded.py-1
                         |delete
                   .col-auto
                     = link_to edit_product_product_consume_log_path(product, product_consume_log), class: 'btn btn-outline-primary rounded-circle' do
-                      span.material-symbols-outlined.py-1
+                      span.material-symbols-rounded.py-1
                         |edit
         .text-center.p-4
           - if !Product.in_use?(product.id)

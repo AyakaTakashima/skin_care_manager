@@ -28,8 +28,11 @@
             | #{Time.current.month}月の消費予定金額は
             br.d-block.d-sm-none
             | #{@amount}円です。
-        .col-12.fw-bold.text-end.pb-2.pe-2
-          = link_to t('action.product_consume_log_index'), monthly_consume_amount_index_path, class: 'text-decoration-none is-text-link'
+        .col-12.fw-bold.pb-2.pe-2
+          = link_to monthly_consume_amount_index_path, class: 'text-decoration-none is-text-link d-flex align-items-center justify-content-end' do
+            = t('action.product_consume_log_index')
+            .material-symbols-rounded.fs-4
+              |navigate_next
     h1.fs-5.fw-bold.text-center.mt-4.text-secondary
       |登録アイテム
     .container-fluid.max-width-1000.text-center
