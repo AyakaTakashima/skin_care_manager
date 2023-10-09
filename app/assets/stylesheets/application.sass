@@ -1,73 +1,70 @@
-@import "bootstrap"
 @import "variables"
+@import "bootstrap"
 
 header
   background-color: $main-color
 
 html
-  height: 100%;
+  height: 100%
 
 body
-  height: 100%;
+  height: 100%
   background-color: $base-color
-  color: $text-color
+  color: $text-body
 
-.btn-outline-primary
-  background: $main-color
-  color: $accent-color
-  border: 1px solid $accent-color
+.btn
+  &.btn-primary
+    color: $main-color
 
-.btn-outline-primary:hover, .btn-outline-primary:focus, 
-.btn-outline-primary:active, .btn-outline-primary:active:focus, .btn-outline-primary:active:hover, .btn-outline-primary:active.focus,
-.btn-outline-primary.disabled:hover, .btn-outline-primary[disabled]:hover, fieldset[disabled] .btn-outline-primary:hover,
-.btn-outline-primary.disabled:focus, .btn-outline-primary[disabled]:focus, fieldset[disabled] .btn-outline-primary:focus,
-.btn:disabled, .btn.disabled, fieldset:disabled .btn
-  background: $accent-color
-  color: $main-color
-  border: 1px solid $accent-color
+    &:active
+      color: $main-color
 
-.btn-primary
-  background: $accent-color
-  color: $main-color
-  border: 1px solid $accent-color
+  &.btn-outline-primary
+    color: $primary
 
-.btn-primary:hover, .btn-primary:focus, 
-.btn-primary:active, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary:active.focus,
-.btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover,
-.btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus,
-.btn:disabled, .btn.disabled, fieldset:disabled .btn
-  background: $accent-color
-  color: $main-color
-  border: 1px solid $accent-color
-  opacity: 0.7
+    &:active
+      color: $primary
 
-.is-text-link
-  color: $accent-color
+    &:active, &:hover, &:focus, &:focus-visible
+      background: $outline-button-hover-primary
+
+  &.btn-outline-secondary
+    color: $secondary
+
+    &:active
+      color: $secondary
+
+    &:active, &:hover, &:focus, &:focus-visible
+      background: $outline-button-hover-secondary
+
+  &:focus-visible
+    outline: none
+
 
 .is-text-link:hover
-  color: $accent-color
+  color: $primary
   opacity: 0.6
 
 .is-image-link:hover
   opacity: 0.6
 
 .is-image-product-is-not-in-use-overlay
-  background-color: rgba(0,0,0,0.03)
+  background-color: $inactive-overlay
   width: 100%
   height: 100%
 
 .is-column-link
-  color: $text-color
+  color: $text-body
 
-.is-column-link:hover
-  background: $hover-background-in-base-color
-  color: $text-color
+  &:hover
+    background: $record-hover
+    color: $text-body
 
 .accent-background
   background: $accent-background
 
-.is-accent-text
-  color: $accent-color
+.is-accent-icon
+  color: $primary
 
 .img-fluid
   object-fit: cover
@@ -85,18 +82,15 @@ body
 .max-image-height-150
   max-height: 150px
 
-.border-primary
-  border-color: $accent-color !important
-
 .bg-primary
   background: $main-color !important
-  color: $accent-color !important
-  border: 1px solid $accent-color
+  color: $primary !important
+  border: 1px solid $primary
 
 .bg-secondary
   background: $main-color !important
-  color: $secondary-color !important
-  border: 1px solid $secondary-color
+  color: $secondary !important
+  border: 1px solid $secondary
 
 .btn-fix-150
   width: 150px
@@ -104,28 +98,18 @@ body
 .btn-fix-106
   width: 106px
 
-.pagination>li>a, .pagination>li>a:hover, .pagination>li>a:focus
-  color: $accent-color
-  border-color: $accent-color
-  box-shadow: none
+.pagination
+  > li:not(.active) > a
+    &:hover, &:focus
+      color: $primary
+      background: $outline-button-hover-primary
 
-.pagination>li>a:hover, .pagination>li>a:focus
-  background: $accent-background
+  *:focus
+    box-shadow: 0 0 0 0.25rem $focus-box-shadow-primary
 
-.pagination>.active>a, .pagination>.active>a:hover, .pagination>.active>a:focus
-  border-color: $accent-color
-  background: $accent-color
+.form-control
+  &:hover
+    border-color: $primary
 
-.pagination>.active>a:hover
-  opacity: 0.7
-
-.pagination>.active>a:focus, .pagination>li>a:focus
-.pagination>.active>a:focus-visible, .pagination>li>a:focus-visible
-  box-shadow: 0 0 0 0.25rem rgba($accent-color, 0.2)
-
-.pagination>.active>a:focus-visible, .pagination>li>a:focus-visible
-  outline: none
-
-.form-control:focus
-  border-color: $accent-color
-  box-shadow: 0 0 0 0.25rem rgba($accent-color, 0.2)
+  *:focus
+    box-shadow: 0 0 0 0.25rem $focus-box-shadow-primary
