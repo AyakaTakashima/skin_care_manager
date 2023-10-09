@@ -112,7 +112,7 @@ class ProductsTest < ApplicationSystemTestCase
     assert_selector 'h1', text: 'パスワードの再設定'
     fill_in 'パスワード', with: 'password123'
     fill_in 'パスワード（確認用）', with: 'password123'
-    click_on 'パスワードを変更する'
+    click_on 'パスワードを変更'
 
     visit new_user_session_path
     fill_in 'Eメール', with: 'heavy_user@example.com'
@@ -138,7 +138,7 @@ class ProductsTest < ApplicationSystemTestCase
     assert_selector 'h1', text: 'アカウント設定'
     fill_in 'Eメール', with: 'heavy_user_edit_mail_address@example.com'
     fill_in '現在のパスワード', with: 'password'
-    click_on '上記の内容で変更する'
+    click_on '上記の内容で変更'
     assert_text 'アカウント情報を変更しました。'
     assert_equal 1, ActionMailer::Base.deliveries.size
     mail = ActionMailer::Base.deliveries.last
@@ -153,7 +153,7 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in '現在のパスワード', with: 'password'
     fill_in 'パスワード', with: 'password123'
     fill_in 'パスワード（確認用）', with: 'password123'
-    click_on '上記の内容で変更する'
+    click_on '上記の内容で変更'
     assert_text 'アカウント情報を変更しました。'
     assert_equal 1, ActionMailer::Base.deliveries.size
     mail = ActionMailer::Base.deliveries.last
