@@ -15,8 +15,9 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product_consume_logs = @product.product_consume_logs.order(id: :asc).reverse
-    @number_of_logs = @product_consume_logs.count + 1
+    @product_consume_logs = @product.product_consume_logs.order(id: :desc).page(params[:page]).per(10)
+    current_page = @product_consume_logs.current_page
+    @number_of_logs = @product_consume_logs.total_count - ((current_page - 1) * 10) + 1
   end
 
   def new

@@ -1,0 +1,29 @@
+- product_consume_logs.each do |product_consume_log|
+  = turbo_frame_tag product, product_consume_log do
+    .row.py-4.border-bottom.align-items-center.product-consume-log-record
+      .col-12.col-xl-2.fw-bold.py-2
+        - number_of_logs -= 1
+        | #{number_of_logs}本目
+      .col-12.col-xl-4.py-2
+        | #{product_consume_log.use_started_at}  〜  #{product_consume_log.use_ended_at}
+      .col
+        div
+          - if product.average_period.zero?
+            |使用中
+          - elsif !product_consume_log.use_ended_at.nil?
+            | #{(product_consume_log.use_ended_at - product_consume_log.use_started_at + 1).numerator}日間
+          - elsif product.days_until_scheduled_consume_date.positive?
+            | 使用中（残り#{product.days_until_scheduled_consume_date}日）
+          - elsif product.days_until_scheduled_consume_date.zero?
+            |本日使い切り予定
+          - else
+            | 使い切り予定日から#{product.days_until_scheduled_consume_date.abs}日経過
+      .col-auto.p-0
+        = link_to product_product_consume_log_path(product, product_consume_log), method: :delete, class: 'btn btn-outline-secondary rounded-circle',
+                  data: { turbo_method: :delete, turbo_confirm: t('notice.product_consume_log_destroy_confirm'), turbo_frame: '_top' } do
+          span.material-symbols-rounded.py-1
+            |delete
+      .col-auto
+        = link_to edit_product_product_consume_log_path(product, product_consume_log), class: 'btn btn-outline-primary rounded-circle' do
+          span.material-symbols-rounded.py-1
+            |edit
