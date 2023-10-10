@@ -37,6 +37,6 @@ div id="#{dom_id product}"
                 = turbo_frame_tag 'product_consume_log_input_started_at'
                   = link_to t('action.input_use_started_at'), new_product_product_consume_log_path(product_id: product.id), class: 'btn btn-outline-primary rounded-pill btn-sm px-4 fw-bold', data: { turbo_frame: 'consume_logs_regular_modal' }
             = turbo_frame_tag 'consume-logs-list' do
-              = render 'product_consume_logs/index', { product: product, product_consume_logs: @product_consume_logs, number_of_logs: @number_of_logs }
+              = render 'product_consume_logs/index', { product:, product_consume_logs: @product_consume_logs, number_of_logs: @number_of_logs }
               .d-flex.justify-content-center.my-4
                 = paginate @product_consume_logs, theme: 'bootstrap-5'
